@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float oxygenLevel;
     void Start()
     {
-        
 
     }
 
