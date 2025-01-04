@@ -1,33 +1,39 @@
-using System;
+
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using Unity.VisualScripting;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
    [SerializeField] float time;
+
+   public Text t1;
+   public Text t2;
+   public Text t3;
+   public Text t4;
    
+   private bool queuedJump = false;
    private List<Contacts> lastContacts = new();
    private Contacts bufferContacts = new();
-   
-   private float vX;
    private Contacts contacts;
+   private bool justExitedCollision = false;
+   private bool afterWallFall = false;
+   
+   [SerializeField] private float tolerance;
    [SerializeField] private float graceFramesJump;
    [SerializeField] private float jumpBuffer;
    [SerializeField] private float currentSpeed;
    [SerializeField] private float maxSpeed;
+   [SerializeField] private float maxAcceleration;
    [SerializeField] private float maxSlidingSpeed;
    [SerializeField] private float jumpForce;
    [SerializeField] private float wallJumpForce;
    [SerializeField] private float acceleration;
    [SerializeField] private float xJumpForce;
    [SerializeField] private float xTolerance;
-   Dictionary<Collider2D, Vector2> currentCollisionsDict = new();
    Rigidbody2D rb;
    InputAction jump;
    List<Contacts.PlayerState> frameStates = new();
@@ -41,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
       contacts = new Contacts();
       colliderHeight = GetComponent<Collider2D>().bounds.size.y;
       rb = GetComponent<Rigidbody2D>();
+      lastContacts.Add(new Contacts{x = -1, y = -1});
       lastContacts.Add(new Contacts{x = 0, y = -1});
    }
    
@@ -64,94 +71,72 @@ public class PlayerMovement : MonoBehaviour
 
    //Vector2(x, y) if touching ground (0, -1) if touching right wall (1, 0)  if touching left wall (-1, 0)  if touching corner (1 or -1, -1) if airborne (0, 0)
 
-
-   Vector2 GetContacts(Collision2D collision)
+   float GetDistance(Vector2 direction)
    {
+      float semiExtentY = (GetComponent<Collider2D>().bounds.extents.y);
+      float semiExtentX = (GetComponent<Collider2D>().bounds.extents.x);
+      
+      
+      RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
+      RaycastHit2D hit1 = Physics2D.Raycast( new Vector2(direction.y * semiExtentX + transform.position.x, direction.x * semiExtentY + transform.position.y), direction);
+      RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + transform.position.x, direction.x * -semiExtentY + transform.position.y), direction);
+      
+      if (!hit1) hit1 = new RaycastHit2D() { distance = 10 };
+      if (!hit2) hit2 = new RaycastHit2D() { distance = 10 };
+      
+      return Mathf.Min(hit1.distance, hit2.distance, hit.distance);
+   }
+
+   Vector2 GetContacts()
+   {
+      
+      //i want to use rb.cast for this
       Vector2 newContacts = Vector2.zero;
-      Vector2 contactPoint = collision.GetContact(0).point;
-      Vector2 localContactPoint = contactPoint - (Vector2)transform.position;
-      if (localContactPoint.y < -(colliderHeight / 2) * .9f)  newContacts.y = -1;
-      if (localContactPoint.x > (colliderWidth / 2) * .9f)  newContacts.x = 1;
-      if (localContactPoint.x < -(colliderWidth / 2) * .9f) newContacts.x = -1;
+
+      float downDistance = GetDistance(Vector2.down);
+      float leftDistance = GetDistance(Vector2.left);
+      float rightDistance = GetDistance(Vector2.right);
+      
+      t3.text = leftDistance.ToString();
+      t4.text = rightDistance.ToString();
+
+      if (Mathf.Abs(downDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance)
+         newContacts.y = -1;
+      if (Mathf.Abs(leftDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
+         newContacts.x = -1;
+      if (Mathf.Abs(rightDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
+         newContacts.x = 1;
+
+      t1.text = newContacts.ToString(); 
+      
       return newContacts;
    }
    
-   void AddContacts(Vector2 newContacts)
-   {
-      if(newContacts.y !=0) contacts.y = -1;
-      if(newContacts.x !=0) contacts.x = newContacts.x;
-      UpdateLastContacts();
-   }
-   
-   void SubtractContacts(Vector2 newContacts)
-   {
-      if(newContacts.y !=0) contacts.y = 0;
-      if(newContacts.x !=0) contacts.x = 0;
-      UpdateLastContacts();
-   }
 
    void OnCollisionEnter2D(Collision2D collision)
    {
-      Vector2 newContacts = GetContacts(collision);
-      currentCollisionsDict.Add(collision.collider, newContacts);
-      AddContacts(newContacts);
+      contacts.contacts = GetContacts();
       
+      //if it hits a wall don't bounce
+      if (contacts.State == Contacts.PlayerState.Wall) rb.linearVelocityX = 0;
+      
+      //if the time since jump is less than the jump buffer then jump
       if (time < jumpBuffer)
-      {
          HandleJump(new InputAction.CallbackContext());
-      }
+      
+      afterWallFall = false;
       
    }
    
    void OnCollisionExit2D(Collision2D collision)
    {
-      SubtractContacts(currentCollisionsDict[collision.collider]);
-      currentCollisionsDict.Remove(collision.collider);
-      
-      if(rb.linearVelocityY < 0 && lastContacts[0].State == Contacts.PlayerState.Wall && contacts.State == Contacts.PlayerState.Airborne)
-      {
-         AddForceX(acceleration*lastContacts[0].x);
-      }
-      
+      justExitedCollision = true;
+      contacts.contacts = GetContacts();
    }
-
-   void UpdateVelocity()
-   {
-      if (contacts.State == Contacts.PlayerState.Wall && rb.linearVelocityY < 0) 
-      {
-         rb.linearVelocityY = Mathf.Clamp(rb.linearVelocityY, -maxSlidingSpeed, maxSlidingSpeed);
-      }
-      
-         
-      //if player is airborne and last contact was grounded or player is grounded
-      if ((contacts.State == Contacts.PlayerState.Airborne && lastContacts[0].State == Contacts.PlayerState.Grounded) ||
-          contacts.State == Contacts.PlayerState.Grounded)
-      {
-         if (Mathf.Abs(rb.linearVelocityX) < maxSpeed)
-         {
-            switch (rb.linearVelocityX)
-            {
-               case < 0:
-                  AddForceX(-acceleration);
-                  break;
-               case > 0:
-                  AddForceX(acceleration);
-                  break;
-               default:
-                  if(lastContacts.FirstOrDefault(w => w.State == Contacts.PlayerState.Wall) == null)
-                  {
-                     break;
-                  }
-                  AddForceX(acceleration * lastContacts.FirstOrDefault(w => w.State == Contacts.PlayerState.Wall)!.x);
-                  break;
-            }
-         }
-      }
-   }
-
    void HandleJump(InputAction.CallbackContext context)
    {
       time = 2;
+      
       if (CanJumpGrounded())
       {
          rb.AddForce(new Vector2(0, jumpForce));
@@ -168,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
          rb.linearVelocityY = 0;
          rb.AddForce(new Vector2(-contacts.x * xJumpForce, wallJumpForce));
       }
+      queuedJump = true;
       
    }    
    
@@ -181,37 +167,108 @@ public class PlayerMovement : MonoBehaviour
       }
       return false;
    }
-   
+
+
+   int CalculateMoveDirection()
+   {
+
+      if (lastContacts.Find(w => w.x != 0) == null)
+         return 0;
+         
+      
+      if (contacts.State == Contacts.PlayerState.Corner)
+         return (int) -contacts.x;  
+      
+      
+      if (contacts.IsGrounded
+          && lastContacts.Find(w =>
+                w.State == Contacts.PlayerState.Corner ||
+                w.State == Contacts.PlayerState.Wall)
+             .IsCorner)
+         return (int) -lastContacts.Find(w => w.State == Contacts.PlayerState.Corner).x;
+      
+      
+      if(rb.linearVelocityY < 0 && contacts.State == Contacts.PlayerState.Airborne && lastContacts[0].State == Contacts.PlayerState.Wall && justExitedCollision)
+      {
+         afterWallFall = true;
+         return (int)lastContacts[0].x;
+      }
+      if (afterWallFall)
+      {
+         return (int)lastContacts[0].x;
+      }
+      
+         
+      return 0;
+   }
    
    
 
    private void FixedUpdate()
    {
-      if(time < 2) time += Time.fixedDeltaTime;
+      //get contacts
+      contacts.contacts = GetContacts();
+
+      //if stopped and airborne set grounded
+      if (contacts.contacts == Vector2.zero && rb.linearVelocity == Vector2.zero) contacts.y = -1;
+      
+      //slow falling if falling down a wall
+      if (contacts.State == Contacts.PlayerState.Wall && rb.linearVelocityY < 0) 
+         rb.linearVelocityY = Mathf.Clamp(rb.linearVelocityY, -maxSlidingSpeed, maxSlidingSpeed);
+      
+      //only increase time if time is less than 2
+      if(time < 2) 
+         time += Time.fixedDeltaTime;
+      
+      //if x velocity is less than xTolerance set it to 0
+      if (Mathf.Abs(rb.linearVelocityX) < xTolerance)
+         rb.linearVelocityX = 0;
+      
+      // if its grounded and still, look for the last collision it had.
+      if(contacts.State == Contacts.PlayerState.Grounded && rb.linearVelocityX == 0)
+      {
+            rb.linearVelocityX = -lastContacts.Find(w => w.x != 0).x * maxSpeed;
+      }
+      
+      //when it touches the wall, set x velocity 0
+      if (contacts.State == Contacts.PlayerState.Wall)
+         rb.linearVelocityX = 0;
       
       
-      if (Mathf.Abs(rb.linearVelocityX) < xTolerance) rb.linearVelocityX = 0;
-      if (contacts.x != 0 && (int) contacts.y == -1) AddForceX(-contacts.x * acceleration);
       
-      UpdateLastContacts();
-      UpdateVelocity();
+      //keep speed at max
+      if (CalculateMoveDirection() != 0)
+      {
+         float moveDirection = CalculateMoveDirection();
+
+         if (contacts.x != 0) moveDirection = -contacts.x;
+         
+         float targetVelocity = moveDirection * maxSpeed;
+         //Find the change of velocity needed to reach target
+         float velocityChange = targetVelocity - rb.linearVelocityX;
+         //Convert to acceleration, which is change of velocity over time
+         acceleration = velocityChange / Time.fixedDeltaTime;
+         //Clamp it to your maximum acceleration magnitude
+         acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
+         //Then AddForce
+         rb.AddForceX(acceleration, ForceMode2D.Force);
+      }
+
+      t2.text = lastContacts[0].contacts.ToString();
+      
+      
+      UpdateLastContacts();          
       UpdateFrameStates(contacts.State);
+      justExitedCollision = false;
       
-      rb.linearVelocityX = Mathf.Clamp(rb.linearVelocityX, -maxSpeed, maxSpeed);
    }
    
    void UpdateLastContacts()
    {
       if (bufferContacts.contacts == contacts.contacts) return;
-      lastContacts.Insert(0 ,new Contacts { contacts = bufferContacts.contacts });
+      lastContacts.Insert(0, new Contacts { contacts = bufferContacts.contacts });
       bufferContacts.contacts = contacts.contacts;
-      if (lastContacts.Count > 5) lastContacts.RemoveAt(5);
-   }
-   
-   void AddForceX(float x)
-   {
-      if(Mathf.Abs(rb.linearVelocityX) < maxSpeed) rb.AddForce(new Vector2(x, 0));
-      rb.linearVelocityX = Mathf.Clamp(rb.linearVelocityX, -maxSpeed, maxSpeed);
+      if (lastContacts.Count > 20) lastContacts.RemoveAt(20);
    }
    
    void UpdateFrameStates(Contacts.PlayerState state)

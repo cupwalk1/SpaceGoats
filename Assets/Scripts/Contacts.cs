@@ -27,6 +27,16 @@ public class Contacts
       }
    }
 
+   public bool IsGrounded => State == PlayerState.Grounded;
+   public bool IsAirborne => State == PlayerState.Airborne;
+   
+   public bool IsWall => State == PlayerState.Wall;
+   
+   public bool IsCorner => State == PlayerState.Corner;
+   
+   public bool IsCausedByJump = false;
+   
+   
    public Vector2 contacts;
 
    public float x
