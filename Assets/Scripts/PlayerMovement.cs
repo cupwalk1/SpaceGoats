@@ -1,8 +1,6 @@
 
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,12 +13,13 @@ public class PlayerMovement : MonoBehaviour
    public Text t3;
    public Text t4;
    
-   private bool queuedJump = false;
    private List<Contacts> lastContacts = new();
    private Contacts bufferContacts = new();
    private Contacts contacts;
-   private bool justExitedCollision = false;
-   private bool afterWallFall = false;
+   private bool afterWallFall;
+   [SerializeField] private bool IsCausedByJump;
+
+   private bool queueJump;
    
    [SerializeField] private float tolerance;
    [SerializeField] private float graceFramesJump;
@@ -50,18 +49,16 @@ public class PlayerMovement : MonoBehaviour
       lastContacts.Add(new Contacts{x = -1, y = -1});
       lastContacts.Add(new Contacts{x = 0, y = -1});
    }
-   
    void Awake()
    {
       input = new InputSystem_Actions();
       jump = input.Player.Jump;
    }
-   
    void OnEnable()
    {
       input.Enable();
       jump.Enable();
-      jump.performed += HandleJump;
+      jump.performed += HandleButton;
    }
    void OnDisable()
    {
@@ -87,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
       return Mathf.Min(hit1.distance, hit2.distance, hit.distance);
    }
 
+   
    Vector2 GetContacts()
    {
       
@@ -96,19 +94,18 @@ public class PlayerMovement : MonoBehaviour
       float downDistance = GetDistance(Vector2.down);
       float leftDistance = GetDistance(Vector2.left);
       float rightDistance = GetDistance(Vector2.right);
+      float upDistance = GetDistance(Vector2.up);
       
-      t3.text = leftDistance.ToString();
-      t4.text = rightDistance.ToString();
-
       if (Mathf.Abs(downDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance)
          newContacts.y = -1;
+      if (Mathf.Abs(upDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance)
+         newContacts.y = 1;
       if (Mathf.Abs(leftDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
          newContacts.x = -1;
       if (Mathf.Abs(rightDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
          newContacts.x = 1;
 
       t1.text = newContacts.ToString(); 
-      
       return newContacts;
    }
    
@@ -122,44 +119,67 @@ public class PlayerMovement : MonoBehaviour
       
       //if the time since jump is less than the jump buffer then jump
       if (time < jumpBuffer)
-         HandleJump(new InputAction.CallbackContext());
-      
-      afterWallFall = false;
+         queueJump = true;
       
    }
-   
    void OnCollisionExit2D(Collision2D collision)
    {
-      justExitedCollision = true;
       contacts.contacts = GetContacts();
    }
-   void HandleJump(InputAction.CallbackContext context)
+   
+   void HandleButton(InputAction.CallbackContext context)
    {
-      time = 2;
+      queueJump = true;
       
-      if (CanJumpGrounded())
-      {
-         rb.AddForce(new Vector2(0, jumpForce));
-         return;
-      }
-
-      if (contacts.State == Contacts.PlayerState.Airborne)
+      if (contacts.IsAirborne)
       {
          time = 0;
       }
       
-      if(contacts.State == Contacts.PlayerState.Wall)
+   }
+   
+   void HandleJump()
+   {
+      contacts.contacts = GetContacts();
+      
+      if (contacts.IsCausedByJump) return;
+      
+      time = 2;
+      
+      if (CanJumpGrounded())
       {
+         IsCausedByJump = true;
+         rb.AddForce(new Vector2(0, jumpForce));
+         return;
+      }
+      
+      if(CanJumpWall())
+      {
+         IsCausedByJump = true;
          rb.linearVelocityY = 0;
          rb.AddForce(new Vector2(-contacts.x * xJumpForce, wallJumpForce));
       }
-      queuedJump = true;
       
-   }    
-   
+   }
+
+   private bool CanJumpWall()
+   {
+      if (contacts.IsWall)
+      {
+         return true;
+      }
+      for (int i = 0; i < graceFramesJump; i++)
+      {
+         if(i >= frameStates.Count) return false;
+         if (frameStates[i] == Contacts.PlayerState.Wall && rb.linearVelocityY <= 0) return true;
+      }
+      return false;
+   }
+
+
    bool CanJumpGrounded()
    {
-      if(contacts.State == Contacts.PlayerState.Grounded) return true;
+      if(contacts.IsGrounded) return true;
       for (int i = 0; i < graceFramesJump; i++)
       {
          if(i >= frameStates.Count) return false;
@@ -180,25 +200,19 @@ public class PlayerMovement : MonoBehaviour
          return (int) -contacts.x;  
       
       
-      if (contacts.IsGrounded
+      if (contacts.IsGrounded 
           && lastContacts.Find(w =>
-                w.State == Contacts.PlayerState.Corner ||
-                w.State == Contacts.PlayerState.Wall)
+                w.State is Contacts.PlayerState.Corner or Contacts.PlayerState.Wall)
              .IsCorner)
-         return (int) -lastContacts.Find(w => w.State == Contacts.PlayerState.Corner).x;
+         return (int) -lastContacts.Find(w => w.IsCorner).x;
       
-      
-      if(rb.linearVelocityY < 0 && contacts.State == Contacts.PlayerState.Airborne && lastContacts[0].State == Contacts.PlayerState.Wall && justExitedCollision)
-      {
-         afterWallFall = true;
-         return (int)lastContacts[0].x;
-      }
-      if (afterWallFall)
+      if(contacts.IsAirborne && lastContacts[0].IsWall && !contacts.IsCausedByJump)
       {
          return (int)lastContacts[0].x;
       }
       
-         
+    
+      
       return 0;
    }
    
@@ -233,8 +247,17 @@ public class PlayerMovement : MonoBehaviour
       //when it touches the wall, set x velocity 0
       if (contacts.State == Contacts.PlayerState.Wall)
          rb.linearVelocityX = 0;
+
       
-      
+      if (bufferContacts.contacts != contacts.contacts)
+      {
+         if (IsCausedByJump)
+         {
+            contacts.IsCausedByJump = true;
+            IsCausedByJump = false;
+         }
+         else if (!contacts.IsCeilingOrAirborne) contacts.IsCausedByJump = false;
+      }
       
       //keep speed at max
       if (CalculateMoveDirection() != 0)
@@ -251,25 +274,31 @@ public class PlayerMovement : MonoBehaviour
          //Clamp it to your maximum acceleration magnitude
          acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
          //Then AddForce
-         rb.AddForceX(acceleration, ForceMode2D.Force);
+         rb.AddForceX(acceleration);
       }
+      
 
-      t2.text = lastContacts[0].contacts.ToString();
+      if (bufferContacts.contacts != contacts.contacts)
+      {
+         lastContacts.Insert(0, new Contacts { contacts = bufferContacts.contacts, IsCausedByJump = contacts.IsCausedByJump });
+         if (lastContacts.Count > 20) lastContacts.RemoveAt(20);
+         bufferContacts.contacts = contacts.contacts;
+         t2.text = lastContacts[0].contacts.ToString();
+      }
+      
+      t3.text = contacts.IsCausedByJump.ToString();
+
+      if (queueJump)
+      {
+         queueJump = false;
+         HandleJump();
+      }
       
       
-      UpdateLastContacts();          
       UpdateFrameStates(contacts.State);
-      justExitedCollision = false;
-      
    }
    
-   void UpdateLastContacts()
-   {
-      if (bufferContacts.contacts == contacts.contacts) return;
-      lastContacts.Insert(0, new Contacts { contacts = bufferContacts.contacts });
-      bufferContacts.contacts = contacts.contacts;
-      if (lastContacts.Count > 20) lastContacts.RemoveAt(20);
-   }
+   
    
    void UpdateFrameStates(Contacts.PlayerState state)
    {
