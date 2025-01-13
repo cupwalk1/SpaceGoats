@@ -97,9 +97,7 @@ public class PlayerMovement : MonoBehaviour
         contacts.contacts = GetContacts();
 
         if (contacts.State == Contacts.PlayerState.Wall) rb.linearVelocityX = 0;
-
-        if (time <= jumpBuffer)
-            queueJump = true;
+        
     }
     
     void HandleButton(InputAction.CallbackContext context)
@@ -115,16 +113,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (contacts.IsCausedByJump) return;
 
-        time = jumpBuffer+1;
-
         if (CanJumpGrounded())
         {
+            time = jumpBuffer;
             rb.AddForce(Vector2.up * jumpForce);
             if (contacts.IsAirborne) contacts.IsCausedByJump = true;
             else IsCausedByJump = true;
         }
         else if (CanJumpWall())
         {
+            time = jumpBuffer;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             rb.AddForce(new Vector2(-contacts.x * xJumpForce, wallJumpForce));
             if (contacts.IsAirborne) contacts.IsCausedByJump = true;
@@ -173,16 +171,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (time < jumpBuffer+1)
+        if (time < jumpBuffer)
             time += Time.fixedDeltaTime;
         
         contacts.contacts = GetContacts();
-        
-        if (queueJump)
-        {
-            queueJump = false;
-            HandleJump();
-        }
         
         if (lastContacts.Count == 0 || lastContacts[0].contacts != contacts.contacts)
         {
@@ -193,8 +185,14 @@ public class PlayerMovement : MonoBehaviour
             if (lastContacts.Count > 20) lastContacts.RemoveAt(20);
             IsCausedByJump = false;
             
-            if (time <= jumpBuffer)
+            if (time < jumpBuffer)
                 queueJump = true;
+        }
+        
+        if (queueJump)
+        {
+            queueJump = false;
+            HandleJump();
         }
     
         //reduce sliding speed
