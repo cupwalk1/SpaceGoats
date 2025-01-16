@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private List<GameObject> obstacles= new();
     [SerializeField] float oxygenLevel;
+    [SerializeField] float health;
     void Start()
     {
 
