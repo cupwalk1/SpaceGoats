@@ -1,18 +1,28 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
-    private static bool _shouldMove;
-    public static bool ShouldMove
+    public int MaxHearts = 4;
+    
+    public UnityEvent OnTakeDamage = new UnityEvent();
+    public UnityEvent OnPlayerDie = new UnityEvent();
+    
+    [SerializeField] private bool _shouldMove;
+    public bool ShouldMove
     {
         get => _shouldMove;
         set => _shouldMove = value;
     }
 
-    private static float _health;
-    public static float Health
+    [SerializeField] private int _health;
+    public int Health
     {
         get => _health;
-        set => _health = Mathf.Clamp(value, 0, 1);
+        set
+        { 
+            _health = Mathf.Clamp(value, 0, MaxHearts);
+        }
     }
 }
+

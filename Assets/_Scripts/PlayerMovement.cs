@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float time;
     [SerializeField] private Text t1, t2, t3, t4;
-
+    private PlayerManager PlayerManager;
     [SerializeField] private float tolerance,
         graceFramesJump,
         jumpBuffer,
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
         wallJumpForce,
         xJumpForce;
 
+    [SerializeField] private float knockbackForce;
     private List<Contacts> lastContacts = new();
     private Contacts contacts;
     private bool afterWallFall, queueJump, IsCausedByJump;
@@ -30,10 +31,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        PlayerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
         contacts = new Contacts();
         lastContacts.Add(new Contacts { x = -1, y = -1 });
         lastContacts.Add(new Contacts { x = 0, y = -1 });
+        PlayerManager.OnTakeDamage.AddListener(DamageKnockback);
     }
 
     void Awake()
@@ -170,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        t4.text = PlayerManager.Health.ToString();
         
         if (time < jumpBuffer)
             time += Time.fixedDeltaTime;
@@ -209,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         
     
-        if (CalculateMoveDirection() != 0)
+        if (CalculateMoveDirection() != 0 && PlayerManager.ShouldMove)
         {
             float moveDirection = CalculateMoveDirection();
     
@@ -232,5 +236,13 @@ public class PlayerMovement : MonoBehaviour
     {
         frameStates.Insert(0, state);
         if (frameStates.Count > 20) frameStates.RemoveAt(20);
+    }
+
+    private void DamageKnockback()
+    {
+        int direction = (int) -rb.linearVelocity.normalized.x;
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(new Vector2(direction * xJumpForce, wallJumpForce));
+        
     }
 }
