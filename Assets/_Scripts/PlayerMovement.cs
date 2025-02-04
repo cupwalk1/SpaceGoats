@@ -8,20 +8,31 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float time;
     [SerializeField] private Text t1, t2, t3, t4;
-    private PlayerManager PlayerManager;
-    [SerializeField] private float tolerance,
+    private PlayerManager _p;
+    [SerializeField] private float 
+        tolerance,
         graceFramesJump,
         jumpBuffer,
         currentSpeed,
         maxSpeed,
-        maxAcceleration,
+        maxDefaultAcceleration,
         maxSlidingSpeed,
         jumpForce,
         wallJumpForce,
         xJumpForce;
 
+    public List<Contacts> LastContacts
+    {
+        get => lastContacts;
+    }
+    public Contacts CurrentContacts
+    {
+        get => contacts;
+    }
+    
     [SerializeField] private float knockbackForce;
     private List<Contacts> lastContacts = new();
+    [HideInInspector] public float maxAcceleration;
     private Contacts contacts;
     private bool afterWallFall, queueJump, IsCausedByJump;
     private Rigidbody2D rb;
@@ -31,12 +42,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        PlayerManager = GetComponent<PlayerManager>();
+        _p = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
+        
+        maxAcceleration = maxDefaultAcceleration;
+        
         contacts = new Contacts();
         lastContacts.Add(new Contacts { x = -1, y = -1 });
         lastContacts.Add(new Contacts { x = 0, y = -1 });
-        PlayerManager.OnTakeDamage.AddListener(DamageKnockback);
+
     }
 
     void Awake()
@@ -64,8 +78,8 @@ public class PlayerMovement : MonoBehaviour
         float semiExtentX = GetComponent<Collider2D>().bounds.extents.x;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(direction.y * semiExtentX + transform.position.x, direction.x * semiExtentY + transform.position.y), direction);
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + transform.position.x, direction.x * -semiExtentY + transform.position.y), direction);
+        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(direction.y * semiExtentX + transform.position.x, direction.x * semiExtentY*0.9f+ transform.position.y), direction);
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + transform.position.x, direction.x * -semiExtentY*0.9f + transform.position.y), direction);
 
         if (!hit1) hit1 = new RaycastHit2D { distance = 10 };
         if (!hit2) hit2 = new RaycastHit2D { distance = 10 };
@@ -112,6 +126,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void HandleJump()
     {
+        
+        if (_p.ShouldMove == false) return;
+        
         contacts.contacts = GetContacts();
 
         if (contacts.IsCausedByJump) return;
@@ -159,11 +176,21 @@ public class PlayerMovement : MonoBehaviour
         //if the last wall contact is a corner, return the opposite direction of the wall    -    It can't be wall because it wouldn't work for falling off a wall
         if (contacts.IsGrounded && lastContacts.Find(w => w.State is Contacts.PlayerState.Corner or Contacts.PlayerState.Wall).IsCorner)
             return (int)-lastContacts.Find(w => w.IsCorner).x;
-
+        
+        
+        for (int i = 1; i < lastContacts.Count; i++)
+        {
+            if (!contacts.IsGrounded) break;
+            if (lastContacts[i].State != Contacts.PlayerState.Wall) continue;
+            if(lastContacts[i - 1].IsCausedByJump && 
+               lastContacts[i - 1].State == Contacts.PlayerState.Airborne)
+                return (int)-lastContacts[i].x;
+            break;
+        }
         // if it came off a wall and wasn't caused by a jump, return the opposite direction of the wall
         if (contacts.IsAirborne && lastContacts[1].IsWall && !contacts.IsCausedByJump) return (int)lastContacts[1].x;
         
-        if (contacts.IsGroundedOrAirborne) return (int) rb.linearVelocity.normalized.x;
+        if (contacts.IsGroundedOrAirborne) return _p.GetSign(rb.linearVelocity.x);
 
         if (contacts.IsWall) return 0;
         //no other conditions are met, return 0
@@ -173,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        t4.text = PlayerManager.Health.ToString();
+        t4.text = _p.Health.ToString();
         
         if (time < jumpBuffer)
             time += Time.fixedDeltaTime;
@@ -186,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
             else contacts.IsCausedByJump = false;
             
             lastContacts.Insert(0, new Contacts { contacts = contacts.contacts, IsCausedByJump = contacts.IsCausedByJump });
-            if (lastContacts.Count > 20) lastContacts.RemoveAt(20);
+            if (lastContacts.Count > 50) lastContacts.RemoveAt(50);
             IsCausedByJump = false;
             
             if (time < jumpBuffer)
@@ -203,30 +230,22 @@ public class PlayerMovement : MonoBehaviour
         if (contacts.State == Contacts.PlayerState.Wall && rb.linearVelocity.y < 0)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -maxSlidingSpeed, maxSlidingSpeed));
         
-        //if the player is grounded and not moving, move in the opposite direction of the wall
-        if (contacts.State == Contacts.PlayerState.Grounded && rb.linearVelocity.x == 0)
-        {
-            rb.linearVelocity = new Vector2(-lastContacts.Find(w => w.x != 0).x * maxSpeed, rb.linearVelocity.y);
-        }
     
         if (contacts.State == Contacts.PlayerState.Wall)
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         
-    
-        if (CalculateMoveDirection() != 0 && PlayerManager.ShouldMove)
+        float moveDirection = CalculateMoveDirection();
+        if (moveDirection != 0 && _p.ShouldMove)
         {
-            float moveDirection = CalculateMoveDirection();
-    
-            if (contacts.x != 0) moveDirection = -contacts.x;
-    
             float targetVelocity = moveDirection * maxSpeed;
             float velocityChange = targetVelocity - rb.linearVelocity.x;
             float acceleration = velocityChange / Time.fixedDeltaTime;
             acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
             rb.AddForce(new Vector2(acceleration, 0));
+            if (Mathf.Abs(Mathf.Abs(rb.linearVelocity.x) - maxSpeed) < tolerance)
+                maxAcceleration = maxDefaultAcceleration;
         }
     
-        t3.text = contacts.IsCausedByJump.ToString();
     
         UpdateFrameStates(contacts.State);
     }
@@ -237,12 +256,5 @@ public class PlayerMovement : MonoBehaviour
         frameStates.Insert(0, state);
         if (frameStates.Count > 20) frameStates.RemoveAt(20);
     }
-
-    private void DamageKnockback()
-    {
-        int direction = (int) -rb.linearVelocity.normalized.x;
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(new Vector2(direction * xJumpForce, wallJumpForce));
-        
-    }
+    
 }
