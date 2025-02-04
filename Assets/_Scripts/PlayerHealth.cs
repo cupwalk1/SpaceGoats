@@ -7,7 +7,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : MonoBehaviour
 {
-   private PlayerManager PlayerManager;
+   private PlayerManager _pm;
 
    [SerializeField] float DeathUpForce = 10f;
 
@@ -18,20 +18,20 @@ public class PlayerHealth : MonoBehaviour
 
    int health
    {
-      get { return PlayerManager.Health; }
-      set { PlayerManager.Health = value; }
+      get { return _pm.Health; }
+      set { _pm.Health = value; }
    }
    
    void Start()
    {
-      PlayerManager = GetComponent<PlayerManager>();
-      health = PlayerManager.MaxHearts;
-      PlayerManager.OnPlayerDie.AddListener(Die);
+      _pm = GetComponent<PlayerManager>();
+      health = _pm.MaxHearts;
+      _pm.OnPlayerDie.AddListener(Die);
    }
 
    public void ResetHealth()
    {
-      PlayerManager.Health = PlayerManager.MaxHearts;
+      _pm.Health = _pm.MaxHearts;
    }
 
    // Update is called once per frame
@@ -46,12 +46,12 @@ public class PlayerHealth : MonoBehaviour
          if (health > 1)
          {
             health -= spikeDamage;
-            PlayerManager.OnTakeDamage.Invoke();
+            _pm.OnTakeDamage.Invoke();
          }
          else
          {
             health = 0;
-            PlayerManager.OnPlayerDie.Invoke();
+            _pm.OnPlayerDie.Invoke();
          }
       }
    }
@@ -60,9 +60,9 @@ public class PlayerHealth : MonoBehaviour
    {
       //reset velocity
       var rb = GetComponent<Rigidbody2D>();
-      PlayerManager.DisableMoveJump();
+      _pm.DisableMoveJump();
       rb.linearVelocity = Vector2.zero;
-      PlayerManager.ShouldMoveCamera = false;
+      _pm.ShouldMoveCamera = false;
       Invoke("DieEnd", 1f);
    }
 

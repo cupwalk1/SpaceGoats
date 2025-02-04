@@ -60,10 +60,15 @@ public class Developer
    [MenuItem("Developer/Refresh Tilemaps")]
    private static void RefreshTileMaps()
    {
-      var tilemap= GameObject.Find("Plants").GetComponent<Tilemap>();
+      Tilemap tilemap= GameObject.Find("Plants").GetComponent<Tilemap>();
       tilemap.RefreshAllTiles();
-      PlantManager.RefreshTilemaps();
-      
+   }
+   //erase plants from plants.json
+   [MenuItem("Developer/Erase Plants")]
+   private static void ErasePlants()
+   {
+      PlantManager.Plants.Clear();
+      PlantManager.SavePlants();
    }
    
 }

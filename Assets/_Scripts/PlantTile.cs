@@ -55,6 +55,9 @@ public class PlantTile : Tile
    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
    {
       base.GetTileData(position, tilemap, ref tileData);
-      tileData.sprite = script.IsRipe ? script.ripeSprite : script.unripeSprite;
+      if(PlantManager.Plants.TryGetValue(position, out var plantData)) 
+         
+         tileData.sprite = PlantManager.Plants[position].IsRipe ? script.ripeSprite : script.unripeSprite;
+      
    }
 }

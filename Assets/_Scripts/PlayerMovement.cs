@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private bool IsTouchingSomething;
     [SerializeField] private float time;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;
@@ -96,13 +98,13 @@ public class PlayerMovement : MonoBehaviour
         float rightDistance = GetDistance(Vector2.right);
         float upDistance = GetDistance(Vector2.up);
 
-        if (Mathf.Abs(downDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance)
+        if (Mathf.Abs(downDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
             newContacts.y = -1;
-        if (Mathf.Abs(upDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance)
+        if (Mathf.Abs(upDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
             newContacts.y = 1;
-        if (Mathf.Abs(leftDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
+        if (Mathf.Abs(leftDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
             newContacts.x = -1;
-        if (Mathf.Abs(rightDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance)
+        if (Mathf.Abs(rightDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
             newContacts.x = 1;
 
         t1.text = newContacts.ToString();
