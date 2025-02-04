@@ -72,8 +72,9 @@ public class PlantScript : MonoBehaviour
 
    private void Harvest()
    {
+      if(IsRipe)
+         RegenTime = GameObject.Find("Goat").GetComponent<PlayerManager>().plantRegenTime;
       IsRipe = false;
-      RegenTime = GameObject.Find("Player").GetComponent<PlayerManager>().plantRegenTime;
       tilemap.RefreshTile(position);
    }
 
