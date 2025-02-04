@@ -25,7 +25,7 @@ MonoBehaviour:
     e13: 0
     e20: 0
     e21: 0
-    e22: 1
+    e22: 0
     e23: 0
     e30: 0
     e31: 0
@@ -35,6 +35,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 0
   plantTilePrefab: {fileID: 7548563167753396204, guid: 97286f0661cb74a68bd7209bbd9a80c6, type: 3}
-  position: {x: -1, y: 1, z: 0}
   light2D: {fileID: 8279888359405866260, guid: 8f8b6c0dd4bfb45e3b755b6cd8e39c45, type: 3}
   boxCollider: {fileID: 8586033904574661851, guid: 97286f0661cb74a68bd7209bbd9a80c6, type: 3}

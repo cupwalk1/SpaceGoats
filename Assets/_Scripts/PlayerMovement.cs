@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Transform hitbox;
     [SerializeField] private float time;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;
@@ -74,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
     float GetDistance(Vector2 direction)
     {
-        float semiExtentY = GetComponent<Collider2D>().bounds.extents.y;
-        float semiExtentX = GetComponent<Collider2D>().bounds.extents.x;
+        float semiExtentY = GetComponentInChildren<Collider2D>().bounds.extents.y;
+        float semiExtentX = GetComponentInChildren<Collider2D>().bounds.extents.x;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(direction.y * semiExtentX + transform.position.x, direction.x * semiExtentY*0.9f+ transform.position.y), direction);
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + transform.position.x, direction.x * -semiExtentY*0.9f + transform.position.y), direction);
+        RaycastHit2D hit = Physics2D.Raycast(hitbox.position, direction);
+        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(direction.y * semiExtentX + hitbox.position.x, direction.x * semiExtentY+ hitbox.position.y), direction);
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + hitbox.position.x, direction.x * -semiExtentY + hitbox.position.y), direction);
 
         if (!hit1) hit1 = new RaycastHit2D { distance = 10 };
         if (!hit2) hit2 = new RaycastHit2D { distance = 10 };
@@ -96,13 +97,13 @@ public class PlayerMovement : MonoBehaviour
         float rightDistance = GetDistance(Vector2.right);
         float upDistance = GetDistance(Vector2.up);
 
-        if (Mathf.Abs(downDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
+        if (Mathf.Abs(downDistance - GetComponentInChildren<Collider2D>().bounds.extents.y) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
             newContacts.y = -1;
-        if (Mathf.Abs(upDistance - GetComponent<Collider2D>().bounds.extents.y) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
+        if (Mathf.Abs(upDistance - GetComponentInChildren<Collider2D>().bounds.extents.y) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
             newContacts.y = 1;
-        if (Mathf.Abs(leftDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
+        if (Mathf.Abs(leftDistance - GetComponentInChildren<Collider2D>().bounds.extents.x) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
             newContacts.x = -1;
-        if (Mathf.Abs(rightDistance - GetComponent<Collider2D>().bounds.extents.x) < tolerance && GetComponent<Collider2D>().IsTouchingLayers())
+        if (Mathf.Abs(rightDistance - GetComponentInChildren<Collider2D>().bounds.extents.x) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
             newContacts.x = 1;
 
         t1.text = newContacts.ToString();
