@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool IsTouchingSomething;
     [SerializeField] private float time;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;

@@ -30,6 +30,29 @@ public class PlantScript : MonoBehaviour
          }
       }
    }
+   
+   public int RegenTime
+   {
+      get
+      {
+         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+            return plantData.TimeToRipe;
+         PlantManager.Plants[position] = new PlantData { Position = position};
+         return 10;
+      }
+      private set
+      {
+         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+         {
+            plantData.TimeToRipe = value;
+            PlantManager.Plants[position] = plantData;
+         }
+         else
+         {
+            PlantManager.Plants[position] = new PlantData { Position = position, TimeToRipe = value };
+         }
+      }
+   }
 
    public Tilemap tilemap;
 
@@ -37,8 +60,9 @@ public class PlantScript : MonoBehaviour
 
    void Start()
    {
+      tilemap.RefreshTile(position);
       PlantManager.LoadPlants();
-
+      PlantManager.StartRegenCounter();
    }
 
    private void OnDestroy()
@@ -48,9 +72,8 @@ public class PlantScript : MonoBehaviour
 
    private void Harvest()
    {
-      if (!IsRipe) return;
       IsRipe = false;
-      PlantManager.Plants[position].IsRipe = false;
+      RegenTime = GameObject.Find("Player").GetComponent<PlayerManager>().plantRegenTime;
       tilemap.RefreshTile(position);
    }
 

@@ -5,5 +5,5 @@ public class PlantData
 {
    public Vector3Int Position;
    public bool IsRipe;
-   public float TimeToRipe;
+   public int TimeToRipe;
 }

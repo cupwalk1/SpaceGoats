@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
    public int MaxHearts = 4;
-
+   public int plantRegenTime = 10;
    public bool IsImmune;
    public UnityEvent OnTakeDamage = new UnityEvent();
    public UnityEvent OnPlayerDie = new UnityEvent();

@@ -56,8 +56,7 @@ public class PlantTile : Tile
    {
       base.GetTileData(position, tilemap, ref tileData);
       if(PlantManager.Plants.TryGetValue(position, out var plantData)) 
-         
-         tileData.sprite = PlantManager.Plants[position].IsRipe ? script.ripeSprite : script.unripeSprite;
+         tileData.sprite = plantData.IsRipe ? script.ripeSprite : script.unripeSprite;
       
    }
 }

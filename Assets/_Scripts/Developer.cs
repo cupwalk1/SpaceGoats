@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -19,7 +20,7 @@ public class Developer
       player.GetComponent<PlayerManager>().EnableMoveJump();
       player.GetComponent<Collider2D>().enabled = true;
    }
-   
+
    [MenuItem("Developer/Check PostProcessing")]
    private static void CheckPostProcessing()
    {
@@ -32,7 +33,7 @@ public class Developer
       }
       postProcessLayer.volumeLayer = LayerMask.GetMask("PostProcessing");
 
-// Ensure the PostProcessVolume is configured correctly
+      // Ensure the PostProcessVolume is configured correctly
       var postProcessVolume = GameObject.FindFirstObjectByType<PostProcessVolume>();
       if (postProcessVolume != null)
       {
@@ -56,19 +57,20 @@ public class Developer
          Debug.LogError("PostProcessVolume is not found in the scene.");
       }
    }
-   
+
    [MenuItem("Developer/Refresh Tilemaps")]
    private static void RefreshTileMaps()
    {
-      Tilemap tilemap= GameObject.Find("Plants").GetComponent<Tilemap>();
+      Tilemap tilemap = GameObject.Find("Plants").GetComponent<Tilemap>();
       tilemap.RefreshAllTiles();
    }
-   //erase plants from plants.json
+
+   // Erase plants from plants.json
    [MenuItem("Developer/Erase Plants")]
    private static void ErasePlants()
    {
       PlantManager.Plants.Clear();
       PlantManager.SavePlants();
    }
-   
 }
+#endif
