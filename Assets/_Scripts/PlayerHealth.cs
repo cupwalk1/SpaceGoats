@@ -70,6 +70,6 @@ public class PlayerHealth : MonoBehaviour
    {
       var rb = GetComponent<Rigidbody2D>();
       rb.AddForce(Vector2.up * DeathUpForce, ForceMode2D.Impulse);
-      GetComponent<Collider2D>().enabled = false;
+      GetComponentInChildren<Collider2D>().enabled = false;
    }
 }
