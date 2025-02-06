@@ -7,20 +7,31 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform hitbox;
-    [SerializeField] private float time;
+    
+    [SerializeField] private float jumpTime, maxJumpTime , jumpBufferTime;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;
-    [SerializeField] private float 
+
+    [SerializeField] private float
+        extraHeight,
         tolerance,
         graceFramesJump,
         jumpBuffer,
         currentSpeed,
         maxSpeed,
         maxDefaultAcceleration,
-        maxSlidingSpeed,
-        jumpForce,
-        wallJumpForce,
-        xJumpForce;
+        maxSlidingSpeed;
+
+    [Header("Jump Forces")]
+    [SerializeField] private float initialJumpForce;
+    [SerializeField] private float continualJumpForce;
+    [SerializeField] private float initalXJumpForce;
+    [SerializeField] private float continualXJumpForce;
+        
+        
+
+    private bool isJumping;
+
 
     public List<Contacts> LastContacts
     {
@@ -64,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     {
         input.Enable();
         jump.Enable();
-        jump.performed += HandleButton;
+
     }
 
     void OnDisable()
@@ -73,40 +84,25 @@ public class PlayerMovement : MonoBehaviour
         jump.Disable();
     }
 
-    float GetDistance(Vector2 direction)
+    bool GetHit(Vector2 direction)
     {
-        float semiExtentY = GetComponentInChildren<Collider2D>().bounds.extents.y;
-        float semiExtentX = GetComponentInChildren<Collider2D>().bounds.extents.x;
-
-        RaycastHit2D hit = Physics2D.Raycast(hitbox.position, direction);
-        RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(direction.y * semiExtentX + hitbox.position.x, direction.x * semiExtentY+ hitbox.position.y), direction);
-        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(direction.y * -semiExtentX + hitbox.position.x, direction.x * -semiExtentY + hitbox.position.y), direction);
-
-        if (!hit1) hit1 = new RaycastHit2D { distance = 10 };
-        if (!hit2) hit2 = new RaycastHit2D { distance = 10 };
-
-        return Mathf.Min(hit1.distance, hit2.distance, hit.distance);
+        var collider = GetComponentInChildren<Collider2D>();
+        return Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0, direction, extraHeight).collider != null;
     }
 
     Vector2 GetContacts()
     {
         Vector2 newContacts = Vector2.zero;
-
-        float downDistance = GetDistance(Vector2.down);
-        float leftDistance = GetDistance(Vector2.left);
-        float rightDistance = GetDistance(Vector2.right);
-        float upDistance = GetDistance(Vector2.up);
-
-        if (Mathf.Abs(downDistance - GetComponentInChildren<Collider2D>().bounds.extents.y) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
+        
+        if (GetHit(Vector2.down))
             newContacts.y = -1;
-        if (Mathf.Abs(upDistance - GetComponentInChildren<Collider2D>().bounds.extents.y) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
-            newContacts.y = 1;
-        if (Mathf.Abs(leftDistance - GetComponentInChildren<Collider2D>().bounds.extents.x) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
+        if (GetHit(Vector2.left))
             newContacts.x = -1;
-        if (Mathf.Abs(rightDistance - GetComponentInChildren<Collider2D>().bounds.extents.x) < tolerance && GetComponentInChildren<Collider2D>().IsTouchingLayers())
+        if (GetHit(Vector2.right))
             newContacts.x = 1;
-
-        t1.text = newContacts.ToString();
+        if (GetHit(Vector2.up))
+            newContacts.y = 1;
+        
         return newContacts;
     }
 
@@ -116,41 +112,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (contacts.State == Contacts.PlayerState.Wall) rb.linearVelocityX = 0;
         
-    }
-    
-    void HandleButton(InputAction.CallbackContext context)
-    {
-        queueJump = true;
-
-        if (contacts.IsAirborne) time = 0;
-        
-    }
-    void HandleJump()
-    {
-        
-        if (_p.ShouldMove == false) return;
-        
-        contacts.contacts = GetContacts();
-
-        if (contacts.IsCausedByJump) return;
-
-        if (CanJumpGrounded())
-        {
-            time = jumpBuffer;
-            rb.AddForce(Vector2.up * jumpForce);
-            if (contacts.IsAirborne) contacts.IsCausedByJump = true;
-            else IsCausedByJump = true;
-        }
-        else if (CanJumpWall())
-        {
-            time = jumpBuffer;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-            rb.AddForce(new Vector2(-contacts.x * xJumpForce, wallJumpForce));
-            if (contacts.IsAirborne) contacts.IsCausedByJump = true;
-            else IsCausedByJump = true;
-            
-        }
-
     }
 
     private bool CanJumpWall()
@@ -201,10 +162,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        t4.text = _p.Health.ToString();
-        
-        if (time < jumpBuffer)
-            time += Time.fixedDeltaTime;
         
         contacts.contacts = GetContacts();
         
@@ -217,14 +174,6 @@ public class PlayerMovement : MonoBehaviour
             if (lastContacts.Count > 50) lastContacts.RemoveAt(50);
             IsCausedByJump = false;
             
-            if (time < jumpBuffer)
-                queueJump = true;
-        }
-        
-        if (queueJump)
-        {
-            queueJump = false;
-            HandleJump();
         }
     
         //reduce sliding speed
@@ -234,7 +183,57 @@ public class PlayerMovement : MonoBehaviour
     
         if (contacts.State == Contacts.PlayerState.Wall)
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+        #region Jump
+
+        if (jump.WasPressedThisFrame())
+        {
+            if (CanJumpGrounded())
+            {
+                isJumping = true;
+                jumpTime = 0;
+                IsCausedByJump = true;
+                
+                rb.AddForce(new Vector2(0, initialJumpForce ), ForceMode2D.Impulse);
+            }
+            else if (CanJumpWall())
+            {
+                isJumping = true;
+                jumpTime = 0;
+                IsCausedByJump = true;
+                
+                rb.linearVelocityY = 0;
+                rb.AddForce(new Vector2(-contacts.x * initalXJumpForce, initialJumpForce), ForceMode2D.Impulse);
+            }
+            else
+            {
+                jumpBufferTime = 0;
+            }
+        }
+        if (jump.IsPressed())
+        {
+            jumpTime += Time.fixedDeltaTime;
+            if (jumpTime < maxJumpTime)
+            {
+                //get direction to jump
+                
+                //if last contact was a wall, jump in the opposite direction
+                if(lastContacts[0].IsWall)
+                    rb.AddForce(new Vector2(-lastContacts[0].x * continualXJumpForce, continualJumpForce));
+                else
+                    rb.AddForce(new Vector2(0, continualJumpForce));
+            }
+            
+        }
+        if (jump.WasReleasedThisFrame())
+        {
+            isJumping = false;
+        }
+
+        #endregion 
         
+        #region ApplyXMovement
+
         float moveDirection = CalculateMoveDirection();
         if (moveDirection != 0 && _p.ShouldMove)
         {
@@ -246,7 +245,8 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Abs(Mathf.Abs(rb.linearVelocity.x) - maxSpeed) < tolerance)
                 maxAcceleration = maxDefaultAcceleration;
         }
-    
+
+        #endregion
     
         UpdateFrameStates(contacts.State);
     }
