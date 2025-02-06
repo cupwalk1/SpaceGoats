@@ -12,13 +12,13 @@ public class Developer
    [MenuItem("Developer/Respawn Player")]
    private static void Respawn()
    {
-      GameObject player = GameObject.Find("Player");
-      player.transform.position = new Vector3(-8, -2.7f);
+      GameObject player = GameObject.Find("Goat");
+      player.transform.position = GameObject.FindWithTag("Respawn").transform.position;
       player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
       player.GetComponent<PlayerHealth>().ResetHealth();
       player.GetComponent<PlayerManager>().ShouldMoveCamera = true;
       player.GetComponent<PlayerManager>().EnableMoveJump();
-      player.GetComponent<Collider2D>().enabled = true;
+      player.GetComponentInChildren<Collider2D>().enabled = true;
    }
 
    [MenuItem("Developer/Check PostProcessing")]
