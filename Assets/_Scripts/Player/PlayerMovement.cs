@@ -185,22 +185,28 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
 
         #region Jump
-
-        if (jump.WasPressedThisFrame())
+        bool canJumpBuffer = CanJumpBuffer();
+        if (jump.WasPressedThisFrame() || canJumpBuffer)
         {
-            if (CanJumpGrounded())
+            if (!canJumpBuffer)
+            {
+                jumpBufferTime = 0;
+            }
+            if (CanJumpGrounded() && _p.ShouldJump)
             {
                 isJumping = true;
                 jumpTime = 0;
                 IsCausedByJump = true;
+                jumpBufferTime = jumpBuffer;
                 
                 rb.AddForce(new Vector2(0, initialJumpForce ), ForceMode2D.Impulse);
             }
-            else if (CanJumpWall())
+            else if (CanJumpWall() && _p.ShouldJump)
             {
                 isJumping = true;
                 jumpTime = 0;
                 IsCausedByJump = true;
+                jumpBufferTime = jumpBuffer;
                 
                 rb.linearVelocityY = 0;
                 rb.AddForce(new Vector2(-contacts.x * initalXJumpForce, initialJumpForce), ForceMode2D.Impulse);
@@ -215,13 +221,16 @@ public class PlayerMovement : MonoBehaviour
             jumpTime += Time.fixedDeltaTime;
             if (jumpTime < maxJumpTime)
             {
-                //get direction to jump
-                
-                //if last contact was a wall, jump in the opposite direction
-                if(lastContacts[0].IsWall)
-                    rb.AddForce(new Vector2(-lastContacts[0].x * continualXJumpForce, continualJumpForce));
-                else
-                    rb.AddForce(new Vector2(0, continualJumpForce));
+                if(_p.ShouldJump)
+                {
+                    //get direction to jump
+                    //if last contact was a wall, jump in the opposite direction
+                    if (lastContacts[0].IsWall)
+                        rb.AddForce(new Vector2(-lastContacts[0].x * continualXJumpForce, continualJumpForce));
+                    
+                    else
+                        rb.AddForce(new Vector2(0, continualJumpForce));
+                }
             }
             
         }
@@ -251,6 +260,15 @@ public class PlayerMovement : MonoBehaviour
         UpdateFrameStates(contacts.State);
     }
 
+    bool CanJumpBuffer()
+    {
+        if (jumpBufferTime < jumpBuffer && (CanJumpGrounded() || CanJumpWall()))
+        {
+            jumpBufferTime = jumpBuffer;
+            return true;
+        }
+        return false;
+    }
     
     void UpdateFrameStates(Contacts.PlayerState state)
     {

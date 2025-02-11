@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
+   public bool IsGameInProgress;
    public int MaxHearts = 4;
    public int plantRegenTime = 10;
    public bool IsImmune;
@@ -61,5 +63,12 @@ public class PlayerManager : MonoBehaviour
          return 1;
       else
          return 0;
+   }
+
+   private void Start()
+   {
+      DisableMoveJump();
+      GameManager.Instance.GameStart.AddListener(delegate { IsGameInProgress = true; });
+      OnPlayerDie.AddListener(delegate { IsGameInProgress = false; });
    }
 }

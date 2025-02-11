@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class PlayerAnim : MonoBehaviour
 {
@@ -15,8 +17,27 @@ public class PlayerAnim : MonoBehaviour
 
    public bool lastIsRight;
       
+   [SerializeField] PlayerManager playerManager;
+   [SerializeField] Slider oxygenBar;
 
+   private void Start()
+   {
+      GameManager.Instance.GameStart.AddListener(OnGameStart);
+      playerManager.OnPlayerDie.AddListener(OnPlayerDie);
+      oxygenBar.handleRect.GetComponent<ParticleSystem>().Stop();
+   }
 
+   private void OnPlayerDie()
+   {
+      oxygenBar.handleRect.GetComponent<ParticleSystem>().Stop();
+   }
+
+   void OnGameStart()
+   {
+      IsRight = true;
+      lastIsRight = true;
+      oxygenBar.handleRect.GetComponent<ParticleSystem>().Play();
+   }
 
    private void FixedUpdate()
    {

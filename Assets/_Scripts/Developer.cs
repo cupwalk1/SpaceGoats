@@ -69,8 +69,17 @@ public class Developer
    [MenuItem("Developer/Erase Plants")]
    private static void ErasePlants()
    {
-      PlantManager.Plants.Clear();
-      PlantManager.SavePlants();
+      PlantManager.Instance.Plants.Clear();
+      PlantManager.Instance.SavePlants();
    }
+   
+   
+   // Button to start game through _pm.GameStart.Invoke()
+   [MenuItem("Developer/Start Game")]
+   private static void StartGame()
+   {
+      GameManager.Instance.GameStart.Invoke();
+   }
+   
 }
 #endif

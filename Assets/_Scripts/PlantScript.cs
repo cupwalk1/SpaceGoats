@@ -7,26 +7,26 @@ public class PlantScript : MonoBehaviour
    public Sprite ripeSprite;
    public Sprite unripeSprite;
    public Vector3Int position;
-
+   private PlantManager _pm;
    public bool IsRipe
    {
       get
       {
-         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+         if (_pm.Plants.TryGetValue(position, out var plantData))
             return plantData.IsRipe;
-         PlantManager.Plants[position] = new PlantData { Position = position, IsRipe = true };
+         _pm.Plants[position] = new PlantData { Position = position, IsRipe = true };
          return true;
       }
       private set
       {
-         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+         if (_pm.Plants.TryGetValue(position, out var plantData))
          {
             plantData.IsRipe = value;
-            PlantManager.Plants[position] = plantData;
+            _pm.Plants[position] = plantData;
          }
          else
          {
-            PlantManager.Plants[position] = new PlantData { Position = position, IsRipe = value };
+            _pm.Plants[position] = new PlantData { Position = position, IsRipe = value };
          }
       }
    }
@@ -35,21 +35,21 @@ public class PlantScript : MonoBehaviour
    {
       get
       {
-         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+         if (_pm.Plants.TryGetValue(position, out var plantData))
             return plantData.TimeToRipe;
-         PlantManager.Plants[position] = new PlantData { Position = position};
+         _pm.Plants[position] = new PlantData { Position = position};
          return 10;
       }
       private set
       {
-         if (PlantManager.Plants.TryGetValue(position, out var plantData))
+         if (_pm.Plants.TryGetValue(position, out var plantData))
          {
             plantData.TimeToRipe = value;
-            PlantManager.Plants[position] = plantData;
+            _pm.Plants[position] = plantData;
          }
          else
          {
-            PlantManager.Plants[position] = new PlantData { Position = position, TimeToRipe = value };
+            _pm.Plants[position] = new PlantData { Position = position, TimeToRipe = value };
          }
       }
    }
@@ -61,20 +61,25 @@ public class PlantScript : MonoBehaviour
    void Start()
    {
       tilemap.RefreshTile(position);
-      PlantManager.LoadPlants();
-      PlantManager.StartRegenCounter();
+      _pm = PlantManager.Instance;
+      _pm.LoadPlants();
+      _pm.StartRegenCounter();
    }
 
    private void OnDestroy()
    {
-      PlantManager.SavePlants();
+      _pm.SavePlants();
    }
 
    private void Harvest()
    {
       if(IsRipe)
+      {
          RegenTime = GameObject.Find("Goat").GetComponent<PlayerManager>().plantRegenTime;
-      IsRipe = false;
+         GameManager.Instance.gameData.PlantsGatheredDuringRun++;      
+         IsRipe = false;
+         _pm.OnPlantGathered();
+      }
       tilemap.RefreshTile(position);
    }
 

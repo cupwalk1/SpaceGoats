@@ -4,30 +4,62 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using System.Threading.Tasks;
+using TMPro;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
-public static class PlantManager
+public class PlantManager : MonoBehaviour
 {
+   [SerializeField] private TMP_Text text;
+   public static PlantManager Instance { get; private set; }
    private static Task _regenTask;
-   private static readonly string SaveFilePath = Path.Combine(Application.persistentDataPath, "plants.json");
-   public static Dictionary<Vector3Int, PlantData> Plants = new();
+   private string SaveFilePath;
+   public Dictionary<Vector3Int, PlantData> Plants = new();
+   public UnityEvent<int> _onPlantGathered = new UnityEvent<int>();
 
-   private static PlantData GetPlant(Vector3Int position)
+
+   public int PlantsGatheredDuringRun
    {
-      if (Plants.TryGetValue(position, out var plantData)) return plantData;
-      plantData = new PlantData { Position = position };
-      Plants[position] = plantData;
-      return plantData;
+      get => GameManager.Instance.gameData.PlantsGatheredDuringRun;
+      set => GameManager.Instance.gameData.PlantsGatheredDuringRun = value;
    }
-   
-   public static void SavePlants()
+
+   private void Awake()
+   {
+      if (Instance == null)
+      {
+         Instance = this;
+         DontDestroyOnLoad(gameObject);
+      }
+      else
+      {
+         Destroy(gameObject);
+      }
+   }
+
+   private void Start()
+   {
+      _onPlantGathered.AddListener(delegate(int i) { text.text = i.ToString(); });
+      SaveFilePath = Path.Combine(Application.persistentDataPath, "plants.json");
+      LoadPlants();
+      StartRegenCounter();
+      _onPlantGathered.Invoke(0);
+   }
+
+
+   public void OnPlantGathered()
+   {
+      _onPlantGathered.Invoke(PlantsGatheredDuringRun);
+   }
+
+   public void SavePlants()
    {
       var plantList = Plants.Values.ToList();
       var json = JsonUtility.ToJson(new PlantDataList { Plants = plantList });
       File.WriteAllText(SaveFilePath, json);
    }
 
-   public static void LoadPlants()
+   public void LoadPlants()
    {
       if (!File.Exists(SaveFilePath)) return;
       var json = File.ReadAllText(SaveFilePath);
@@ -35,13 +67,13 @@ public static class PlantManager
       Plants = plantList.Plants.ToDictionary(p => p.Position);
    }
 
-   public static void StartRegenCounter()
+   public void StartRegenCounter()
    {
       if (_regenTask != null && !_regenTask.IsCompleted) return;
       _regenTask = RegenCounter();
    }
 
-   private static async Task RegenCounter()
+   private async Task RegenCounter()
    {
       while (true)
       {

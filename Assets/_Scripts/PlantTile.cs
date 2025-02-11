@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
@@ -13,7 +12,6 @@ public class PlantTile : Tile
    public GameObject plantTilePrefab;
    [SerializeField] private Light2D light2D;
    [SerializeField] private BoxCollider2D boxCollider;
-
    public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
    {
       
@@ -51,12 +49,14 @@ public class PlantTile : Tile
          }
       }
    }
-   
+
    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
    {
       base.GetTileData(position, tilemap, ref tileData);
-      if(PlantManager.Plants.TryGetValue(position, out var plantData)) 
+
+      if (PlantManager.Instance != null && PlantManager.Instance.Plants.TryGetValue(position, out var plantData))
+      {
          tileData.sprite = plantData.IsRipe ? script.ripeSprite : script.unripeSprite;
-      
+      }
    }
 }
