@@ -43,7 +43,8 @@ public class PlantManager : MonoBehaviour
       SaveFilePath = Path.Combine(Application.persistentDataPath, "plants.json");
       LoadPlants();
       StartRegenCounter();
-      _onPlantGathered.Invoke(0);
+      PlantsGatheredDuringRun = 0;
+      text.text = "0";
    }
 
 
