@@ -1,5 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using System.IO;
+using _Scripts;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -12,65 +14,17 @@ public class Developer
    [MenuItem("Developer/Respawn Player")]
    private static void Respawn()
    {
-      GameObject player = GameObject.Find("Goat");
-      player.transform.position = GameObject.FindWithTag("Respawn").transform.position;
-      player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-      player.GetComponent<PlayerHealth>().ResetHealth();
-      player.GetComponent<PlayerManager>().ShouldMoveCamera = true;
-      player.GetComponent<PlayerManager>().EnableMoveJump();
-      player.GetComponentInChildren<Collider2D>().enabled = true;
-   }
-
-   [MenuItem("Developer/Check PostProcessing")]
-   private static void CheckPostProcessing()
-   {
-      // Ensure the PostProcessLayer is added to the camera
-      var camera = Camera.main;
-      var postProcessLayer = camera.GetComponent<PostProcessLayer>();
-      if (postProcessLayer == null)
-      {
-         postProcessLayer = camera.gameObject.AddComponent<PostProcessLayer>();
-      }
-      postProcessLayer.volumeLayer = LayerMask.GetMask("PostProcessing");
-
-      // Ensure the PostProcessVolume is configured correctly
-      var postProcessVolume = GameObject.FindFirstObjectByType<PostProcessVolume>();
-      if (postProcessVolume != null)
-      {
-         postProcessVolume.isGlobal = true;
-         // Ensure the profile is assigned and contains the Vignette effect
-         if (postProcessVolume.profile == null)
-         {
-            Debug.LogError("PostProcessProfile is not assigned to the PostProcessVolume.");
-         }
-         else
-         {
-            Vignette vignette;
-            if (!postProcessVolume.profile.TryGetSettings(out vignette))
-            {
-               Debug.LogError("Vignette effect is not added to the PostProcessProfile.");
-            }
-         }
-      }
-      else
-      {
-         Debug.LogError("PostProcessVolume is not found in the scene.");
-      }
-   }
-
-   [MenuItem("Developer/Refresh Tilemaps")]
-   private static void RefreshTileMaps()
-   {
-      Tilemap tilemap = GameObject.Find("Plants").GetComponent<Tilemap>();
-      tilemap.RefreshAllTiles();
+      GameManager.Instance.RestartGame();
    }
 
    // Erase plants from plants.json
-   [MenuItem("Developer/Erase Plants")]
+   [MenuItem("Developer/Erase Saves")]
    private static void ErasePlants()
    {
       PlantManager.Instance.Plants.Clear();
       PlantManager.Instance.SavePlants();
+      
+      File.Create(Application.persistentDataPath + "/gameData.json");
    }
    
    
@@ -80,6 +34,54 @@ public class Developer
    {
       GameManager.Instance.GameStart.Invoke();
    }
+
+
+   [MenuItem("Developer/Upgrades/PurchaseExtraLife")]
+   private static void UnlockExtraLife()
+   {
+      UpgradeManager.Instance.AddUpgrade(new ExtraLifeUpgrade());
+   }
    
+   [MenuItem("Developer/Upgrades/PurchaseIncreaseOxygenCapacity")]
+   private static void UnlockIncreaseOxygenCapacity()
+   {
+      UpgradeManager.Instance.AddUpgrade(new IncreaseOxygenCapacityUpgrade());
+   }
+   
+   [MenuItem("Developer/Upgrades/PurchaseIncreasePlantCapacity")]
+   private static void UnlockIncreasePlantCapacity()
+   {
+      UpgradeManager.Instance.AddUpgrade(new IncreasePlantCapacityUpgrade());
+   }
+   
+   // public class IncreaseOxygenCapacityUpgrade : UpgradeBase
+   // {
+   //    public IncreaseOxygenCapacityUpgrade()
+   //    {
+   //       Price = 100;
+   //       Name = "Aumento Capacità";
+   //       Description = "Aumenta la capacità di ossigeno di 10 secondi";
+   //    }
+   //    public override void OnEnable()
+   //    {
+   //       GameObject.FindWithTag("Player").GetComponent<PlayerManager>().MaxOxygen += 10;
+   //    }
+   // }
+   //
+   // public class IncreasePlantCapacityUpgrade : UpgradeBase
+   // {
+   //    public IncreasePlantCapacityUpgrade()
+   //    {
+   //       Price = 100;
+   //       Name = "Aumento Capacità";
+   //       Description = "Aumenta la capacità di piante di 1";
+   //    }
+   //    public override void OnEnable()
+   //    {
+   //       GameObject.FindWithTag("Player").GetComponent<PlayerManager>().MaxPlants++;
+   //    }
+   // }
 }
+
+
 #endif

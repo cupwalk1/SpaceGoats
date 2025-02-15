@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using _Scripts;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
@@ -22,12 +24,16 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public UnityEvent GameStart = new UnityEvent();
+    public UnityEvent GameLoaded = new UnityEvent();
+    
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -49,8 +55,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        // Logic to restart the game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameLoaded.Invoke();
+        GameStart.Invoke();
     }
 
     public void QuitGame()
@@ -61,6 +67,7 @@ public class GameManager : MonoBehaviour
     
     private void OnApplicationQuit()
     {
+        Debug.Log("Game quit");
         SaveGame();
     }
 
@@ -70,27 +77,34 @@ public class GameManager : MonoBehaviour
       PlantManager.Instance.SavePlants();
     }
    
-    static void SaveGameData()
+    public void SaveGameData()
     {
-        var gameData = new GameData { PlantsGatheredDuringRun = PlantManager.Instance.PlantsGatheredDuringRun };
-        var json = JsonUtility.ToJson(gameData);
+        var json = JsonUtility.ToJson(_gameData);
         File.WriteAllText(Path.Combine(Application.persistentDataPath, "gameData.json"), json);
     }
    
     static GameData LoadGameData()
     {
-        if (!File.Exists(Path.Combine(Application.persistentDataPath, "gameData.json"))) return new GameData();
+        if (!File.Exists(Path.Combine(Application.persistentDataPath, "gameData.json")))
+        {
+            File.Create(Path.Combine(Application.persistentDataPath, "gameData.json"));
+            return new GameData();
+        }
         var json = File.ReadAllText(Path.Combine(Application.persistentDataPath, "gameData.json"));
         return JsonUtility.FromJson<GameData>(json);
     }
     
-    public UnityEvent GameStart = new UnityEvent();
-    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameLoaded.Invoke();
+    }
 }
 
 [System.Serializable]
 public class GameData
 {
     public int PlantsGatheredDuringRun;
+
+    public List<UpgradeBase> Upgrades = new();
 }
 

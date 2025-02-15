@@ -73,8 +73,9 @@ public class PlantScript : MonoBehaviour
 
    private void Harvest()
    {
-      if(IsRipe)
+      if(IsRipe && _pm.PlantsGatheredDuringRun < GameObject.Find("Goat").GetComponent<PlayerManager>().MaxPlants)
       {
+         
          RegenTime = GameObject.Find("Goat").GetComponent<PlayerManager>().plantRegenTime;
          GameManager.Instance.gameData.PlantsGatheredDuringRun++;      
          IsRipe = false;

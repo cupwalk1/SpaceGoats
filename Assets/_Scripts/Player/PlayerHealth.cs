@@ -9,10 +9,8 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
    private PlayerManager _pm;
-
-   [SerializeField] int maxOxygenTime = 100;
-
    [SerializeField] private Slider oxygenBar;
+   
    [SerializeField] float DeathUpForce = 10f;
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created;
@@ -34,11 +32,9 @@ public class PlayerHealth : MonoBehaviour
    
    void Start()
    {
-      oxygenLevel = 1;
-      _pm = GetComponent<PlayerManager>();
-      health = _pm.MaxHearts;
       _pm.OnPlayerDie.AddListener(Die);
       GameManager.Instance.GameStart.AddListener(GameStart);
+
    }
 
    private void GameStart()
@@ -59,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
    {
       if (_pm.IsGameInProgress)
       {
-         oxygenLevel -= Time.deltaTime / maxOxygenTime;
+         oxygenLevel -= Time.deltaTime / _pm.MaxOxygen;
          if (oxygenBar.value <= 0)
          {
             _pm.OnPlayerDie.Invoke();

@@ -16,7 +16,8 @@ public class PlantManager : MonoBehaviour
    private string SaveFilePath;
    public Dictionary<Vector3Int, PlantData> Plants = new();
    public UnityEvent<int> _onPlantGathered = new UnityEvent<int>();
-
+   
+   public int maxCapacity = 10;
 
    public int PlantsGatheredDuringRun
    {
@@ -52,7 +53,7 @@ public class PlantManager : MonoBehaviour
    {
       _onPlantGathered.Invoke(PlantsGatheredDuringRun);
    }
-
+   
    public void SavePlants()
    {
       var plantList = Plants.Values.ToList();
