@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class PlayerAnim : MonoBehaviour
@@ -68,6 +67,11 @@ public class PlayerAnim : MonoBehaviour
          IsRight = playerMovement.CurrentContacts.contacts.x < 0;
       }
       else IsRight = rb.linearVelocityX > 0;
-      LeanTween.scaleX(gameObject, IsRight ? 1 : -1, flipTime).setEaseInOutSine();
+    Invoke("FlipSprite", flipTime);
+   }
+   
+   void FlipSprite()
+   {
+      spriteRenderer.flipX = !IsRight;
    }
 }
