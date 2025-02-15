@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
    
    void Start()
    {
+      _pm = GetComponent<PlayerManager>();
       _pm.OnPlayerDie.AddListener(Die);
       GameManager.Instance.GameStart.AddListener(GameStart);
 
