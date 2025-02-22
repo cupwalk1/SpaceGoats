@@ -12,6 +12,7 @@ public class PlayerAnim : MonoBehaviour
    public SpriteRenderer spriteRenderer;
    public float flipTime = 0.25f;
    public Rigidbody2D rb;
+   Animator _animator;
       
 
    public bool lastIsRight;
@@ -21,6 +22,7 @@ public class PlayerAnim : MonoBehaviour
 
    private void Start()
    {
+      _animator = GetComponent<Animator>();
       GameManager.Instance.GameStart.AddListener(OnGameStart);
       playerManager.OnPlayerDie.AddListener(OnPlayerDie);
       oxygenBar.handleRect.GetComponent<ParticleSystem>().Stop();
@@ -62,15 +64,10 @@ public class PlayerAnim : MonoBehaviour
 
    void Flip()
    {
-      if(Mathf.Abs(rb.linearVelocityX) < 0.1f) 
-      {
-         IsRight = playerMovement.CurrentContacts.contacts.x < 0;
-      }
-      else IsRight = rb.linearVelocityX > 0;
-    Invoke("FlipSprite", flipTime);
+      _animator.SetTrigger("Flip");
    }
    
-   void FlipSprite()
+   public void FlipSprite()
    {
       spriteRenderer.flipX = !IsRight;
    }
