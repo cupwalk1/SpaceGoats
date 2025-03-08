@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05296ff5f608497994710e27e46c584c, type: 3}
-  m_Name: Plant Tile
+  m_Name: EnergyTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 8854971001033267750, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
+  m_Sprite: {fileID: 21300014, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,10 +31,10 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 7548563167753396204, guid: 97286f0661cb74a68bd7209bbd9a80c6, type: 3}
+  m_InstancedGameObject: {fileID: 7548563167753396204, guid: 2678f3fb0d835490cb210d0a1707bc74, type: 3}
   m_Flags: 1
   m_ColliderType: 0
-  Name: Plant
-  RipeSprite: {fileID: 8854971001033267750, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
-  UnripeSprite: {fileID: -4832618155596115187, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
-  Prefab: {fileID: 7548563167753396204, guid: 97286f0661cb74a68bd7209bbd9a80c6, type: 3}
+  Name: Energy
+  RipeSprite: {fileID: 21300014, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
+  UnripeSprite: {fileID: 21300026, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
+  Prefab: {fileID: 0}

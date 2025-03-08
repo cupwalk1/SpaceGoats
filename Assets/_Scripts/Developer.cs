@@ -21,8 +21,8 @@ public class Developer
    [MenuItem("Developer/Erase Saves")]
    private static void ErasePlants()
    {
-      PlantManager.Instance.Plants.Clear();
-      PlantManager.Instance.SavePlants();
+      ResourceManager.Instance.Resouces.Clear();
+      ResourceManager.Instance.SaveResources();
       
       File.Create(Application.persistentDataPath + "/gameData.json");
    }
@@ -33,6 +33,13 @@ public class Developer
    private static void StartGame()
    {
       GameManager.Instance.GameStart.Invoke();
+   }
+   
+   [MenuItem("Developer/Refresh Resource Tiles")]
+   private static void method1()
+   {
+      Tilemap tilemap = GameObject.Find("Plants").GetComponent<Tilemap>();
+      tilemap.RefreshAllTiles();
    }
 
 

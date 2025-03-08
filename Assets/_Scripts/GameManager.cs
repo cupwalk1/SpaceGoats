@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     private void SaveGame()
     {
       SaveGameData();
-      PlantManager.Instance.SavePlants();
+      ResourceManager.Instance.SaveResources();
     }
    
     public void SaveGameData()
