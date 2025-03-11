@@ -38,7 +38,7 @@ public class Developer
    [MenuItem("Developer/Refresh Resource Tiles")]
    private static void method1()
    {
-      Tilemap tilemap = GameObject.Find("Plants").GetComponent<Tilemap>();
+      Tilemap tilemap = GameObject.Find("Ground & Resouces").GetComponent<Tilemap>();
       tilemap.RefreshAllTiles();
    }
 

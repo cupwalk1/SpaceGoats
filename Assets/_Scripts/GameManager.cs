@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public bool IsInGameScene => SceneManager.GetActiveScene().buildIndex != 0;
+    
     public static GameManager Instance { get; private set; }
     
     private GameData _gameData;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
     
     public UnityEvent GameStart = new UnityEvent();
     public UnityEvent GameLoaded = new UnityEvent();
+    public UnityEvent GameEnded = new UnityEvent();
     
     private void Awake()
     {
@@ -39,18 +43,22 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        GameObject.FindWithTag("Player").GetComponent<PlayerManager>().OnPlayerDie.AddListener(EndGame);
+    }
+
+    private void Start()
+    {
+        GameEnded.AddListener(EndGame);
     }
 
     public void StartGame()
     {
-        // Logic to start the game
-        SceneManager.LoadScene("GameScene");
+        GameStart.Invoke();
     }
 
     public void EndGame()
     {
         SaveGameData();
+        SceneManager.LoadScene("MenuScene");
     }
 
     public void RestartGame()
@@ -74,7 +82,10 @@ public class GameManager : MonoBehaviour
     private void SaveGame()
     {
       SaveGameData();
-      ResourceManager.Instance.SaveResources();
+      if(IsInGameScene)
+      {
+          ResourceManager.Instance.SaveResources();
+      }
     }
    
     public void SaveGameData()
@@ -96,9 +107,14 @@ public class GameManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GameLoaded.Invoke();
+        if (IsInGameScene)
+        {
+            GameLoaded.Invoke();
+            Invoke("StartGame", 2);
+        }
     }
 }
+
 
 [System.Serializable]
 public class GameData

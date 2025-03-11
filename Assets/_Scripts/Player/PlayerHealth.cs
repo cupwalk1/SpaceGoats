@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,20 +10,11 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
    private PlayerManager _pm;
-   [SerializeField] private Slider oxygenBar;
    
    [SerializeField] float DeathUpForce = 10f;
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created;
    
-   float oxygenLevel
-   {
-      set
-      {
-         oxygenBar.value = value; 
-      }
-      get { return oxygenBar.value; }
-   }
 
    int health
    {
@@ -46,23 +38,10 @@ public class PlayerHealth : MonoBehaviour
 
    public void ResetHealth()
    {
-      oxygenLevel = 1;
       _pm.Health = _pm.MaxHearts;
    }
    
-
-   // Update is called once per frame
-   void Update()
-   {
-      if (_pm.IsGameInProgress)
-      {
-         oxygenLevel -= Time.deltaTime / _pm.MaxOxygen;
-         if (oxygenBar.value <= 0)
-         {
-            _pm.OnPlayerDie.Invoke();
-         }
-      }
-   }
+   
 
    private void OnTriggerEnter2D(Collider2D other)
    {
@@ -85,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
    {
       _pm.IsGameInProgress = false;
       //reset velocity
-      oxygenLevel = 0;
+
       var rb = GetComponent<Rigidbody2D>();
       rb.linearVelocityX = 0;
       _pm.DisableMoveJump();
@@ -98,5 +77,11 @@ public class PlayerHealth : MonoBehaviour
       var rb = GetComponent<Rigidbody2D>();
       rb.AddForce(Vector2.up * DeathUpForce, ForceMode2D.Impulse);
       GetComponentInChildren<Collider2D>().enabled = false;
+      Invoke("CallGameEnd", 1f);
+   }
+
+   void CallGameEnd()
+   {
+      GameManager.Instance.GameEnded.Invoke();
    }
 }

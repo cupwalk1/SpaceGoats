@@ -9,6 +9,19 @@ public abstract class ResourceScript : MonoBehaviour
    public TileData tileData;
    public Vector3Int position;
 
+   Coroutine _regenCoroutine;
+   private Coroutine RegenCoroutine
+   {
+      get => _regenCoroutine;
+      set
+      {
+         if (_regenCoroutine == null)
+         {
+            _regenCoroutine = value;
+         }
+      }
+      
+   }
    public abstract int MaxTimeToRegen { get; set; }
 
    protected ResourceManager _RM
@@ -23,13 +36,19 @@ public abstract class ResourceScript : MonoBehaviour
    private void Start()
    {
       _thisResourceData = _RM.GetResource(position);
-      var elapsedTime = (DateTime.Now - _RM.lastSave).Seconds;
+      Debug.Log(_thisResourceData.IsRipe);
+      if(!IsRipe)
+      {
+         RegenCoroutine = StartCoroutine("Regen");
+         gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
+      }
+      var elapsedTime = (DateTime.Now - _RM.lastSave).TotalSeconds;
       TimeToRipe -= elapsedTime;
+      
    }
 
    IEnumerator Regen()
    {
-      TimeToRipe = MaxTimeToRegen;
       while (TimeToRipe > 0)
       {
          TimeToRipe--;
@@ -49,7 +68,7 @@ public abstract class ResourceScript : MonoBehaviour
       get => TimeToRipe <= 0;
    }
 
-   public int TimeToRipe
+   public double TimeToRipe
    {
       get => _thisResourceData.TimeToRipe;
       set
@@ -66,22 +85,23 @@ public abstract class ResourceScript : MonoBehaviour
    private void OnDestroy()
    {
       _RM.SaveResources();
+      StopCoroutine(RegenCoroutine);
    }
 
    public abstract bool Harvest();
 
    public void OnTriggerEnter2D(Collider2D other)
    {
-      if (!other.gameObject.CompareTag("Player")) return;
+      if (!other.gameObject.transform.parent.CompareTag("Player")) return;
       if (IsRipe)
       {
          if (Harvest())
          {
-            StartCoroutine("Regen");
+            TimeToRipe = MaxTimeToRegen;
+            RegenCoroutine = StartCoroutine("Regen");
             gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
          }
       }
-
-      else Debug.Log(TimeToRipe.ToString());
+      
    }
 }

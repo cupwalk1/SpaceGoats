@@ -7,13 +7,6 @@ class PlantScript : ResourceScript
 
    public override bool Harvest()
    {
-      if (_RM.PlantsGatheredDuringRun < GameObject.Find("Goat").GetComponent<PlayerManager>().MaxPlants)
-      {
-         GameManager.Instance.gameData.PlantsGatheredDuringRun++;
-         _RM.OnPlantGathered();
-         return true;
-      }
-
-      return false;
+      return true;
    }
 }

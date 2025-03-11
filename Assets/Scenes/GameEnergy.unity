@@ -539,6 +539,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6174852203379132015, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
+      propertyPath: oxygenBar
+      value: 
+      objectReference: {fileID: 1774897116}
     - target: {fileID: 8009642172547981965, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
       propertyPath: m_Name
       value: Goat
@@ -1072,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7a28724184a41a6a7c911e3cb854e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1489228232}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: -100}
   magnitude: 0.03
@@ -2230,6 +2234,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 68.7}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &1489228232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8009642172547981965, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
+  m_PrefabInstance: {fileID: 344393007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525236651
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,6 +2515,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3363290926447342575, guid: a2c934e913a3443cda72695795c220f2, type: 3}
   m_PrefabInstance: {fileID: 1774897114}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1774897116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3025954594373742663, guid: a2c934e913a3443cda72695795c220f2, type: 3}
+  m_PrefabInstance: {fileID: 1774897114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1894556720
 PrefabInstance:
   m_ObjectHideFlags: 0

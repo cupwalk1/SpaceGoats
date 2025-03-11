@@ -11,7 +11,6 @@ using UnityEngine.Tilemaps;
 
 public class ResourceManager : MonoBehaviour
 {
-   [SerializeField] private TMP_Text text;
    public static ResourceManager Instance { get; private set; }
    private static Task _regenTask;
    private string SaveFilePath;
@@ -20,12 +19,7 @@ public class ResourceManager : MonoBehaviour
    public DateTime lastSave;
    
    int maxCapacity = 10;
-
-   public int PlantsGatheredDuringRun
-   {
-      get => GameManager.Instance.gameData.PlantsGatheredDuringRun;
-      set => GameManager.Instance.gameData.PlantsGatheredDuringRun = value;
-   }
+   
 
    public ResourceData GetResource(Vector3Int position)
    {
@@ -52,22 +46,22 @@ public class ResourceManager : MonoBehaviour
 
    private void Start()
    {
-      _onPlantGathered.AddListener(delegate(int i) { text.text = i.ToString(); });
       SaveFilePath = Path.Combine(Application.persistentDataPath, "resources.json");
-      PlantsGatheredDuringRun = 0;
-      text.text = "0";
+      GameManager.Instance.GameLoaded.AddListener(RefreshTiles);
+      GameManager.Instance.GameLoaded.AddListener(LoadResources);
+      
    }
 
 
-   public void OnPlantGathered()
+   public void RefreshTiles()
    {
-      _onPlantGathered.Invoke(PlantsGatheredDuringRun);
+      GameObject.FindGameObjectWithTag("tilemap").GetComponent<Tilemap>().RefreshAllTiles();
    }
    
    public void SaveResources()
    {
       var plantList = Resouces.Values.ToList();
-      var json = JsonUtility.ToJson(new ResourceDataList { ResourceList = plantList, saveTime = DateTime.Now});
+      var json = JsonUtility.ToJson(new ResourceDataList(plantList, DateTime.Now));
       File.WriteAllText(SaveFilePath, json);
    }
    
@@ -77,7 +71,7 @@ public class ResourceManager : MonoBehaviour
       var json = File.ReadAllText(SaveFilePath);
       var plantList = JsonUtility.FromJson<ResourceDataList>(json);
       Resouces = plantList.ResourceList.ToDictionary(p => p.Position);
-      lastSave = plantList.saveTime;
+      lastSave = plantList.GetSaveTime(); // Use GetSaveTime to convert string back to DateTime
    }
    
 
@@ -87,6 +81,16 @@ public class ResourceManager : MonoBehaviour
 [Serializable]
 public class ResourceDataList
 {
-   public DateTime saveTime;
-   [FormerlySerializedAs("Plants")] public List<ResourceData> ResourceList;
+   public ResourceDataList(List<ResourceData> r, DateTime t)
+   {
+      ResourceList = r;
+      saveTime = t.ToString("o"); // Convert DateTime to ISO 8601 string
+   }
+   public string saveTime; // Change DateTime to string
+   public List<ResourceData> ResourceList;
+
+   public DateTime GetSaveTime()
+   {
+      return DateTime.Parse(saveTime); // Convert string back to DateTime
+   }
 }

@@ -79,7 +79,6 @@ public class PlayerManager : MonoBehaviour
    private void OnGameLoad()
    {
       IsGameInProgress = false;
-
       UpgradeManager.Instance.EnableUpgrades();
       transform.position = GameObject.FindWithTag("Respawn").transform.position;
       GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;

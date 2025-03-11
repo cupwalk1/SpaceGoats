@@ -8,5 +8,5 @@ public class ResourceData
    {
       get => TimeToRipe <= 0;
    }
-   public int TimeToRipe;
+   public double TimeToRipe;
 }

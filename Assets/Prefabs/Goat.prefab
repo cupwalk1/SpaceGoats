@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2303065529462011835}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   hitbox: {fileID: 3209685280519699649}
   jumpTime: 0
   maxJumpTime: 0.35
-  jumpBufferTime: 0
+  jumpBufferTime: 1
   t1: {fileID: 0}
   t2: {fileID: 0}
   t3: {fileID: 0}
@@ -359,7 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b66f24f1f9e4345acb0b922a9e4b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenBar: {fileID: 0}
   DeathUpForce: 15
 --- !u!50 &7678955284043626090
 Rigidbody2D:
@@ -411,7 +410,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
-        m_MethodName: Shake
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -426,7 +425,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
-        m_MethodName: Shake
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

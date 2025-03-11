@@ -242,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb144312794645efbb1385ef764184c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 664885769}
   _onPlantGathered:
     m_PersistentCalls:
       m_Calls: []
@@ -1247,7 +1246,7 @@ GameObject:
   - component: {fileID: 628717280}
   m_Layer: 0
   m_Name: Ground & Resouces
-  m_TagString: Untagged
+  m_TagString: tilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2612,6 +2611,9 @@ MonoBehaviour:
   GameLoaded:
     m_PersistentCalls:
       m_Calls: []
+  GameEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1309754590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,10 +3400,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1990887247}
     m_Modifications:
-    - target: {fileID: 3183742845406252783, guid: aefb29bfab6484092b607f67438c1218, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4630199887536941261, guid: aefb29bfab6484092b607f67438c1218, type: 3}
       propertyPath: m_LocalPosition.x
       value: -95.41599
@@ -3485,11 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 399471377}
     - target: {fileID: 4341957502130315363, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -95.995
+      value: -96.45231
       objectReference: {fileID: 0}
     - target: {fileID: 4341957502130315363, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.054
+      value: 18.046616
       objectReference: {fileID: 0}
     - target: {fileID: 4341957502130315363, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
       propertyPath: m_LocalPosition.z

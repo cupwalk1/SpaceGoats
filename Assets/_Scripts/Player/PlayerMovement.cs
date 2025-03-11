@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -112,6 +113,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (contacts.State == Contacts.PlayerState.Wall) rb.linearVelocityX = 0;
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.name == "Door" && rb.linearVelocityX < 0)
+            _p.ShouldJump = false;
+        else if(other.gameObject.name == "Mask")
+            GameManager.Instance.GameEnded.Invoke();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.name == "Door") _p.ShouldJump = true;
     }
 
     private bool CanJumpWall()
@@ -275,5 +289,5 @@ public class PlayerMovement : MonoBehaviour
         frameStates.Insert(0, state);
         if (frameStates.Count > 20) frameStates.RemoveAt(20);
     }
-    
+
 }
