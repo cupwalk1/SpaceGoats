@@ -8,7 +8,11 @@ public abstract class ResourceScript : MonoBehaviour
 {
    public TileData tileData;
    public Vector3Int position;
-
+   public SpriteRenderer minimapSprite;
+   
+   Color readyColor = Color.yellow;
+   Color notReadyColor = new Color(140, 140, 100, 1);
+   
    Coroutine _regenCoroutine;
    private Coroutine RegenCoroutine
    {
@@ -35,13 +39,16 @@ public abstract class ResourceScript : MonoBehaviour
 
    private void Start()
    {
+      minimapSprite = gameObject.GetComponentInChildren<SpriteRenderer>();
       _thisResourceData = _RM.GetResource(position);
       Debug.Log(_thisResourceData.IsRipe);
       if(!IsRipe)
       {
+         minimapSprite.color = notReadyColor;
          RegenCoroutine = StartCoroutine("Regen");
          gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
       }
+      else minimapSprite.color = readyColor;
       var elapsedTime = (DateTime.Now - _RM.lastSave).TotalSeconds;
       TimeToRipe -= elapsedTime;
       
@@ -76,6 +83,7 @@ public abstract class ResourceScript : MonoBehaviour
          _thisResourceData.TimeToRipe = value;
          if (value <= 0)
          {
+            minimapSprite.color = readyColor;
             gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
          }
       }
@@ -97,6 +105,7 @@ public abstract class ResourceScript : MonoBehaviour
       {
          if (Harvest())
          {
+            minimapSprite.color = notReadyColor;
             TimeToRipe = MaxTimeToRegen;
             RegenCoroutine = StartCoroutine("Regen");
             gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);

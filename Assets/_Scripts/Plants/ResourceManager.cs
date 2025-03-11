@@ -6,14 +6,15 @@ using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class ResourceManager : MonoBehaviour
 {
-   public static ResourceManager Instance { get; private set; }
+   public static ResourceManager Instance;
    private static Task _regenTask;
-   private string SaveFilePath;
+   private string SaveFilePath =>   Path.Combine(Application.persistentDataPath, SceneManager.GetActiveScene().name+".json");
    public Dictionary<Vector3Int, ResourceData> Resouces = new();
    public UnityEvent<int> _onPlantGathered = new UnityEvent<int>();
    public DateTime lastSave;
@@ -46,7 +47,6 @@ public class ResourceManager : MonoBehaviour
 
    private void Start()
    {
-      SaveFilePath = Path.Combine(Application.persistentDataPath, "resources.json");
       GameManager.Instance.GameLoaded.AddListener(RefreshTiles);
       GameManager.Instance.GameLoaded.AddListener(LoadResources);
       
