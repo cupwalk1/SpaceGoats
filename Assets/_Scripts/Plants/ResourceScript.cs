@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public abstract class ResourceScript : MonoBehaviour
 {
+   public abstract ResourceData.ResourceType Type { get; }
    public TileData tileData;
    public Vector3Int position;
    public SpriteRenderer minimapSprite;
@@ -40,7 +42,7 @@ public abstract class ResourceScript : MonoBehaviour
    private void Start()
    {
       minimapSprite = gameObject.GetComponentInChildren<SpriteRenderer>();
-      _thisResourceData = _RM.GetResource(position);
+      _thisResourceData = _RM.GetResource(position, Type);
       Debug.Log(_thisResourceData.IsRipe);
       if(!IsRipe)
       {
@@ -49,7 +51,7 @@ public abstract class ResourceScript : MonoBehaviour
          gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
       }
       else minimapSprite.color = readyColor;
-      var elapsedTime = (DateTime.Now - _RM.lastSave).TotalSeconds;
+      var elapsedTime = (DateTime.Now - _thisResourceData.GetSaveTime()).TotalSeconds;
       TimeToRipe -= elapsedTime;
       
    }
@@ -93,6 +95,7 @@ public abstract class ResourceScript : MonoBehaviour
    private void OnDestroy()
    {
       _RM.SaveResources();
+      if (RegenCoroutine == null) return;
       StopCoroutine(RegenCoroutine);
    }
 

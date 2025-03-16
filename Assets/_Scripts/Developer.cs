@@ -1,11 +1,8 @@
 #if UNITY_EDITOR
-using System.Collections.Generic;
 using System.IO;
 using _Scripts;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Tilemaps;
 
 public class Developer
@@ -21,7 +18,7 @@ public class Developer
    [MenuItem("Developer/Erase Saves")]
    private static void ErasePlants()
    {
-      ResourceManager.Instance.Resouces.Clear();
+      ResourceManager.Instance.Resources.Clear();
       ResourceManager.Instance.SaveResources();
       
       File.Create(Application.persistentDataPath + "/gameData.json");
@@ -41,6 +38,25 @@ public class Developer
       Tilemap tilemap = GameObject.Find("Ground & Resouces").GetComponent<Tilemap>();
       tilemap.RefreshAllTiles();
    }
+   
+   [MenuItem("Developer/GetHarvestableResources/GameEnergy")]
+   private static void method2()
+   {
+      Debug.Log(ResourceManager.Instance.GetHarvestableResources("GameEnergy"));
+   }
+   
+   [MenuItem("Developer/GetHarvestableResources/GamePlants")]
+   private static void method3()
+   {
+      Debug.Log(ResourceManager.Instance.GetHarvestableResources("GamePlants"));
+   }
+   //GameMaterials
+   [MenuItem("Developer/GetHarvestableResources/GameMaterials")]
+   private static void method4()
+   {
+      Debug.Log(ResourceManager.Instance.GetHarvestableResources("GameMaterial"));
+   }
+   
 
 
    [MenuItem("Developer/Upgrades/PurchaseExtraLife")]

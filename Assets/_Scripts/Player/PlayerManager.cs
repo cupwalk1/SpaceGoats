@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
    public bool ShouldMove
    {
       get => _shouldMove;
-      set => _shouldMove = value;
+      set => _shouldMove = value;   
    }
 
    [SerializeField] private bool _shouldJump;

@@ -147,8 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
   minimapSprite: {fileID: 0}
-  averageBreakingTime: 10
-  randomSemiSpan: 5
+  averageBreakingTime: 120
+  randomSemiSpan: 20
 --- !u!1001 &3527764346689527515
 PrefabInstance:
   m_ObjectHideFlags: 0

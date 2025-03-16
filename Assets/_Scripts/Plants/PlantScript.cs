@@ -5,8 +5,10 @@ class PlantScript : ResourceScript
 {
    public override int MaxTimeToRegen { get; set; } = 10;
 
+   public override ResourceData.ResourceType Type => ResourceData.ResourceType.Plant;
    public override bool Harvest()
    {
+      ResourceManager.Instance.PlantsGathered++;
       return true;
    }
 }

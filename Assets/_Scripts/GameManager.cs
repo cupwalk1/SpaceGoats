@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent GameStart = new UnityEvent();
     public UnityEvent GameLoaded = new UnityEvent();
     public UnityEvent GameEnded = new UnityEvent();
+    public UnityEvent MenuLoaded = new UnityEvent();
+    public UnityEvent OnPlayerWin = new UnityEvent();
     
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameEnded.AddListener(EndGame);
+        OnPlayerWin.AddListener(delegate{GameManager.Instance.GameEnded.Invoke();});
     }
 
     public void StartGame()
@@ -112,6 +115,10 @@ public class GameManager : MonoBehaviour
             GameLoaded.Invoke();
             Invoke("StartGame", 2);
         }
+        else
+        {
+            MenuLoaded.Invoke();
+        }
     }
 }
 
@@ -119,8 +126,6 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class GameData
 {
-    public int PlantsGatheredDuringRun;
-
     public List<UpgradeBase> Upgrades = new();
 }
 

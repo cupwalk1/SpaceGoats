@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         if(other.gameObject.name == "Door" && rb.linearVelocityX < 0)
             _p.ShouldJump = false;
         else if(other.gameObject.name == "Mask")
-            GameManager.Instance.GameEnded.Invoke();
+           GameManager.Instance.OnPlayerWin.Invoke();
     }
 
     private void OnTriggerExit2D(Collider2D other)
