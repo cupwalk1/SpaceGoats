@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitbox: {fileID: 3209685280519699649}
+  anim: {fileID: 2706005599140307615}
   jumpTime: 0
   maxJumpTime: 0.35
   jumpBufferTime: 1
@@ -339,11 +340,11 @@ MonoBehaviour:
   graceFramesJump: 7
   jumpBuffer: 0.2
   currentSpeed: 0
-  maxSpeed: 7
-  maxDefaultAcceleration: 80
+  maxSpeed: 8
+  maxDefaultAcceleration: 90
   maxSlidingSpeed: 4
   initialJumpForce: 13
-  continualJumpForce: 13
+  continualJumpForce: 15
   initalXJumpForce: 7.5
   continualXJumpForce: 15
   knockbackForce: 750

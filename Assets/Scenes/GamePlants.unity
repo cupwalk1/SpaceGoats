@@ -242,9 +242,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb144312794645efbb1385ef764184c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Resources: []
   _onPlantGathered:
     m_PersistentCalls:
       m_Calls: []
+  TotalMaterials: 0
+  EnergyProducedByEachGenerator: 0
+  TimeForFoodDecrease: 0
+  PlantMaxCapacity: 20
+  PlantsGathered: 0
+  MaterialsGathered: 0
 --- !u!1 &128058293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2288,12 @@ MonoBehaviour:
   GameEnded:
     m_PersistentCalls:
       m_Calls: []
+  MenuLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerWin:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1309754590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,6 +3170,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3937490776014307107, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -190
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937490776014307107, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937490776014307107, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -44.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937490776014307107, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.0000305
+      objectReference: {fileID: 0}
     - target: {fileID: 5072953897841586593, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3237,6 +3266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5796915124036115551, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -779301137, guid: c985b2084b7b7449d9c90b1068d70236, type: 3}
     - target: {fileID: 6381691993816457899, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
       propertyPath: m_Name
       value: IngameUI
@@ -3245,6 +3278,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8813421358981245799, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -779301137, guid: c985b2084b7b7449d9c90b1068d70236, type: 3}
     - target: {fileID: 9034656604511850480, guid: 06f5a09e8176c44cf9714d39e3f54265, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

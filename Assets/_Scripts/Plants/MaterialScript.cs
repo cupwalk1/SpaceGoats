@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MaterialScript : ResourceScript
@@ -9,4 +10,5 @@ public class MaterialScript : ResourceScript
       ResourceManager.Instance.MaterialsGathered++;
       return true;
    }
+   
 }

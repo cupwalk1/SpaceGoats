@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int Enum = Animator.StringToHash("enum Index");
+    private static readonly int Yvelocity = Animator.StringToHash("Yvelocity");
     [SerializeField] private Transform hitbox;
-    
+    [SerializeField] private Animator anim;
     [SerializeField] private float jumpTime, maxJumpTime , jumpBufferTime;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;
@@ -103,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
             newContacts.x = 1;
         if (GetHit(Vector2.up))
             newContacts.y = 1;
-        
         return newContacts;
     }
 
@@ -178,7 +179,8 @@ public class PlayerMovement : MonoBehaviour
     {
         
         contacts.contacts = GetContacts();
-        
+        anim.SetFloat(Yvelocity, rb.linearVelocity.y);
+        anim.SetInteger(Enum, (int)contacts.State);
         if (lastContacts.Count == 0 || lastContacts[0].contacts != contacts.contacts)
         {
             if (IsCausedByJump)  contacts.IsCausedByJump = true;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,11 +24,19 @@ public class ResourceManager : MonoBehaviour
    public Dictionary<string, int> ResourceCountInScene = new();
    public UnityEvent<int> _onPlantGathered = new UnityEvent<int>();
 
-   public int EnergyProducedByEachGenerator;
+   
+   [Header("Resources")] 
+   private int _totalFood;
 
-   [Header("Resources")] public int TotalFood;
+   public int TotalFood
+   {
+      get => _totalFood;
+      set
+      {
+         _totalFood = Mathf.Clamp(value, 0, PlantMaxCapacity);
+      }
+   }
    public int TotalMaterials;
-
    public int TotalEnergy
    {
 
@@ -39,15 +48,18 @@ public class ResourceManager : MonoBehaviour
       }
    } 
 
+  [Header("Energy")] 
    private int EnergyCapacity;
+   public int EnergyProducedByEachGenerator;
 
+   [Header("Food")]
+   public int TimeForFoodDecrease;
+   public int PlantMaxCapacity = 20;
 
    [Header("Resources Gathered During Game")]
    public int PlantsGathered;
-
    public int MaterialsGathered;
 
-   public int PlantMaxCapacity = 20;
 
 
    public int GetHarvestableResources(string SceneName)
@@ -94,6 +106,7 @@ public class ResourceManager : MonoBehaviour
 
       TotalMaterials = PlayerPrefs.GetInt("TotalMaterials", 0);
       TotalFood = PlayerPrefs.GetInt("TotalFood", 0);
+      StartCoroutine(Eating());
    }
 
    private void GainResources()
@@ -134,6 +147,15 @@ public class ResourceManager : MonoBehaviour
       Resources = plantList.ResourceList;
       PlantsGathered = 0;
       MaterialsGathered = 0;
+   }
+
+   IEnumerator Eating()
+   {
+      while (gameObject)
+      {
+         yield return new WaitForSeconds(TimeForFoodDecrease);
+         TotalFood--;
+      }
    }
 
    public (ResourceData.ResourceType type, string levelName) GetResourceType(Vector3Int position)

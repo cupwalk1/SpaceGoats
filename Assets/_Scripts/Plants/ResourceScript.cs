@@ -1,16 +1,19 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public abstract class ResourceScript : MonoBehaviour
 {
    public abstract ResourceData.ResourceType Type { get; }
    public TileData tileData;
    public Vector3Int position;
-   public SpriteRenderer minimapSprite;
+   public Image minimapSprite;
+   protected Animator _animator;
    
    Color readyColor = Color.yellow;
    Color notReadyColor = new Color(140, 140, 100, 1);
@@ -41,18 +44,19 @@ public abstract class ResourceScript : MonoBehaviour
 
    private void Start()
    {
-      minimapSprite = gameObject.GetComponentInChildren<SpriteRenderer>();
       _thisResourceData = _RM.GetResource(position, Type);
+      _animator = GetComponent<Animator>();
+      minimapSprite = gameObject.GetComponentInChildren<Image>();
       Debug.Log(_thisResourceData.IsRipe);
       if(!IsRipe)
       {
          minimapSprite.color = notReadyColor;
          RegenCoroutine = StartCoroutine("Regen");
-         gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
       }
       else minimapSprite.color = readyColor;
       var elapsedTime = (DateTime.Now - _thisResourceData.GetSaveTime()).TotalSeconds;
       TimeToRipe -= elapsedTime;
+      _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
       
    }
 
@@ -61,6 +65,7 @@ public abstract class ResourceScript : MonoBehaviour
       while (TimeToRipe > 0)
       {
          TimeToRipe--;
+         _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
          yield return new WaitForSeconds(1);
       }
    }
@@ -86,7 +91,6 @@ public abstract class ResourceScript : MonoBehaviour
          if (value <= 0)
          {
             minimapSprite.color = readyColor;
-            gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
          }
       }
    }

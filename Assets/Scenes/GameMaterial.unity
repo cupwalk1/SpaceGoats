@@ -242,9 +242,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb144312794645efbb1385ef764184c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Resources: []
   _onPlantGathered:
     m_PersistentCalls:
       m_Calls: []
+  TotalMaterials: 0
+  EnergyProducedByEachGenerator: 0
+  TimeForFoodDecrease: 0
+  PlantMaxCapacity: 20
+  PlantsGathered: 0
+  MaterialsGathered: 0
 --- !u!1 &128058293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2031,12 @@ MonoBehaviour:
   GameEnded:
     m_PersistentCalls:
       m_Calls: []
+  MenuLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerWin:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1309754590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,14 +2969,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 675951928}
     m_Modifications:
-    - target: {fileID: 1147264449865480462, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
-      propertyPath: OnPlayerDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1147264449865480462, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
-      propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2350428688768063844, guid: 910bc2aa0cab64f6894a400e95d91e70, type: 3}
       propertyPath: t1
       value: 
