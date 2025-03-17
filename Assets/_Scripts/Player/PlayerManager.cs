@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
    public bool ShouldMove
    {
       get => _shouldMove;
-      set => _shouldMove = value;
+      set => _shouldMove = value;   
    }
 
    [SerializeField] private bool _shouldJump;
@@ -79,7 +79,6 @@ public class PlayerManager : MonoBehaviour
    private void OnGameLoad()
    {
       IsGameInProgress = false;
-
       UpgradeManager.Instance.EnableUpgrades();
       transform.position = GameObject.FindWithTag("Respawn").transform.position;
       GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;

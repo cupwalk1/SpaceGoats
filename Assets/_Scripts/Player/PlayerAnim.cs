@@ -25,19 +25,16 @@ public class PlayerAnim : MonoBehaviour
       _animator = GetComponent<Animator>();
       GameManager.Instance.GameStart.AddListener(OnGameStart);
       playerManager.OnPlayerDie.AddListener(OnPlayerDie);
-      oxygenBar.handleRect.GetComponent<ParticleSystem>().Stop();
+
    }
 
    private void OnPlayerDie()
    {
-      oxygenBar.handleRect.GetComponent<ParticleSystem>().Stop();
    }
 
    void OnGameStart()
    {
-      IsRight = true;
-      lastIsRight = true;
-      oxygenBar.handleRect.GetComponent<ParticleSystem>().Play();
+
    }
 
    private void FixedUpdate()

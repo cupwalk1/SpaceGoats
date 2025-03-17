@@ -1,41 +1,89 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class ResourceManager : MonoBehaviour
 {
-   [SerializeField] private TMP_Text text;
-   public static ResourceManager Instance { get; private set; }
+   public static ResourceManager Instance;
    private static Task _regenTask;
-   private string SaveFilePath;
-   public Dictionary<Vector3Int, ResourceData> Resouces = new();
+
+   private string SaveFilePath =>
+      Path.Combine(Application.persistentDataPath, "resources.json");
+
+   public List<ResourceData> Resources = new();
+   public Dictionary<string, int> ResourceCountInScene = new();
    public UnityEvent<int> _onPlantGathered = new UnityEvent<int>();
-   public DateTime lastSave;
-   
-   int maxCapacity = 10;
 
-   public int PlantsGatheredDuringRun
+   
+   [Header("Resources")] 
+   private int _totalFood;
+
+   public int TotalFood
    {
-      get => GameManager.Instance.gameData.PlantsGatheredDuringRun;
-      set => GameManager.Instance.gameData.PlantsGatheredDuringRun = value;
+      get => _totalFood;
+      set
+      {
+         _totalFood = Mathf.Clamp(value, 0, PlantMaxCapacity);
+      }
+   }
+   public int TotalMaterials;
+   public int TotalEnergy
+   {
+
+      get
+      {
+         var c = JsonUtility
+            .FromJson<ResourceDataList>(File.ReadAllText(SaveFilePath));
+         return c.ResourceList.Count(s => s.TimeToRipe >= (DateTime.Now - s.GetSaveTime()).TotalSeconds && s.Type == ResourceData.ResourceType.Energy);
+      }
+   } 
+
+  [Header("Energy")] 
+   private int EnergyCapacity;
+   public int EnergyProducedByEachGenerator;
+
+   [Header("Food")]
+   public int TimeForFoodDecrease;
+   public int PlantMaxCapacity = 20;
+
+   [Header("Resources Gathered During Game")]
+   public int PlantsGathered;
+   public int MaterialsGathered;
+
+
+
+   public int GetHarvestableResources(string SceneName)
+   {
+      var resList = JsonUtility.FromJson<ResourceDataList>(File.ReadAllText(SaveFilePath)).ResourceList;
+      return resList.Count(s => s.TimeToRipe <= (DateTime.Now - s.GetSaveTime()).TotalSeconds);
    }
 
-   public ResourceData GetResource(Vector3Int position)
+
+   public ResourceData GetResource(Vector3Int position, ResourceData.ResourceType type, string sceneName = null)
    {
-      if (Resouces.TryGetValue(position, out var plantData))
-         return plantData;
-      Resouces[position] = new ResourceData { Position = position};
-      return Resouces[position];
+      if (sceneName == null)
+         sceneName = SceneManager.GetActiveScene().name;
+      var r = Resources.FirstOrDefault(p => p.Position == position && p.SceneName == sceneName && p.Type == type);
+      if (r != null)
+         return r;
+      r = new ResourceData(type, sceneName, position, 0);
+      Resources.Add(r);
+      Debug.Log("Created new resource");
+      return r;
    }
-   
-   
+
+
+
    private void Awake()
    {
       if (Instance == null)
@@ -52,41 +100,81 @@ public class ResourceManager : MonoBehaviour
 
    private void Start()
    {
-      _onPlantGathered.AddListener(delegate(int i) { text.text = i.ToString(); });
-      SaveFilePath = Path.Combine(Application.persistentDataPath, "resources.json");
-      PlantsGatheredDuringRun = 0;
-      text.text = "0";
+      GameManager.Instance.GameLoaded.AddListener(RefreshTiles);
+      GameManager.Instance.GameLoaded.AddListener(LoadResources);
+      GameManager.Instance.OnPlayerWin.AddListener(GainResources);
+
+      TotalMaterials = PlayerPrefs.GetInt("TotalMaterials", 0);
+      TotalFood = PlayerPrefs.GetInt("TotalFood", 0);
+      StartCoroutine(Eating());
    }
 
-
-   public void OnPlantGathered()
+   private void GainResources()
    {
-      _onPlantGathered.Invoke(PlantsGatheredDuringRun);
+      TotalFood += PlantsGathered;
+      TotalMaterials += MaterialsGathered;
    }
    
+   public void RefreshTiles()
+   {
+      GameObject.FindGameObjectWithTag("tilemap").GetComponent<Tilemap>().RefreshAllTiles();
+   }
+
    public void SaveResources()
    {
-      var plantList = Resouces.Values.ToList();
-      var json = JsonUtility.ToJson(new ResourceDataList { ResourceList = plantList, saveTime = DateTime.Now});
+      foreach (var r in Resources.Where(s => s.SceneName == SceneManager.GetActiveScene().name))
+      {
+         r.SetSaveTime(DateTime.Now);
+      }
+      var json = JsonUtility.ToJson(new ResourceDataList(Resources));
       File.WriteAllText(SaveFilePath, json);
+
+      PlayerPrefs.SetInt("TotalFood", TotalFood);
+      PlayerPrefs.SetInt("TotalMaterials", TotalMaterials);
    }
-   
+
    public void LoadResources()
    {
-      if (!File.Exists(SaveFilePath)) return;
+      if (!File.Exists(SaveFilePath))
+      {
+         var j = JsonUtility.ToJson(new ResourceDataList(Resources));
+         File.WriteAllText(SaveFilePath, j);
+         Debug.Log("File not found");
+         return;
+      }
       var json = File.ReadAllText(SaveFilePath);
       var plantList = JsonUtility.FromJson<ResourceDataList>(json);
-      Resouces = plantList.ResourceList.ToDictionary(p => p.Position);
-      lastSave = plantList.saveTime;
+      Resources = plantList.ResourceList;
+      PlantsGathered = 0;
+      MaterialsGathered = 0;
    }
-   
 
-   
+   IEnumerator Eating()
+   {
+      while (gameObject)
+      {
+         yield return new WaitForSeconds(TimeForFoodDecrease);
+         TotalFood--;
+      }
+   }
+
+   public (ResourceData.ResourceType type, string levelName) GetResourceType(Vector3Int position)
+   {
+      var t = Resources.FirstOrDefault(p =>
+         p.Position == position && p.SceneName == SceneManager.GetActiveScene().name);
+      if (t != null)
+         return (t.Type, t.SceneName);
+      Debug.Log("Resource not found");
+      return (ResourceData.ResourceType.None, SceneManager.GetActiveScene().name);
+   }
 }
 
 [Serializable]
 public class ResourceDataList
 {
-   public DateTime saveTime;
-   [FormerlySerializedAs("Plants")] public List<ResourceData> ResourceList;
+   public ResourceDataList(List<ResourceData> r)
+   {
+      ResourceList = r;
+   }
+   public List<ResourceData> ResourceList;
 }

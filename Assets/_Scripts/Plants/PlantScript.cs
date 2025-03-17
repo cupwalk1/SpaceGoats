@@ -5,15 +5,15 @@ class PlantScript : ResourceScript
 {
    public override int MaxTimeToRegen { get; set; } = 10;
 
+   public override ResourceData.ResourceType Type => ResourceData.ResourceType.Plant;
    public override bool Harvest()
    {
-      if (_RM.PlantsGatheredDuringRun < GameObject.Find("Goat").GetComponent<PlayerManager>().MaxPlants)
+      if(ResourceManager.Instance.PlantsGathered+ResourceManager.Instance.TotalFood >= ResourceManager.Instance.PlantMaxCapacity)
       {
-         GameManager.Instance.gameData.PlantsGatheredDuringRun++;
-         _RM.OnPlantGathered();
-         return true;
+         Debug.Log("Plant capacity reached");
+         return false;
       }
-
-      return false;
+      ResourceManager.Instance.PlantsGathered++;
+      return true;
    }
 }

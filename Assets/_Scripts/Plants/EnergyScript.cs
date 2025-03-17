@@ -3,9 +3,11 @@ using Random = UnityEngine.Random;
 
 public class EnergyScript : ResourceScript
 {
-   public int averageBreakingTime = 10;
-   public int randomSemiSpan = 5;
+   public int averageBreakingTime = 120;
+   public int randomSemiSpan = 40;
 
+   public override ResourceData.ResourceType Type => ResourceData.ResourceType.Energy;
+   
    public override int MaxTimeToRegen
    {
       get

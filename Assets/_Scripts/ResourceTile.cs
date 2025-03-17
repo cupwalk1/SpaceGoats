@@ -39,9 +39,11 @@ public class ResourceTile : Tile
    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
    {
       base.GetTileData(position, tilemap, ref tileData);
+      
       if (ResourceManager.Instance != null)
       {
-         ResourceData rd = ResourceManager.Instance.GetResource(position);
+         (ResourceData.ResourceType type, string levelName) = ResourceManager.Instance.GetResourceType(position);
+         ResourceData rd = ResourceManager.Instance.GetResource(position, type, levelName);
          tileData.sprite = rd.TimeToRipe <= 0 ? RipeSprite : UnripeSprite;
       }
 

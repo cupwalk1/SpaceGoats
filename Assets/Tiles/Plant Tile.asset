@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05296ff5f608497994710e27e46c584c, type: 3}
   m_Name: Plant Tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 8854971001033267750, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -35,6 +35,6 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 0
   Name: Plant
-  RipeSprite: {fileID: 8854971001033267750, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
-  UnripeSprite: {fileID: -4832618155596115187, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
+  RipeSprite: {fileID: 0}
+  UnripeSprite: {fileID: 0}
   Prefab: {fileID: 7548563167753396204, guid: 97286f0661cb74a68bd7209bbd9a80c6, type: 3}

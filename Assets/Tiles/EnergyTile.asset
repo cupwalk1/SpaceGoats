@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05296ff5f608497994710e27e46c584c, type: 3}
   m_Name: EnergyTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300014, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -35,6 +35,6 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 0
   Name: Energy
-  RipeSprite: {fileID: 21300014, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
-  UnripeSprite: {fileID: 21300026, guid: 19f60735a26b44949acfda90d4d794df, type: 3}
+  RipeSprite: {fileID: 0}
+  UnripeSprite: {fileID: 0}
   Prefab: {fileID: 0}

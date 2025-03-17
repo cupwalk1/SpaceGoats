@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +7,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int Enum = Animator.StringToHash("enum Index");
+    private static readonly int Yvelocity = Animator.StringToHash("Yvelocity");
     [SerializeField] private Transform hitbox;
-    
+    [SerializeField] private Animator anim;
     [SerializeField] private float jumpTime, maxJumpTime , jumpBufferTime;
     [SerializeField] private Text t1, t2, t3, t4;
     private PlayerManager _p;
@@ -102,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
             newContacts.x = 1;
         if (GetHit(Vector2.up))
             newContacts.y = 1;
-        
         return newContacts;
     }
 
@@ -112,6 +114,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (contacts.State == Contacts.PlayerState.Wall) rb.linearVelocityX = 0;
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.name == "Door" && rb.linearVelocityX < 0)
+            _p.ShouldJump = false;
+        else if(other.gameObject.name == "Mask")
+           GameManager.Instance.OnPlayerWin.Invoke();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.name == "Door") _p.ShouldJump = true;
     }
 
     private bool CanJumpWall()
@@ -164,7 +179,8 @@ public class PlayerMovement : MonoBehaviour
     {
         
         contacts.contacts = GetContacts();
-        
+        anim.SetFloat(Yvelocity, rb.linearVelocity.y);
+        anim.SetInteger(Enum, (int)contacts.State);
         if (lastContacts.Count == 0 || lastContacts[0].contacts != contacts.contacts)
         {
             if (IsCausedByJump)  contacts.IsCausedByJump = true;
@@ -275,5 +291,5 @@ public class PlayerMovement : MonoBehaviour
         frameStates.Insert(0, state);
         if (frameStates.Count > 20) frameStates.RemoveAt(20);
     }
-    
+
 }
