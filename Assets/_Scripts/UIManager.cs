@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private Vector3 _initialPositionSettings;
-    private Vector3 _initialPositionCredits;
    [SerializeField] private GameObject SettingsGear;
    [SerializeField] private GameObject SettingsPanel;
    [SerializeField] private GameObject SettingsMenu;
    [SerializeField] private GameObject CreditsPanel;
    [SerializeField] private GameObject CreditsMenu;
+   [SerializeField] private GameObject PotenziamentiPanel;
+   [SerializeField] private GameObject PotenziamentiMenu;
    [SerializeField] private Slider volumeSlider;
+   [SerializeField] private Transform menuSpawn;
    public void LoadGame(string level)
    {
       SceneManager.LoadScene(level);
@@ -47,8 +48,6 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.Save();
         SettingsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
-        _initialPositionSettings = SettingsMenu.transform.position;
-        _initialPositionCredits = CreditsMenu.transform.position;
     }
     
     // public void OnTutorialClick()
@@ -68,8 +67,20 @@ public class UIManager : MonoBehaviour
     public void OnSettingsClose()
     {
         PlayerPrefs.Save();
-        SettingsMenu.transform.LeanMove(_initialPositionSettings, 1f).setEaseInQuad().setOnComplete(() => SettingsPanel.SetActive(false));
+        SettingsMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => SettingsPanel.SetActive(false));
     }
+    
+    public void OnPotenziamentiOpen()
+    {
+        PotenziamentiPanel.SetActive(true);
+        PotenziamentiMenu.transform.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
+    }
+    
+    public void OnPotenziamentiClose()
+    {
+        PotenziamentiMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => PotenziamentiPanel.SetActive(false));
+    }
+    
     
     public void OnCreditsOpen()
     {
@@ -82,7 +93,7 @@ public class UIManager : MonoBehaviour
     {
         OnSettingsOpen();
         PlayerPrefs.Save();
-        CreditsMenu.transform.LeanMove(_initialPositionCredits, 1f).setEaseOutQuad().setOnComplete(() => CreditsPanel.SetActive(false));
+        CreditsMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseOutQuad().setOnComplete(() => CreditsPanel.SetActive(false));
     }
 
     public void OnDonateClick()
