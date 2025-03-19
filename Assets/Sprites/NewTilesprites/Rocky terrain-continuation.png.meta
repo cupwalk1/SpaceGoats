@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: bc8992df375767149b449e8782163a76
+guid: d0031d515e2323a43965f25e6d819a53
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9195940081089472430
-    second: Ore stages_0
-  - first:
-      213: -7725735647760792125
-    second: Ore stages_1
-  - first:
-      213: -6105390546296110862
-    second: Ore stages_2
+      213: 973757021722338108
+    second: Rocky terrain-continuation_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ore stages_young
+      name: Rocky terrain-continuation_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 2
-        width: 25
-        height: 12
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,52 +128,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25892eae735716080800000000000000
-      internalID: -9195940081089472430
+      spriteID: c336d412ada738d00800000000000000
+      internalID: 973757021722338108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ore stages_immature
+      name: Rocky terrain-continuation_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 2
-        width: 27
-        height: 16
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3c545ae6c5ca8c490800000000000000
-      internalID: -7725735647760792125
+      spriteID: 0fb1d35d61854bc4ab09b5d8d0d1dfdb
+      internalID: -388097463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ore stages_old
+      name: Rocky terrain-continuation_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 3
-        width: 30
-        height: 27
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2f00ef855ab454ba0800000000000000
-      internalID: -6105390546296110862
+      spriteID: 8f06fc77f1686484f92e6982f8b4aa99
+      internalID: 274785147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocky terrain-continuation_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d0481ff9a98db47b32711c43df2b02
+      internalID: -14318398
       vertices: []
       indices: 
       edges: []
@@ -188,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cc8a29979592ccb47a4239322f8a34a2
+    spriteID: 70f476ef4d8c67346a419c079ae66481
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ore stages_immature: -7725735647760792125
-      Ore stages_old: -6105390546296110862
-      Ore stages_young: -9195940081089472430
+      Rocky terrain-continuation_0: 973757021722338108
+      Rocky terrain-continuation_1: -388097463
+      Rocky terrain-continuation_2: 274785147
+      Rocky terrain-continuation_3: -14318398
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

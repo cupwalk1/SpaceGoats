@@ -1,37 +1,16 @@
 fileFormatVersion: 2
-guid: 1146c1bd598a33b499ab6a271272c2c2
+guid: bcf21d1324068d34d9f13bef12a81ac9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 356542512985400626
-    second: Broken tube_0
+      213: 8376215389244470686
+    second: Ore stages 1_0
   - first:
-      213: 3597125882566604765
-    second: Broken tube_1
+      213: 7074491607527231886
+    second: Ore stages 1_1
   - first:
-      213: 1100757208608214123
-    second: Broken tube_2
-  - first:
-      213: 785363815730937507
-    second: Broken tube_3
-  - first:
-      213: -1796652404402127793
-    second: Broken tube_4
-  - first:
-      213: -6580107250548465854
-    second: Broken tube_5
-  - first:
-      213: -7075391969328241144
-    second: Broken tube_6
-  - first:
-      213: 878989982898812627
-    second: Broken tube_7
-  - first:
-      213: -2419510289735274966
-    second: Broken tube_8
-  - first:
-      213: -670727189988115842
-    second: Broken tube_9
+      213: -1116731083843649206
+    second: Ore stages 1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Broken tube_0
+      name: Ore stages 1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 29
-        height: 29
+        width: 25
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,61 +134,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 235e1d9c681b2f400800000000000000
-      internalID: 356542512985400626
+      spriteID: e95b316748b4e3470800000000000000
+      internalID: 8376215389244470686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_1
+      name: Ore stages 1_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dd7feba8eee8be130800000000000000
-      internalID: 3597125882566604765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_2
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 0
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b6c0b0369dca64f00800000000000000
-      internalID: 1100757208608214123
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_6
-      rect:
-        serializedVersion: 2
-        x: 163
+        x: 35
         y: 0
         width: 27
         height: 27
@@ -221,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 806e98dad782fcd90800000000000000
-      internalID: -7075391969328241144
+      spriteID: e81942182a4ad2260800000000000000
+      internalID: 7074491607527231886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_7
+      name: Ore stages 1_2
       rect:
         serializedVersion: 2
-        x: 99
+        x: 63
         y: 0
-        width: 28
-        height: 28
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,52 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d67fcb7bbcc23c00800000000000000
-      internalID: 878989982898812627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_8
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2e2de9e53c2c6ed0800000000000000
-      internalID: -2419510289735274966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_9
-      rect:
-        serializedVersion: 2
-        x: 195
-        y: 0
-        width: 26
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7aff83ac2911b6f0800000000000000
-      internalID: -670727189988115842
+      spriteID: a41ccd5fef29080f0800000000000000
+      internalID: -1116731083843649206
       vertices: []
       indices: 
       edges: []
@@ -297,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ffdacd6eae6a19447b2b06bade79d02b
+    spriteID: 5ffce5a81a9bb5c44a69cda00404f2ab
     internalID: 0
     vertices: []
     indices: 
@@ -307,16 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Broken tube_0: 356542512985400626
-      Broken tube_1: 3597125882566604765
-      Broken tube_2: 1100757208608214123
-      Broken tube_3: 785363815730937507
-      Broken tube_4: -1796652404402127793
-      Broken tube_5: -6580107250548465854
-      Broken tube_6: -7075391969328241144
-      Broken tube_7: 878989982898812627
-      Broken tube_8: -2419510289735274966
-      Broken tube_9: -670727189988115842
+      Ore stages 1_0: 8376215389244470686
+      Ore stages 1_1: 7074491607527231886
+      Ore stages 1_2: -1116731083843649206
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
