@@ -113,10 +113,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Greenhouse plant_ripe
+      name: Greenhouse plant_unripe
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 32
         width: 32
         height: 32
@@ -135,10 +135,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Greenhouse plant_not ripe
+      name: Greenhouse plant_ripe
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 32
         width: 32
         height: 32
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db5d28287d5750b43865ac3b02dbb3f0
-      internalID: -1236347183
+      spriteID: 1953341a8fe9c4d4a9d7a79eeb78da85
+      internalID: 1356535169
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67df24a6a7ea72144ac1570c1ee78b2c
-      internalID: 709084977
+      spriteID: ce5a0e067bf821d488fd23bdf0c7a584
+      internalID: -2008693100
       vertices: []
       indices: 
       edges: []
@@ -182,7 +182,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b2bbf70e5551ef44e9c0d6dd4d58daaa
+    spriteID: 518f0259a44b6e84ea101783af1ce359
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +192,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Greenhouse plant_not ripe: -1236347183
-      Greenhouse plant_ripe: -2106546789922421830
-      Greenhouse plant_sprout: 709084977
+      Greenhouse plant_ripe: 1356535169
+      Greenhouse plant_sprout: -2008693100
+      Greenhouse plant_unripe: -2106546789922421830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
