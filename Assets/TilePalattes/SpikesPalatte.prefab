@@ -309,11 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff596ce4dd4a4698ba17ef498906d56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ripeSprite: {fileID: 8854971001033267750, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
-  unripeSprite: {fileID: -4832618155596115187, guid: 2cd1fa5aabe6740038fea95a6a2eef68, type: 3}
   position: {x: -1, y: 1, z: 0}
-  IsRipe: 1
-  tilemap: {fileID: 1323474470806874045}
+  minimapSprite: {fileID: 0}
 --- !u!114 &893172659625429869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +363,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &6314579719614952191
+--- !u!114 &3175454018610218686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b9c1267f1f73f5b4ebb70dce6d275502
+guid: 2a20466bb3a99b74c9f9fb285076e410
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3416524894454517893
-    second: fixed tube_0
+      213: -5898848283792403723
+    second: Energy Door_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fixed tube_0
+      name: Energy Door_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 12
         y: 0
-        width: 26
-        height: 11
+        width: 36
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7f62c3c5b01690d0800000000000000
-      internalID: -3416524894454517893
+      spriteID: 5f291a44db4132ea0800000000000000
+      internalID: -5898848283792403723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Energy Door_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 57
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f772186a5e5415349aac0daaa10f6867
+      internalID: 89444817
       vertices: []
       indices: 
       edges: []
@@ -138,7 +160,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 13fadcc93fa12eb47acbe65b5ade4316
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +170,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fixed tube_0: -3416524894454517893
+      Energy Door_0: -5898848283792403723
+      Energy Door_1: 89444817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
