@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ab2bf6f0b814cb1a01913b178cfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goatStats: {fileID: 11400000, guid: ec40a697f60634edfaa6698caeff3967, type: 2}
   hitbox: {fileID: 3209685280519699649}
   anim: {fileID: 2706005599140307615}
   jumpTime: 0
@@ -340,7 +341,6 @@ MonoBehaviour:
   graceFramesJump: 7
   jumpBuffer: 0.2
   currentSpeed: 0
-  maxSpeed: 8
   maxDefaultAcceleration: 90
   maxSlidingSpeed: 4
   initialJumpForce: 13
@@ -401,11 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da95aded38152a339c99a8267122a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoatStats: {fileID: 11400000, guid: ec40a697f60634edfaa6698caeff3967, type: 2}
   IsGameInProgress: 0
-  MaxPlants: 5
-  MaxHearts: 4
-  MaxOxygen: 150
-  plantRegenTime: 10
   IsImmune: 0
   OnTakeDamage:
     m_PersistentCalls:

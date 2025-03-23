@@ -1,20 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
    private PlayerManager _pm;
    
    [SerializeField] float DeathUpForce = 10f;
-
-   // Start is called once before the first execution of Update after the MonoBehaviour is created;
-   
 
    int health
    {
@@ -38,14 +28,14 @@ public class PlayerHealth : MonoBehaviour
 
    public void ResetHealth()
    {
-      _pm.Health = _pm.MaxHearts;
+      _pm.Health = _pm.GoatStats.maxGoatHealth;
    }
    
    
 
    private void OnTriggerEnter2D(Collider2D other)
    {
-      if (other.name == "Obstacles")
+      if (other.CompareTag("Spike"))
       {
          if (health > 1)
          {
@@ -63,7 +53,6 @@ public class PlayerHealth : MonoBehaviour
    private void Die()
    {
       _pm.IsGameInProgress = false;
-      //reset velocity
 
       var rb = GetComponent<Rigidbody2D>();
       rb.linearVelocityX = 0;

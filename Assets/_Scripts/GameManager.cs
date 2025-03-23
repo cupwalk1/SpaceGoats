@@ -27,11 +27,16 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public UnityEvent GameStartup = new UnityEvent();
     public UnityEvent GameStart = new UnityEvent();
     public UnityEvent GameLoaded = new UnityEvent();
     public UnityEvent GameEnded = new UnityEvent();
     public UnityEvent MenuLoaded = new UnityEvent();
     public UnityEvent OnPlayerWin = new UnityEvent();
+    public UnityEvent OnGameOver = new UnityEvent();
+    public UnityEvent OnGameWin = new UnityEvent();
+
+    
     
     private void Awake()
     {
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         GameEnded.AddListener(EndGame);
         OnPlayerWin.AddListener(delegate{GameManager.Instance.GameEnded.Invoke();});
+        GameStartup.Invoke();
     }
 
     public void StartGame()
@@ -78,17 +84,13 @@ public class GameManager : MonoBehaviour
     
     private void OnApplicationQuit()
     {
-        Debug.Log("Game quit");
         SaveGame();
     }
 
     private void SaveGame()
     {
       SaveGameData();
-      if(IsInGameScene)
-      {
-          ResourceManager.Instance.SaveResources();
-      }
+      ResourceManager.Instance.SaveResources();
     }
    
     public void SaveGameData()
@@ -119,6 +121,11 @@ public class GameManager : MonoBehaviour
         {
             MenuLoaded.Invoke();
         }
+    }
+
+    public void Victory()
+    {
+        OnGameWin.Invoke();
     }
 }
 

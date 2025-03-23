@@ -1,3 +1,13 @@
 fileFormatVersion: 2
 guid: 4882c546919c4c4bae75d43c6f1b1d50
-timeCreated: 1740313035
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - resourceInfo: {fileID: 11400000, guid: 83f23355c090b44818d43965510b0d65, type: 2}
+  - minimapSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -18,7 +18,6 @@ public class PlayerKB : MonoBehaviour
    {
       _rb = GetComponent<Rigidbody2D>();
       _playerManager = GetComponent<PlayerManager>();
-      _playerManager.OnTakeDamage.AddListener(TakeDamageKB);
    }
    private void TakeDamageKB()
    {

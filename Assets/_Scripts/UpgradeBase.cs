@@ -5,54 +5,45 @@ namespace _Scripts
 {
    public abstract class UpgradeBase
    {
+      public GameObject UpgradePanel;
+      public int Level;
+      public int MaxLevel;
       public string Name;
       public string Description;
       public int Price;
+      public GameObject Panel;
+      public ResouceTypes ResourceType1;
+      public ResouceTypes ResourceType2;
+      public UpgradeScript Script;
+      
+      public UpgradeBase()
+      {
+         Level = 0;
+         Panel = GameObject.Instantiate(UpgradePanel, GameObject.FindWithTag("UpgradePanel").transform);
+         Script = Panel.GetComponent<UpgradeScript>();
+         Script.BuyButton.onClick.AddListener(() => {
+           if(Level < MaxLevel)
+           {
+              Level++;
+               LevelUp();
+           }
+         });
+         
+      }
+      
+      public enum ResouceTypes
+      {
+         Energy,
+         Food,
+         Material
+      }
+
+      
+      
+      public abstract void LevelUp();
       
       public abstract void OnEnable();
-      public virtual void OnDisable(){}
-
+      
       public bool IsEnabled { get; private set; } = false;
-   }
-   public class ExtraLifeUpgrade : UpgradeBase
-   {
-      public ExtraLifeUpgrade()
-      {
-         Price = 100;
-         Name = "Cuore Extra";
-         Description = "Aumenta il numero di cuori massimi di uno";
-      }
-      public override void OnEnable()
-      {
-         GameObject.FindWithTag("Player").GetComponent<PlayerManager>().MaxHearts++;
-      }
-   }
-   
-   public class IncreaseOxygenCapacityUpgrade : UpgradeBase
-   {
-      public IncreaseOxygenCapacityUpgrade()
-      {
-         Price = 100;
-         Name = "Aumento Capacità";
-         Description = "Aumenta la capacità di ossigeno di 10 secondi";
-      }
-      public override void OnEnable()
-      {
-         GameObject.FindWithTag("Player").GetComponent<PlayerManager>().MaxOxygen += 10;
-      }
-   }
-   
-   public class IncreasePlantCapacityUpgrade : UpgradeBase
-   {
-      public IncreasePlantCapacityUpgrade()
-      {
-         Price = 100;
-         Name = "Aumento Capacità";
-         Description = "Aumenta la capacità di piante di 1";
-      }
-      public override void OnEnable()
-      {
-         GameObject.FindWithTag("Player").GetComponent<PlayerManager>().MaxPlants++;
-      }
    }
 }

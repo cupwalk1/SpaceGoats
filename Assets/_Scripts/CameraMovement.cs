@@ -12,6 +12,7 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         transform.position = player.transform.position + offset;
+        player.GetComponent<PlayerManager>().OnTakeDamage.AddListener(Shake);
     }
     
     void FixedUpdate()

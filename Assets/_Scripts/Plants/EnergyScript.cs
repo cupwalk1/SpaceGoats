@@ -1,24 +1,17 @@
 using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnergyScript : ResourceScript
 {
-   public int averageBreakingTime = 120;
-   public int randomSemiSpan = 40;
-
    public override ResourceData.ResourceType Type => ResourceData.ResourceType.Energy;
-   
-   public override int MaxTimeToRegen
-   {
-      get
-      {
-         return Random.Range(averageBreakingTime - randomSemiSpan, averageBreakingTime + randomSemiSpan);
-      }
-      set => value = averageBreakingTime;
-   }
 
+   public override int MaxTimeToRegen => Random.Range(resourceInfo.averageGeneratorBreakingTime - resourceInfo.semiRangeGeneratorBreakingTime,
+            resourceInfo.averageGeneratorBreakingTime + resourceInfo.semiRangeGeneratorBreakingTime);
+   
    public override bool Harvest()
    {
+      Debug.Log("Harvesting energy");
       return true;
    }
 }

@@ -1,43 +1,105 @@
-using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using UnityEngine;
 
-namespace _Scripts
+public class UpgradeManager : MonoBehaviour
 {
-   public class UpgradeManager : MonoBehaviour
+   public GoatStats GoatStats;
+   public ResourceInfo ResourceInfo;
+   public UpgradeStack[] UpgradeStacks;
+
+   public GameObject UpgradePrefab;
+   public GameObject MaxedOutPrefab;
+
+
+   public static UpgradeManager Instance;
+   GameManager _gm;
+
+   private void Awake()
    {
-      public static UpgradeManager Instance;
-      GameManager _gm;
-      
-      private void Awake()
+      if (Instance == null)
       {
-         if (Instance == null)
-         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-         }
-         else
-         {
-            Destroy(gameObject);
-         }
+         Instance = this;
       }
-      
-      private void Start()
+      else
       {
-         _gm = GameManager.Instance;
+         Destroy(gameObject);
+      }
+   }
+
+
+   private void Start()
+   {
+      _gm = GameManager.Instance;
+      InstantiateStacks();
+      _gm.MenuLoaded.AddListener(InstantiateStacks);
+   }
+
+   private void InstantiateStacks()
+   {
+      foreach (var stack in UpgradeStacks)
+      {
+         stack.InstantiateStack();
+      }
+   }
+   
+   public void UpdateStacks()
+   {
+      foreach (var stack in UpgradeStacks) stack.UpdateStack();
+      
+      bool victory = false;
+      UpgradeStacks.Where(s => s.IsRequiredForVictory).ToList().ForEach(s =>
+      {
+         if (s.UpgradeLevel == s.Upgrades.Length) victory = true;
+      });
+      if (victory) _gm.Victory();
+   }
+}
+
+[System.Serializable]
+public class UpgradeStack
+{
+   public UpgradeData[] Upgrades;
+   public bool IsRequiredForVictory;
+
+   public int UpgradeLevel
+   {
+   
+      get { return PlayerPrefs.GetInt(Stack.name); }
+      set
+      {
+         PlayerPrefs.SetInt(Stack.name, value);
+         PlayerPrefs.Save();
+         UpdateStack();
+      }
+   }
+
+   public GameObject Stack;
+   public void UpdateStack()
+   {
+      for (int i = 0; i < Stack.transform.childCount; i++)
+      {
+         Stack.transform.GetChild(i).gameObject.SetActive(false);
       }
 
-      public void AddUpgrade(UpgradeBase upgrade)
+      if (UpgradeLevel >= Upgrades.Length)
       {
-         GameManager.Instance.gameData.Upgrades.Add(upgrade);
+         Object.Instantiate(UpgradeManager.Instance.MaxedOutPrefab, Stack.transform);
       }
-      public void EnableUpgrades()
+      else Stack.transform.GetChild(UpgradeLevel).gameObject.SetActive(true);
+   }
+
+   public void InstantiateStack()
+   {
+      if(Stack.transform.childCount != 0) return;
+      for (int i = 0; i < Upgrades.Length; i++)
       {
-         var upgrades = GameManager.Instance.gameData.Upgrades;
-         foreach (var upgrade in upgrades)
-         {
-            upgrade.OnEnable();
-         }
+         var g = GameObject.Instantiate(UpgradeManager.Instance.UpgradePrefab, Stack.transform);
+         g.GetComponent<UpgradeScript>().UpgradeData = Upgrades[i];
+         g.GetComponent<UpgradeScript>().UpgradeStack = this;
+         g.SetActive(false);
+         if(g.GetComponent<UpgradeScript>().UpgradeData.IsTemporary && UpgradeLevel >= i)
+            g.GetComponent<UpgradeScript>().UpgradeData.OnUpgrade.Invoke();
       }
+      UpdateStack();
    }
 }

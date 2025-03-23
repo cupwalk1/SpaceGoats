@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GoatStats goatStats;
     private static readonly int Enum = Animator.StringToHash("enum Index");
     private static readonly int Yvelocity = Animator.StringToHash("Yvelocity");
     [SerializeField] private Transform hitbox;
@@ -21,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
         graceFramesJump,
         jumpBuffer,
         currentSpeed,
-        maxSpeed,
         maxDefaultAcceleration,
         maxSlidingSpeed;
 
@@ -262,12 +262,12 @@ public class PlayerMovement : MonoBehaviour
         float moveDirection = CalculateMoveDirection();
         if (moveDirection != 0 && _p.ShouldMove)
         {
-            float targetVelocity = moveDirection * maxSpeed;
+            float targetVelocity = moveDirection * goatStats.speed;
             float velocityChange = targetVelocity - rb.linearVelocity.x;
             float acceleration = velocityChange / Time.fixedDeltaTime;
             acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
             rb.AddForce(new Vector2(acceleration, 0));
-            if (Mathf.Abs(Mathf.Abs(rb.linearVelocity.x) - maxSpeed) < tolerance)
+            if (Mathf.Abs(Mathf.Abs(rb.linearVelocity.x) - goatStats.speed) < tolerance)
                 maxAcceleration = maxDefaultAcceleration;
         }
 

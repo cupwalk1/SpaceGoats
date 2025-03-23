@@ -1,104 +1,124 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[Serializable]
+public enum PanelType
+{
+    Settings,
+    Credits,
+    Potenziamenti,
+    GameOver,
+    Potenziamenti2,
+    Victory
+}
+
+public abstract class UIPanel : MonoBehaviour
+{
+    [SerializeField] protected Transform menu;
+    [SerializeField] protected Transform menuSpawn;
+
+    public virtual void Show()
+    {
+        gameObject.SetActive(true);
+        if (menu) menu.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
+    }
+
+    public virtual void Hide()
+    {
+        if (menu)
+        {
+            menu.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => gameObject.SetActive(false));
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+}
+
 public class UIManager : MonoBehaviour
 {
-   // Start is called once before the first execution of Update after the MonoBehaviour is created
-   [SerializeField] private GameObject SettingsGear;
-   [SerializeField] private GameObject SettingsPanel;
-   [SerializeField] private GameObject SettingsMenu;
-   [SerializeField] private GameObject CreditsPanel;
-   [SerializeField] private GameObject CreditsMenu;
-   [SerializeField] private GameObject PotenziamentiPanel;
-   [SerializeField] private GameObject PotenziamentiMenu;
-   [SerializeField] private Slider volumeSlider;
-   [SerializeField] private Transform menuSpawn;
-   public void LoadGame(string level)
-   {
-      SceneManager.LoadScene(level);
-   }
-
-  
-    // public void SetLocale(string locale)
-    // {
-    //     LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(locale);
-    //     PlayerPrefs.SetString("locale", locale);
-    //     PlayerPrefs.Save();
-    // }
+    public GameObject serra;
+    private Dictionary<PanelType, UIPanel> panels = new Dictionary<PanelType, UIPanel>();
+    [SerializeField] private ResourceCounter rc;
+    [SerializeField] private ResourceManager _rm;
+    [SerializeField] private Slider volumeSlider;
     
-    public void Start()
+    private void Awake()
     {
+        foreach (var panel in FindObjectsOfType<UIPanel>())
+        {
+            if (Enum.TryParse(panel.name, out PanelType panelType))
+            {
+                panels[panelType] = panel;
+                panel.Hide();
+            }
+        }
+    }
+
+    private void Start()
+    {
+        serra.SetActive(false);
+        _rm = ResourceManager.Instance;
         volumeSlider.onValueChanged.AddListener((float value) => PlayerPrefs.SetFloat("volume", value));
         volumeSlider.value = PlayerPrefs.GetFloat("volume");
-        // SetLocale(PlayerPrefs.GetString("locale"));
-        // if (PlayerPrefs.GetString("locale") == null)
-        // {
-        //     SetLocale("en");
-        // }
-        if (PlayerPrefs.GetFloat("volume") == null)
+        _rm.OnResourcesChanged.AddListener(CheckGameOver);
+        if (_rm.TotalFood == 0 || _rm.TotalEnergy == 0) GameManager.Instance.OnGameOver.Invoke();
+        GameManager.Instance.OnGameOver.AddListener(ShowGameOver);
+        PlayerPrefs.SetFloat("volume", PlayerPrefs.GetFloat("volume", 1f));
+        PlayerPrefs.SetInt("vibration", PlayerPrefs.GetInt("vibration", 1));
+        PlayerPrefs.Save();
+    }
+
+    private void CheckGameOver()
+    {
+        if (_rm.TotalFood == 0 || _rm.TotalEnergy == 0) GameManager.Instance.OnGameOver.Invoke();
+    }
+
+    public void TogglePanel(PanelType panelType)
+    {
+        if (panels.TryGetValue(panelType, out UIPanel panel))
         {
-            PlayerPrefs.SetFloat("volume", 1f);
+            if (panel.gameObject.activeSelf) panel.Hide();
+            else panel.Show();
         }
-        if (PlayerPrefs.GetInt("vibration") == null)
+    }
+
+    public void LoadGame(string level) => SceneManager.LoadScene(level);
+
+    public void OnRetryClick()
+    {
+        foreach (var resource in _rm.Resources)
         {
-            PlayerPrefs.SetInt("vibration", 1);
+            resource.TimeToRipe = (resource.Type == ResourceData.ResourceType.Energy) ? _rm.RandomMaxEnergyTime : 0;
         }
-        PlayerPrefs.Save();
-        SettingsPanel.SetActive(false);
-        CreditsPanel.SetActive(false);
+        _rm.SaveResources();
+        PlayerPrefs.DeleteAll();
+        _rm.TotalFood = Mathf.RoundToInt(_rm.ResourceInfo.maxFruitsInWarehouse / 1.5f);
+        _rm.TotalMaterials = 0;
+        UpgradeManager.Instance.UpdateStacks();
+        TogglePanel(PanelType.GameOver);
     }
-    
-    // public void OnTutorialClick()
-    // {
-    //     SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
-    //     GameController gameController = GameObject.Find("GameController").GetComponent<GameController>();
-    //     gameController.StartGame(Game.GameType.Tutorial);
-    //      
-    // }
-
-    public void OnSettingsOpen()
-    {
-        SettingsPanel.SetActive(true);
-        SettingsMenu.transform.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
-    }
-    
-    public void OnSettingsClose()
-    {
-        PlayerPrefs.Save();
-        SettingsMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => SettingsPanel.SetActive(false));
-    }
-    
-    public void OnPotenziamentiOpen()
-    {
-        PotenziamentiPanel.SetActive(true);
-        PotenziamentiMenu.transform.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
-    }
-    
-    public void OnPotenziamentiClose()
-    {
-        PotenziamentiMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => PotenziamentiPanel.SetActive(false));
-    }
-    
-    
-    public void OnCreditsOpen()
-    {
-        OnSettingsClose();
-        CreditsPanel.SetActive(true);
-        CreditsMenu.transform.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
-    }
-    
-    public void OnCreditsClose()
-    {
-        OnSettingsOpen();
-        PlayerPrefs.Save();
-        CreditsMenu.transform.LeanMove(menuSpawn.position, 1f).setEaseOutQuad().setOnComplete(() => CreditsPanel.SetActive(false));
+    void ShowPanel(PanelType panelType)
+    {if(panels.TryGetValue(panelType, out UIPanel panel)) panel.Show();
+    else Debug.LogError($"Panel {panelType} not found.");
     }
 
-    public void OnDonateClick()
-    {
-        Application.OpenURL("https://buymeacoffee.com/cupwalk1");
-    }
-
+    public void ToggleSettings() => TogglePanel(PanelType.Settings);
+    public void ToggleCredits() => TogglePanel(PanelType.Credits);
+    public void TogglePotenziamenti() => TogglePanel(PanelType.Potenziamenti);
+    public void TogglePotenziamenti2() => TogglePanel(PanelType.Potenziamenti2);
+    public void ToggleGameOver() => TogglePanel(PanelType.GameOver);
+    public void ShowGameOver() => ShowPanel(PanelType.GameOver);
+    public void ShowVictory() => ShowPanel(PanelType.Victory);
+    public void ToggleVictory() => TogglePanel(PanelType.Victory);
+    
+    public void OnSerraClick() => serra.SetActive(true);
+    public void OnExitClick() => Application.Quit();
+    public void OnDonateClick() => Application.OpenURL("https://buymeacoffee.com/cupwalk1");
 }

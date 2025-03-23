@@ -6,7 +6,9 @@ public class OxygenScript : MonoBehaviour
     PlayerManager PM;
     Slider oxygenBar => GetComponent<Slider>();
     private ParticleSystem oxygenParticles => oxygenBar.handleRect.GetComponent<ParticleSystem>();
-    
+
+    [SerializeField]
+    private float SecondsOfOxygen;
     float oxygenLevel
     {
         get{return oxygenBar.value;}
@@ -23,7 +25,8 @@ public class OxygenScript : MonoBehaviour
         });
         GameManager.Instance.GameStart.AddListener(delegate
         {
-            oxygenLevel = PM.MaxOxygen;
+            SecondsOfOxygen = PM.GoatStats.maxTimeOxygen;
+            oxygenLevel = PM.GoatStats.maxTimeOxygen;
             oxygenParticles.Play();
         });
         oxygenParticles.Stop();
@@ -34,7 +37,8 @@ public class OxygenScript : MonoBehaviour
     {
         if (PM.IsGameInProgress)
         {
-            oxygenLevel -= Time.deltaTime / PM.MaxOxygen;
+            oxygenLevel -= Time.deltaTime / PM.GoatStats.maxTimeOxygen;
+            SecondsOfOxygen -= Time.deltaTime;
             if (oxygenBar.value <= 0)
             {
                 PM.OnPlayerDie.Invoke();

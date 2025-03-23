@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8099322d7401044ca96ce1cdbeb8f727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceInfo: {fileID: 11400000, guid: 83f23355c090b44818d43965510b0d65, type: 2}
   position: {x: 0, y: 0, z: 0}
   minimapSprite: {fileID: 0}
 --- !u!95 &-1307400131713644725

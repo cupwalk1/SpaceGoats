@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public abstract class ResourceScript : MonoBehaviour
 {
+   public ResourceInfo resourceInfo;
    public abstract ResourceData.ResourceType Type { get; }
    public TileData tileData;
    public Vector3Int position;
@@ -31,7 +32,7 @@ public abstract class ResourceScript : MonoBehaviour
       }
       
    }
-   public abstract int MaxTimeToRegen { get; set; }
+   public abstract int MaxTimeToRegen { get; }
 
    protected ResourceManager _RM
    {
@@ -54,8 +55,6 @@ public abstract class ResourceScript : MonoBehaviour
          RegenCoroutine = StartCoroutine("Regen");
       }
       else minimapSprite.color = readyColor;
-      var elapsedTime = (DateTime.Now - _thisResourceData.GetSaveTime()).TotalSeconds;
-      TimeToRipe -= elapsedTime;
       _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
       
    }

@@ -5,11 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
+   public GoatStats GoatStats;
    public bool IsGameInProgress;
-   public int MaxPlants = 5;
-   public int MaxHearts = 4;
-   public int MaxOxygen = 150;
-   public int plantRegenTime = 10;
    public bool IsImmune;
    public UnityEvent OnTakeDamage = new UnityEvent();
    public UnityEvent OnPlayerDie = new UnityEvent();
@@ -54,7 +51,7 @@ public class PlayerManager : MonoBehaviour
    public int Health
    {
       get => _health;
-      set { _health = Mathf.Clamp(value, 0, MaxHearts); }
+      set { _health = Mathf.Clamp(value, 0, GoatStats.maxGoatHealth); }
    }
 
    public int GetSign(float value, float tolerance = 0.001f)
@@ -79,7 +76,7 @@ public class PlayerManager : MonoBehaviour
    private void OnGameLoad()
    {
       IsGameInProgress = false;
-      UpgradeManager.Instance.EnableUpgrades();
+      //UpgradeManager.Instance.EnableUpgrades();
       transform.position = GameObject.FindWithTag("Respawn").transform.position;
       GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
       GetComponent<PlayerHealth>().ResetHealth();
