@@ -21,4 +21,4 @@ MonoBehaviour:
   energyAvailable: 5000
   energyPerGenerator: 0
   averageGeneratorBreakingTime: 180
-  semiRangeGeneratorBreakingTime: 30
+  semiRangeGeneratorBreakingTime: 5

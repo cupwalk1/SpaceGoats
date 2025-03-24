@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
    public int Health
    {
       get => _health;
-      set { _health = Mathf.Clamp(value, 0, GoatStats.maxGoatHealth); }
+      set => _health = value;
    }
 
    public int GetSign(float value, float tolerance = 0.001f)

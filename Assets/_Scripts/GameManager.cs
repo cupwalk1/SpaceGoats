@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     public bool IsInGameScene => SceneManager.GetActiveScene().buildIndex != 0;
-    
+    public bool IsFreePlay;
     public static GameManager Instance { get; private set; }
     
     private GameData _gameData;

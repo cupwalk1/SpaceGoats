@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
-  m_Name: StrongerTubes
+  m_Name: UnbreakableTubes
   m_EditorClassIdentifier: 
-  Name: Tubi Forti
-  Description: 
+  Name: Tubi Irrompibili
+  Description: Tubi sistemati non si romperano mai piu'
+  IsTemporary: 0
   Cost:
-    materials: 1
+    materials: 10
     fruits: 0
-    power: 1
+    power: 5000
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a06291275845342a3be4be6c11a6ccef, type: 2}
         m_TargetAssemblyTypeName: AllUpgrades, Assembly-CSharp
-        m_MethodName: IncreasePipeDuration
-        m_Mode: 3
+        m_MethodName: MaxOutPipeDuration
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

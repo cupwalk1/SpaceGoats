@@ -45,14 +45,7 @@ public class UpgradeManager : MonoBehaviour
    public void UpdateStacks()
    {
       foreach (var stack in UpgradeStacks) stack.UpdateStack();
-      
-      bool victory = false;
-      UpgradeStacks.Where(s => s.IsRequiredForVictory).ToList().ForEach(s =>
-      {
-         if (s.UpgradeLevel == s.Upgrades.Length) victory = true;
-      });
-      if (victory) _gm.Victory();
-   }
+      }
 }
 
 [System.Serializable]

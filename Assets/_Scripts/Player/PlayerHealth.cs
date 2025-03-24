@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
    {
       _pm.EnableMoveJump();
       _pm.ShouldMoveCamera = true;
+      ResetHealth();
    }
 
    public void ResetHealth()
@@ -41,11 +42,14 @@ public class PlayerHealth : MonoBehaviour
          {
             health -= 1;
             _pm.OnTakeDamage.Invoke();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.damage);
          }
          else
          {
             health = 0;
+            _pm.OnTakeDamage.Invoke();
             _pm.OnPlayerDie.Invoke();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.lose);
          }
       }
    }

@@ -51,8 +51,6 @@ public class AllUpgrades : ScriptableObject
       goatStats.maxTimeOxygen += i;
    }
    
-   
-   
    public void ReducePlantRegenTimePercent(int i)
    {
       resourceInfo.plantRegenTime = (int)(resourceInfo.plantRegenTime * (1 - i / 100f));

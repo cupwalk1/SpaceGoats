@@ -210,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (CanJumpGrounded() && _p.ShouldJump)
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.jump);
                 isJumping = true;
                 jumpTime = 0;
                 IsCausedByJump = true;
@@ -219,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (CanJumpWall() && _p.ShouldJump)
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.jump);
                 isJumping = true;
                 jumpTime = 0;
                 IsCausedByJump = true;

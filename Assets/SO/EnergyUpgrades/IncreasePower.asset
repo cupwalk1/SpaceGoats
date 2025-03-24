@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
-  m_Name: UnbreakableTubes
+  m_Name: IncreasePower
   m_EditorClassIdentifier: 
-  Name: Tubi Forti
-  Description: 
+  Name: Energy Boost
+  Description: Aumenta la potenza generata dal impianto di 1000 kW.
+  IsTemporary: 0
   Cost:
     materials: 10
     fruits: 0
-    power: 5000
+    power: 2000
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a06291275845342a3be4be6c11a6ccef, type: 2}
         m_TargetAssemblyTypeName: AllUpgrades, Assembly-CSharp
-        m_MethodName: MaxOutPipeDuration
-        m_Mode: 1
+        m_MethodName: IncreaseEnergyCapacity
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 30
+          m_IntArgument: 1000
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

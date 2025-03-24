@@ -16,8 +16,8 @@ public abstract class ResourceScript : MonoBehaviour
    public Image minimapSprite;
    protected Animator _animator;
    
-   Color readyColor = Color.yellow;
-   Color notReadyColor = new Color(140, 140, 100, 1);
+   Color readyColor = Color.blue;
+   Color notReadyColor = Color.gray;
    
    Coroutine _regenCoroutine;
    private Coroutine RegenCoroutine
