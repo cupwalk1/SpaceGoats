@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Thorns 1
+  m_Name: Greenhouse plant_ripe
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 7265480496060309873, guid: e64c712828f8d5f4a9915f12cec476b8, type: 3}
+  m_Sprite: {fileID: 1356535169, guid: 6822cbc1af12031479e309773ce3f655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
