@@ -7,7 +7,7 @@ public class MaterialScript : ResourceScript
    public override int MaxTimeToRegen => resourceInfo.oreRegenTime;
    public override bool Harvest()
    {
-      ResourceManager.Instance.MaterialsGathered++;
+      ResourceManager.Instance.MaterialsGathered += resourceInfo.materialsPerOre;
       return true;
    }
    

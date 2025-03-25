@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
-  m_Name: GoatSpeed
+  m_Name: GoatOxygen
   m_EditorClassIdentifier: 
-  Name: Energy Drink
-  Description: Increases the goat's speed by 1
+  Name: Bombole
+  Description: Aumenta la capacita' delle bombole
   IsTemporary: 0
   Cost:
     materials: 0

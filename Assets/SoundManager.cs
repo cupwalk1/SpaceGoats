@@ -22,7 +22,7 @@ public class SoundManager : MonoBehaviour
    {
       if (Instance != null)
       {
-         Destroy(this);
+         Destroy(this.gameObject);
          return;
       }
       Instance = this;
@@ -34,4 +34,9 @@ public class SoundManager : MonoBehaviour
    {
       sfxSource.PlayOneShot(clip, volumeCoeff*PlayerPrefs.GetFloat("volume", 1));
    }
+   
+   public void PlayWin() => PlaySFX(win);
+   public void PlayClick() => PlaySFX(click);
+   public void PlayGameOver() => PlaySFX(lose);
+
 }

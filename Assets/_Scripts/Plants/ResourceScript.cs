@@ -78,7 +78,7 @@ public abstract class ResourceScript : MonoBehaviour
 
    public bool IsRipe
    {
-      get => TimeToRipe <= 0;
+      get => TimeToRipe == 0;
    }
 
    public double TimeToRipe
@@ -111,6 +111,7 @@ public abstract class ResourceScript : MonoBehaviour
       {
          if (Harvest())
          {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.AquiredResource);
             minimapSprite.color = notReadyColor;
             TimeToRipe = MaxTimeToRegen;
             RegenCoroutine = StartCoroutine("Regen");

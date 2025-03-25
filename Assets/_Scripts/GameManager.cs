@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public bool IsInGameScene => SceneManager.GetActiveScene().buildIndex != 0;
     public bool IsFreePlay;
+    public bool IsGameOver;
     public static GameManager Instance { get; private set; }
     
     private GameData _gameData;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
         GameEnded.AddListener(EndGame);
         OnPlayerWin.AddListener(delegate{GameManager.Instance.GameEnded.Invoke();});
         GameStartup.Invoke();
+        OnGameOver.AddListener(delegate { IsGameOver = true; });
     }
 
     public void StartGame()
@@ -126,6 +128,7 @@ public class GameManager : MonoBehaviour
     public void Victory()
     {
         OnGameWin.Invoke();
+        IsGameOver = true;
     }
 }
 

@@ -6,8 +6,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "AllUpgrades", menuName = "ScriptableObjects/AllUpgrades")]
 public class AllUpgrades : ScriptableObject
 {
-   GoatStats goatStats => UpgradeManager.Instance.GoatStats;
-   ResourceInfo resourceInfo => UpgradeManager.Instance.ResourceInfo;
+   public GoatStats goatStats;
+   public ResourceInfo resourceInfo;
    
    public void IncreasePipeDuration(int i)
    {
@@ -25,12 +25,16 @@ public class AllUpgrades : ScriptableObject
    {
       resourceInfo.energyAvailable += i;
    }
-   
+
    public void UnlockSerra()
    {
       FindFirstObjectByType<UIManager>().OnSerraClick();
    }
-   
+   public void UnlockSecondaCaverna()
+   {
+      FindFirstObjectByType<UIManager>().OnSecCavClick();
+   }
+
    public void IncreaseGoatSpeed(float i)
    {
       goatStats.speed += i;

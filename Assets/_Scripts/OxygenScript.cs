@@ -35,7 +35,7 @@ public class OxygenScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PM.IsGameInProgress)
+        if (PM.IsGameInProgress && !PM.OnDoorThreshold)
         {
             oxygenLevel -= Time.deltaTime / PM.GoatStats.maxTimeOxygen;
             SecondsOfOxygen -= Time.deltaTime;

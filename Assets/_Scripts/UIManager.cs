@@ -25,16 +25,18 @@ public abstract class UIPanel : MonoBehaviour
 
    public virtual void Show()
    {
+      SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
       gameObject.SetActive(true); 
       if (menu) menu.LeanMove(Vector3.zero, 1f).setEaseOutElastic().period = 1.2f;
       Debug.Log($"Showing panel {this.name}");
    }
 
-   public virtual void Hide()
+   public virtual void Hide(bool ommitNoise = false)
    {
       if (menu)
       {
          menu.LeanMove(menuSpawn.position, 1f).setEaseInQuad().setOnComplete(() => gameObject.SetActive(false));
+         if (!ommitNoise) SoundManager.Instance.PlaySFX(SoundManager.Instance.backBtn);
       }
       else
       {
@@ -46,6 +48,14 @@ public abstract class UIPanel : MonoBehaviour
 public class UIManager : MonoBehaviour
 {
    public GameObject serra;
+   public GameObject secCav;
+   
+   public ResourceInfo ResourceInfo;
+   public GoatStats GoatStats;
+   
+   public ResourceInfo DefaultResourceInfo;
+   public GoatStats DefaultGoatStats;
+   
    private Dictionary<PanelType, UIPanel> panels = new Dictionary<PanelType, UIPanel>();
    [SerializeField] private ResourceCounter rc;
    [SerializeField] private ResourceManager _rm;
@@ -58,7 +68,7 @@ public class UIManager : MonoBehaviour
          if (Enum.TryParse(panel.name, out PanelType panelType))
          {
             panels[panelType] = panel;
-            panel.Hide();
+            panel.Hide(true);
          }
       }
    }
@@ -66,6 +76,7 @@ public class UIManager : MonoBehaviour
    private void Start()
    {
       serra.SetActive(false);
+      secCav.SetActive(false);
       _rm = ResourceManager.Instance;
       volumeSlider.onValueChanged.AddListener((float value) => PlayerPrefs.SetFloat("volume", value));
       volumeSlider.value = PlayerPrefs.GetFloat("volume");
@@ -82,7 +93,7 @@ public class UIManager : MonoBehaviour
     
    private void CheckGameOver()
    {
-      if (_rm.TotalFood == 0 || _rm.TotalEnergy == 0) GameManager.Instance.OnGameOver.Invoke();
+      if ((_rm.TotalFood == 0 || _rm.TotalEnergy == 0) && !GameManager.Instance.IsGameOver)GameManager.Instance.OnGameOver.Invoke();
    }
 
    public void TogglePanel(PanelType panelType)
@@ -94,11 +105,11 @@ public class UIManager : MonoBehaviour
       }
    }
     
-   public void HidePanel(PanelType panelType)
+   public void HidePanel(PanelType panelType, bool ommitNoise = false)
    {
       if (panels.TryGetValue(panelType, out UIPanel panel))
       {
-         panel.Hide();
+         panel.Hide(ommitNoise);
       }
    }
 
@@ -110,12 +121,31 @@ public class UIManager : MonoBehaviour
       {
          resource.TimeToRipe = (resource.Type == ResourceData.ResourceType.Energy) ? _rm.RandomMaxEnergyTime : 0;
       }
+      serra.SetActive(false);
+      secCav.SetActive(false);
+      HideVictory(true);
+      HideGameOver(true);
       _rm.SaveResources();
+      
+      var volume = PlayerPrefs.GetFloat("volume", 1f);
       PlayerPrefs.DeleteAll();
-      _rm.TotalFood = Mathf.RoundToInt(_rm.ResourceInfo.maxFruitsInWarehouse / 1.5f);
+      PlayerPrefs.SetFloat("volume", volume);
+      PlayerPrefs.Save();
+      
+      ResourceInfo.CopyFrom(DefaultResourceInfo);
+      GoatStats.CopyFrom(DefaultGoatStats);
+      GameManager.Instance.IsGameOver = false;
       _rm.TotalMaterials = 0;
+      _rm.TotalFood = Mathf.RoundToInt(_rm.ResourceInfo.maxFruitsInWarehouse / 1.5f);
       UpgradeManager.Instance.UpdateStacks();
    }
+
+   private void HideGameOver(bool omit = false)
+   {
+      HidePanel(PanelType.GameOver, omit);
+      if (GameManager.Instance.IsGameOver) GameManager.Instance.IsGameOver = false;
+   }
+
    void ShowPanel(PanelType panelType)
    {if(panels.TryGetValue(panelType, out UIPanel panel)) panel.Show();
       else Debug.LogError($"Panel {panelType} not found.");
@@ -128,33 +158,40 @@ public class UIManager : MonoBehaviour
    public void ToggleGameOver() => TogglePanel(PanelType.GameOver);
    public void ShowGameOver()
    {
-      HidePotenziamenti();
-      HidePotenziamenti2();
-      HideSettings();
-      HidePanel(PanelType.Credits);
+      HidePotenziamenti(true);
+      HidePotenziamenti2(true);
+      HideSettings(true);
+      HidePanel(PanelType.Credits, true);
       ShowPanel(PanelType.GameOver);
+      SoundManager.Instance.PlayGameOver();
    }
 
    public void ShowVictory()
    {
-      HidePotenziamenti();
-      HidePotenziamenti2();
-      HideSettings();
-      HidePanel(PanelType.Credits);
+      HidePotenziamenti(true);
+      HidePotenziamenti2(true);
+      HideSettings(true);
+      HidePanel(PanelType.Credits, true);
       ShowPanel(PanelType.Victory);
+      SoundManager.Instance.PlayWin();
    }
 
-   public void HidePotenziamenti() => HidePanel(PanelType.Potenziamenti);
-   public void HidePotenziamenti2() => HidePanel(PanelType.Potenziamenti2);
-   public void HideSettings() => HidePanel(PanelType.Settings);
+   public void HidePotenziamenti(bool ommitNoise = false) => HidePanel(PanelType.Potenziamenti, ommitNoise);
+   public void HidePotenziamenti2(bool ommitNoise = false) => HidePanel(PanelType.Potenziamenti2, ommitNoise);
+   public void HideSettings(bool ommitNoise = false) => HidePanel(PanelType.Settings, ommitNoise);
 
-   public void HideVictory()
+   public void HideVictory(bool ommit = false)
    {
-      HidePanel(PanelType.Victory);
+      HidePanel(PanelType.Victory, ommit);
       GameManager.Instance.IsFreePlay = true;
    }
     
    public void OnSerraClick() => serra.SetActive(true);
    public void OnExitClick() => Application.Quit();
    public void OnDonateClick() => Application.OpenURL("https://buymeacoffee.com/cupwalk1");
+
+   public void OnSecCavClick()
+   {
+      secCav.SetActive(true);
+   }
 }

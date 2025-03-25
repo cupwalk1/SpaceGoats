@@ -119,14 +119,21 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.name == "Door" && rb.linearVelocityX < 0)
+        {
             _p.ShouldJump = false;
+            _p.OnDoorThreshold = true;
+        } 
         else if(other.gameObject.name == "Mask")
            GameManager.Instance.OnPlayerWin.Invoke();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.name == "Door") _p.ShouldJump = true;
+        if(other.gameObject.name == "Door")
+        {
+            _p.ShouldJump = true;
+            _p.OnDoorThreshold = false;
+        }
     }
 
     private bool CanJumpWall()

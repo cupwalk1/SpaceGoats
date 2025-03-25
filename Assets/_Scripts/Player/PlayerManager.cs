@@ -47,6 +47,7 @@ public class PlayerManager : MonoBehaviour
    }
 
    [SerializeField] private int _health;
+   public bool OnDoorThreshold;
 
    public int Health
    {

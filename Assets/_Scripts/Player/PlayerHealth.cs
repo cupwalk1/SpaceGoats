@@ -49,7 +49,6 @@ public class PlayerHealth : MonoBehaviour
             health = 0;
             _pm.OnTakeDamage.Invoke();
             _pm.OnPlayerDie.Invoke();
-            SoundManager.Instance.PlaySFX(SoundManager.Instance.lose);
          }
       }
    }
@@ -62,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
       rb.linearVelocityX = 0;
       _pm.DisableMoveJump();
       _pm.ShouldMoveCamera = false;
+      SoundManager.Instance.PlaySFX(SoundManager.Instance.lose);
       Invoke("DieEnd", 1f);
    }
 

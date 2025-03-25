@@ -110,8 +110,6 @@ public class ResourceManager : MonoBehaviour
 
    private void Start()
    {
-      GameManager.Instance.OnGameOver.AddListener(delegate { ResourceInfo.CopyFrom(DefaultResourceInfo); });
-      GameManager.Instance.OnGameOver.AddListener(delegate { GoatStats.CopyFrom(DefaultGoatStats); });
       GameManager.Instance.OnPlayerWin.AddListener(GainResources);
       TotalMaterials = PlayerPrefs.GetInt("TotalMaterials", 0);
       TotalFood = PlayerPrefs.GetInt("TotalFood", ResourceInfo.maxFruitsInWarehouse / 2);
