@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
   m_Name: StrongerTubes
   m_EditorClassIdentifier: 
-  Name: Tubi Forti
-  Description: Rende piu forti i tubi.
+  Name: Valvole resistenti
+  Description: "Rende piu forti i tubi,riducendo la possibilit\xE0 che si rompano."
   IsTemporary: 0
   Cost:
-    materials: 1
+    materials: 25
     fruits: 0
-    power: 1
+    power: 5000
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -29,7 +29,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 30
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

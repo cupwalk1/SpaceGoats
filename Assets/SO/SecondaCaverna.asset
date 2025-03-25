@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
   m_Name: SecondaCaverna
   m_EditorClassIdentifier: 
-  Name: Apri una seconda caverna
-  Description: Sbloccare un nuovo edificio che contiene piante facilmente racoglibili.
+  Name: Nuovi orizzonti
+  Description: Esplora una nuova caverna ricca di gustose piante!
   IsTemporary: 1
   Cost:
-    materials: 10
-    fruits: 0
+    materials: 40
+    fruits: 60
     power: 8000
   OnUpgrade:
     m_PersistentCalls:
