@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
   m_Name: UnbreakableTubes
   m_EditorClassIdentifier: 
-  Name: Tubi Irrompibili
+  Name: Tubi Indistruttibili
   Description: Tubi sistemati non si romperano mai piu'
   IsTemporary: 0
   Cost:
-    materials: 10
-    fruits: 0
-    power: 5000
+    materials: 120
+    fruits: 50
+    power: 8000
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
