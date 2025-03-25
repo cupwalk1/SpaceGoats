@@ -75,9 +75,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.71875}
-    oldSize: {x: 0.9375, y: 0.84375}
-    newSize: {x: 1, y: 0.71875}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -216,7 +215,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 4278565016705163308, guid: 50cae2e7895da9a46a59dcf962548214, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -224,7 +223,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &6801961734046832438
@@ -274,6 +273,10 @@ PrefabInstance:
     - target: {fileID: 5583183271623950147, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416093471245396620, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -353874725
       objectReference: {fileID: 0}
     - target: {fileID: 8957637614818600628, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_Name

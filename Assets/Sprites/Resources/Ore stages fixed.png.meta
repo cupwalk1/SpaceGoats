@@ -1,37 +1,16 @@
 fileFormatVersion: 2
-guid: 1146c1bd598a33b499ab6a271272c2c2
+guid: 50cae2e7895da9a46a59dcf962548214
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 356542512985400626
-    second: Broken tube_0
+      213: 3089830099323864298
+    second: Ore stages fixed_0
   - first:
-      213: 3597125882566604765
-    second: Broken tube_1
+      213: 4278565016705163308
+    second: Ore stages fixed_1
   - first:
-      213: 1100757208608214123
-    second: Broken tube_2
-  - first:
-      213: 785363815730937507
-    second: Broken tube_3
-  - first:
-      213: -1796652404402127793
-    second: Broken tube_4
-  - first:
-      213: -6580107250548465854
-    second: Broken tube_5
-  - first:
-      213: -7075391969328241144
-    second: Broken tube_6
-  - first:
-      213: 878989982898812627
-    second: Broken tube_7
-  - first:
-      213: -2419510289735274966
-    second: Broken tube_8
-  - first:
-      213: -670727189988115842
-    second: Broken tube_9
+      213: 4217585665596154810
+    second: Ore stages fixed_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -140,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Broken tube_0
+      name: Ore stages fixed_0
       rect:
         serializedVersion: 2
         x: 0
@@ -155,17 +134,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 235e1d9c681b2f400800000000000000
-      internalID: 356542512985400626
+      spriteID: ae4428eca1841ea20800000000000000
+      internalID: 3089830099323864298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_1
+      name: Ore stages fixed_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 31
         y: 0
         width: 32
         height: 32
@@ -177,17 +156,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd7feba8eee8be130800000000000000
-      internalID: 3597125882566604765
+      spriteID: c20ef11c634806b30800000000000000
+      internalID: 4278565016705163308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_2
+      name: Ore stages fixed_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 63
         y: 0
         width: 32
         height: 32
@@ -199,96 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b6c0b0369dca64f00800000000000000
-      internalID: 1100757208608214123
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_6
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 806e98dad782fcd90800000000000000
-      internalID: -7075391969328241144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_7
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3d67fcb7bbcc23c00800000000000000
-      internalID: 878989982898812627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2e2de9e53c2c6ed0800000000000000
-      internalID: -2419510289735274966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_9
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7aff83ac2911b6f0800000000000000
-      internalID: -670727189988115842
+      spriteID: ab363af21dfd78a30800000000000000
+      internalID: 4217585665596154810
       vertices: []
       indices: 
       edges: []
@@ -297,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ffdacd6eae6a19447b2b06bade79d02b
+    spriteID: d5f445d7addaf394a923bfcc9b979eba
     internalID: 0
     vertices: []
     indices: 
@@ -307,16 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Broken tube_0: 356542512985400626
-      Broken tube_1: 3597125882566604765
-      Broken tube_2: 1100757208608214123
-      Broken tube_3: 785363815730937507
-      Broken tube_4: -1796652404402127793
-      Broken tube_5: -6580107250548465854
-      Broken tube_6: -7075391969328241144
-      Broken tube_7: 878989982898812627
-      Broken tube_8: -2419510289735274966
-      Broken tube_9: -670727189988115842
+      Ore stages fixed_0: 3089830099323864298
+      Ore stages fixed_1: 4278565016705163308
+      Ore stages fixed_2: 4217585665596154810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

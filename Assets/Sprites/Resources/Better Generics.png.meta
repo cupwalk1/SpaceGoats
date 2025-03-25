@@ -1,37 +1,16 @@
 fileFormatVersion: 2
-guid: 1146c1bd598a33b499ab6a271272c2c2
+guid: 83c871dcd80979941bad379e76c86cdf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 356542512985400626
-    second: Broken tube_0
+      213: -1797915750972675520
+    second: Better Generics_0
   - first:
-      213: 3597125882566604765
-    second: Broken tube_1
+      213: 8748083807722570359
+    second: Better Generics_1
   - first:
-      213: 1100757208608214123
-    second: Broken tube_2
-  - first:
-      213: 785363815730937507
-    second: Broken tube_3
-  - first:
-      213: -1796652404402127793
-    second: Broken tube_4
-  - first:
-      213: -6580107250548465854
-    second: Broken tube_5
-  - first:
-      213: -7075391969328241144
-    second: Broken tube_6
-  - first:
-      213: 878989982898812627
-    second: Broken tube_7
-  - first:
-      213: -2419510289735274966
-    second: Broken tube_8
-  - first:
-      213: -670727189988115842
-    second: Broken tube_9
+      213: -1331335165636412343
+    second: Better Generics_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -140,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Broken tube_0
+      name: Better Generics_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 8
+        y: 33
+        width: 16
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 235e1d9c681b2f400800000000000000
-      internalID: 356542512985400626
+      spriteID: 04aa13776258c07e0800000000000000
+      internalID: -1797915750972675520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_1
+      name: Better Generics_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 35
+        y: 35
+        width: 28
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd7feba8eee8be130800000000000000
-      internalID: 3597125882566604765
+      spriteID: 77286a0bfdf676970800000000000000
+      internalID: 8748083807722570359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Broken tube_2
+      name: Better Generics_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
+        x: 4
+        y: 3
+        width: 25
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,96 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b6c0b0369dca64f00800000000000000
-      internalID: 1100757208608214123
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_6
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 806e98dad782fcd90800000000000000
-      internalID: -7075391969328241144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_7
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3d67fcb7bbcc23c00800000000000000
-      internalID: 878989982898812627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2e2de9e53c2c6ed0800000000000000
-      internalID: -2419510289735274966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Broken tube_9
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7aff83ac2911b6f0800000000000000
-      internalID: -670727189988115842
+      spriteID: 94c714778b5268de0800000000000000
+      internalID: -1331335165636412343
       vertices: []
       indices: 
       edges: []
@@ -297,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ffdacd6eae6a19447b2b06bade79d02b
+    spriteID: 6ff54cf94b6f740418bbef78b1d77649
     internalID: 0
     vertices: []
     indices: 
@@ -307,16 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Broken tube_0: 356542512985400626
-      Broken tube_1: 3597125882566604765
-      Broken tube_2: 1100757208608214123
-      Broken tube_3: 785363815730937507
-      Broken tube_4: -1796652404402127793
-      Broken tube_5: -6580107250548465854
-      Broken tube_6: -7075391969328241144
-      Broken tube_7: 878989982898812627
-      Broken tube_8: -2419510289735274966
-      Broken tube_9: -670727189988115842
+      Better Generics_0: -1797915750972675520
+      Better Generics_1: 8748083807722570359
+      Better Generics_2: -1331335165636412343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

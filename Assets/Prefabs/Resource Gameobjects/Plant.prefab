@@ -314,6 +314,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7416093471245396620, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -353874725
+      objectReference: {fileID: 0}
     - target: {fileID: 8957637614818600628, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_Name
       value: MinimapMarker

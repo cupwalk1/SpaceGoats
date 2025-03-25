@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2a20466bb3a99b74c9f9fb285076e410
+guid: 3df8a4b37827e2749a04e4499f5d26f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5898848283792403723
-    second: Energy Door_0
+      213: 1694360111530691102
+    second: Mine door_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Energy Door_0
+      name: Mine door_0
       rect:
         serializedVersion: 2
-        x: 12
+        x: 7
         y: 0
-        width: 36
-        height: 70
+        width: 76
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,30 +128,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f291a44db4132ea0800000000000000
-      internalID: -5898848283792403723
+      spriteID: e1ac0695b83938710800000000000000
+      internalID: 1694360111530691102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Energy Door_1
+      name: Mine door_1
       rect:
         serializedVersion: 2
-        x: 26
+        x: 7
         y: 0
-        width: 57
-        height: 70
+        width: 40
+        height: 79
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f772186a5e5415349aac0daaa10f6867
-      internalID: 89444817
+      spriteID: c121c7274a082bc41a79dd0bbc1366ce
+      internalID: 567825854
       vertices: []
       indices: 
       edges: []
@@ -160,7 +160,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 13fadcc93fa12eb47acbe65b5ade4316
+    spriteID: 883b5664ab919654d995378584d6bc9c
     internalID: 0
     vertices: []
     indices: 
@@ -170,8 +170,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Energy Door_0: -5898848283792403723
-      Energy Door_1: 89444817
+      Mine door_0: 1694360111530691102
+      Mine door_1: 567825854
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
