@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tiles Tubes
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -667057756, guid: 2953cbff942b0a949908410f6bea9ed1, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 1474639578404275614, guid: 78879ff31a1784607a52118277fa94a2, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 7

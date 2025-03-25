@@ -11,6 +11,7 @@ namespace _Scripts.Panels
       public override void Show()
       {
          base.Show();
+         GameManager.Instance.IsGameOver = true;
          if(ResourceManager.Instance.TotalEnergy == 0)
          {
             energyText.enabled = true;

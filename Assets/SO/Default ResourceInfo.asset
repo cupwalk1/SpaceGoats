@@ -19,6 +19,6 @@ MonoBehaviour:
   materialsPerOre: 3
   oreRegenTime: 30
   energyAvailable: 5000
-  energyPerGenerator: 0
+  energyPerGenerator: -4252
   averageGeneratorBreakingTime: 180
   semiRangeGeneratorBreakingTime: 60

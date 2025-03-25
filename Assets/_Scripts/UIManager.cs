@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
       }
       serra.SetActive(false);
       secCav.SetActive(false);
-      HideVictory(true);
+      HidePanel(PanelType.Victory, true);
       HideGameOver(true);
       _rm.SaveResources();
       
@@ -134,10 +134,10 @@ public class UIManager : MonoBehaviour
       
       ResourceInfo.CopyFrom(DefaultResourceInfo);
       GoatStats.CopyFrom(DefaultGoatStats);
-      GameManager.Instance.IsGameOver = false;
       _rm.TotalMaterials = 0;
       _rm.TotalFood = Mathf.RoundToInt(_rm.ResourceInfo.maxFruitsInWarehouse / 1.5f);
       UpgradeManager.Instance.UpdateStacks();
+      GameManager.Instance.IsGameOver = false;
    }
 
    private void HideGameOver(bool omit = false)

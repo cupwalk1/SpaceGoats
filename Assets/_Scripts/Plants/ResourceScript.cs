@@ -45,7 +45,7 @@ public abstract class ResourceScript : MonoBehaviour
 
    private void Start()
    {
-      _thisResourceData = _RM.GetResource(position, Type);
+      _thisResourceData = _RM.GetResource(transform.position, Type);
       _animator = GetComponent<Animator>();
       minimapSprite = gameObject.GetComponentInChildren<Image>();
       Debug.Log(_thisResourceData.IsRipe);
@@ -67,12 +67,6 @@ public abstract class ResourceScript : MonoBehaviour
          _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
          yield return new WaitForSeconds(1);
       }
-   }
-
-   public void Initialize(Vector3Int position, ITilemap tilemap)
-   {
-      this.position = position;
-      if (ResourceScript.tilemap is null) ResourceScript.tilemap = tilemap;
    }
 
 
@@ -115,7 +109,6 @@ public abstract class ResourceScript : MonoBehaviour
             minimapSprite.color = notReadyColor;
             TimeToRipe = MaxTimeToRegen;
             RegenCoroutine = StartCoroutine("Regen");
-            gameObject.GetComponentInParent<Tilemap>().RefreshTile(position);
          }
       }
       

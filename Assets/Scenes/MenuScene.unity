@@ -4788,7 +4788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Plants
+  m_text: Caverna 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
@@ -6588,7 +6588,7 @@ GameObject:
   - component: {fileID: 1152920401}
   - component: {fileID: 1152920400}
   m_Layer: 0
-  m_Name: Button-Plants
+  m_Name: PrimaCaverna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9740,7 +9740,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: La colonia e' falita
+  m_text: La colonia e' fallita
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
@@ -9767,7 +9767,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 111.6
+  m_fontSize: 106.95
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

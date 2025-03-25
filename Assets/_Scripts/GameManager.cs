@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
         GameEnded.AddListener(EndGame);
         OnPlayerWin.AddListener(delegate{GameManager.Instance.GameEnded.Invoke();});
         GameStartup.Invoke();
-        OnGameOver.AddListener(delegate { IsGameOver = true; });
     }
 
     public void StartGame()

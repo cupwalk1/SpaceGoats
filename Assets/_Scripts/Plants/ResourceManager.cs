@@ -79,7 +79,7 @@ public class ResourceManager : MonoBehaviour
    }
 
 
-   public ResourceData GetResource(Vector3Int position, ResourceData.ResourceType type, string sceneName = null)
+   public ResourceData GetResource(Vector3 position, ResourceData.ResourceType type, string sceneName = null)
    {
       if (sceneName == null)
          sceneName = SceneManager.GetActiveScene().name;
@@ -201,7 +201,7 @@ public class ResourceManager : MonoBehaviour
          }
       }
 
-      public (ResourceData.ResourceType type, string levelName) GetResourceType(Vector3Int position)
+      public (ResourceData.ResourceType type, string levelName) GetResourceType(Vector3 position)
       {
          var t = Resources.FirstOrDefault(p =>
             p.Position == position && p.SceneName == SceneManager.GetActiveScene().name);

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ResourceData
 {
    
-   public ResourceData(ResourceType type, string sceneName, Vector3Int position, double timeToRipe)
+   public ResourceData(ResourceType type, string sceneName, Vector3 position, double timeToRipe)
    {
       Type = type;
       SceneName = sceneName;
@@ -23,7 +23,7 @@ public class ResourceData
    }
    public ResourceType Type;
    public string SceneName;
-   public Vector3Int Position;
+   public Vector3 Position;
    public bool IsRipe
    {
       get => TimeToRipe == 0;
