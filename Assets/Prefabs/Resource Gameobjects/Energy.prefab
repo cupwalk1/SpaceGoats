@@ -71,17 +71,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: 0, y: -0.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 1}
-    newSize: {x: 2, y: 1}
+    oldSize: {x: 1.3333334, y: 1.3333334}
+    newSize: {x: 0.90625, y: 0.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7262850171763738933
 MonoBehaviour:
@@ -216,15 +216,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 356542512985400626, guid: 1146c1bd598a33b499ab6a271272c2c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 0.90625, y: 0.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &3527764346689527515
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583183271623950147, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5583183271623950147, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -274,6 +274,10 @@ PrefabInstance:
     - target: {fileID: 5583183271623950147, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416093471245396620, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -353874725
       objectReference: {fileID: 0}
     - target: {fileID: 8957637614818600628, guid: 8ffa3e00554c64591b3b4f2f0c35e5c4, type: 3}
       propertyPath: m_Name
