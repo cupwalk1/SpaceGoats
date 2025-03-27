@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
-  m_Name: GoatSpeed
+  m_Name: GoatJump
   m_EditorClassIdentifier: 
-  Name: Energy Drink
-  Description: Increases the goat's max speed by 1
+  Name: Spring Boots
+  Description: Increases the goat's max jump by 1
   IsTemporary: 1
   Cost:
     materials: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a06291275845342a3be4be6c11a6ccef, type: 2}
         m_TargetAssemblyTypeName: AllUpgrades, Assembly-CSharp
-        m_MethodName: IncreaseGoatSpeed
+        m_MethodName: IncreaseGoatJump
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

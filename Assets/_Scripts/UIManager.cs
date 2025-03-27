@@ -60,7 +60,10 @@ public class UIManager : MonoBehaviour
    [SerializeField] private ResourceCounter rc;
    [SerializeField] private ResourceManager _rm;
    [SerializeField] private Slider volumeSlider;
-    
+   
+   [SerializeField] private UpgradeSlider VelocityPanel;
+   [SerializeField] private UpgradeSlider JumpPanel; 
+   
    private void Awake()
    {
       foreach (var panel in FindObjectsOfType<UIPanel>())
@@ -75,6 +78,8 @@ public class UIManager : MonoBehaviour
 
    private void Start()
    {
+      GameManager.Instance.ResetGame.AddListener(RestartGame);
+      
       serra.SetActive(false);
       secCav.SetActive(false);
       _rm = ResourceManager.Instance;
@@ -83,14 +88,14 @@ public class UIManager : MonoBehaviour
       _rm.OnResourcesChanged.AddListener(CheckGameOver);
         
       GameManager.Instance.OnGameWin.AddListener(ShowVictory);
-      if (_rm.TotalFood == 0 || _rm.TotalEnergy == 0) GameManager.Instance.OnGameOver.Invoke();
+      CheckGameOver();
       GameManager.Instance.OnGameOver.AddListener(ShowGameOver);
       PlayerPrefs.SetFloat("volume", PlayerPrefs.GetFloat("volume", 1f));
       PlayerPrefs.SetInt("vibration", PlayerPrefs.GetInt("vibration", 1));
       PlayerPrefs.Save();
    }
 
-    
+
    private void CheckGameOver()
    {
       if ((_rm.TotalFood == 0 || _rm.TotalEnergy == 0) && !GameManager.Instance.IsGameOver)GameManager.Instance.OnGameOver.Invoke();
@@ -115,7 +120,12 @@ public class UIManager : MonoBehaviour
 
    public void LoadGame(string level) => SceneManager.LoadScene(level);
 
-   public void OnRetryClick()
+   public void CallReset()
+   {
+      GameManager.Instance.ResetGame.Invoke();
+   }
+
+   public void RestartGame()
    {
       foreach (var resource in _rm.Resources)
       {
@@ -136,7 +146,6 @@ public class UIManager : MonoBehaviour
       GoatStats.CopyFrom(DefaultGoatStats);
       _rm.TotalMaterials = 0;
       _rm.TotalFood = Mathf.RoundToInt(_rm.ResourceInfo.maxFruitsInWarehouse / 1.5f);
-      UpgradeManager.Instance.UpdateStacks();
       GameManager.Instance.IsGameOver = false;
    }
 
@@ -155,7 +164,6 @@ public class UIManager : MonoBehaviour
    public void ToggleCredits() => TogglePanel(PanelType.Credits);
    public void TogglePotenziamenti() => TogglePanel(PanelType.Potenziamenti);
    public void TogglePotenziamenti2() => TogglePanel(PanelType.Potenziamenti2);
-   public void ToggleGameOver() => TogglePanel(PanelType.GameOver);
    public void ShowGameOver()
    {
       HidePotenziamenti(true);
@@ -189,6 +197,7 @@ public class UIManager : MonoBehaviour
    public void OnSerraClick() => serra.SetActive(true);
    public void OnExitClick() => Application.Quit();
    public void OnDonateClick() => Application.OpenURL("https://buymeacoffee.com/cupwalk1");
+   public void OnCoseUnaCittaSostenibileClick() => Application.OpenURL("https://unric.org/it/obiettivo-11-rendere-le-citta-e-gli-insediamenti-umani-inclusivi-sicuri-duraturi-e-sostenibili/");
 
    public void OnSecCavClick()
    {

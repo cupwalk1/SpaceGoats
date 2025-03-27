@@ -176,6 +176,7 @@ public class ResourceManager : MonoBehaviour
    {
       while (gameObject)
       {
+         yield return new WaitForSeconds(1);
          foreach (var s in Resources)
          {
             if (s.TimeToRipe > 0)
@@ -186,9 +187,16 @@ public class ResourceManager : MonoBehaviour
                   OnResourcesChanged.Invoke();
                }
             }
+
+            if (s.ResourceGameObject)
+            {
+               s.ResourceGameObject.GetComponent<Animator>().SetInteger("TimeToRipe", (int)s.TimeToRipe);
+               s.ResourceGameObject.GetComponent<ResourceScript>().minimapSprite.color = s.IsRipe
+                  ? s.ResourceGameObject.GetComponent<ResourceScript>().readyColor
+                  : s.ResourceGameObject.GetComponent<ResourceScript>().notReadyColor;
+            }
          }
 
-         yield return new WaitForSeconds(1);
       }
    }
 

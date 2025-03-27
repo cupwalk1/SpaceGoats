@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnGameOver = new UnityEvent();
     public UnityEvent OnGameWin = new UnityEvent();
 
+    public UnityEvent ResetGame = new UnityEvent();
     
     
     private void Awake()
@@ -73,8 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        GameLoaded.Invoke();
-        GameStart.Invoke();
+        
     }
 
     public void QuitGame()

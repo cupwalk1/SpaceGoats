@@ -10,7 +10,9 @@ public class UpgradeManager : MonoBehaviour
    public GameObject UpgradePrefab;
    public GameObject MaxedOutPrefab;
 
-
+   public UpgradeSlider SpeedSlider;
+   public UpgradeSlider JumpSlider;
+   
    public static UpgradeManager Instance;
    GameManager _gm;
 
@@ -29,9 +31,45 @@ public class UpgradeManager : MonoBehaviour
 
    private void Start()
    {
+      
       _gm = GameManager.Instance;
-      InstantiateStacks();
       _gm.MenuLoaded.AddListener(InstantiateStacks);
+      _gm.ResetGame.AddListener(ResetGame);
+      
+      SpeedSlider.DisablePanel();
+      SpeedSlider.Slider.onValueChanged.AddListener(VelocityChange);
+      SpeedSlider.Slider.value = UnParseVelocity(GoatStats.speed);
+      SpeedSlider.UpdateSlider();
+      
+      JumpSlider.DisablePanel();
+      JumpSlider.Slider.onValueChanged.AddListener(value => JumpChange(value));
+      JumpSlider.Slider.value = UnParseJump(GoatStats.jumpForce);
+      JumpSlider.UpdateSlider();
+      
+      InstantiateStacks();
+   }
+
+   private void JumpChange(float value)
+   {
+      GoatStats.jumpForce = ParseJump(value);
+      JumpSlider.UpdateSlider();
+   }
+   
+   private float ParseJump(float value)
+   {
+      return 15 + (value-1)* (GoatStats.maxJumpForce-15) /5;
+   }
+   
+   public float UnParseJump(float value)
+   {
+      return 5*(value-15)/(GoatStats.maxJumpForce-15)+1;
+   }
+
+   private void ResetGame()
+   {
+      SpeedSlider.DisablePanel();
+      SpeedSlider.Slider.maxValue = 1;
+      UpgradeManager.Instance.UpdateStacks();
    }
 
    private void InstantiateStacks()
@@ -45,7 +83,23 @@ public class UpgradeManager : MonoBehaviour
    public void UpdateStacks()
    {
       foreach (var stack in UpgradeStacks) stack.UpdateStack();
-      }
+   }
+   
+   private void VelocityChange(float value)
+   {
+      GoatStats.speed = ParseVelocity(value);
+      SpeedSlider.UpdateSlider();
+   }
+   
+   public float ParseVelocity(float value)
+   {
+      return 7+ (value-1)* (GoatStats.maxSpeed-7) /5;
+   }
+   
+   public float UnParseVelocity(float value)
+   {
+      return 5*(value-7)/(GoatStats.maxSpeed-7)+1;
+   }
 }
 
 [System.Serializable]
@@ -90,7 +144,7 @@ public class UpgradeStack
          g.GetComponent<UpgradeScript>().UpgradeData = Upgrades[i];
          g.GetComponent<UpgradeScript>().UpgradeStack = this;
          g.SetActive(false);
-         if(g.GetComponent<UpgradeScript>().UpgradeData.IsTemporary && UpgradeLevel >= i)
+         if(g.GetComponent<UpgradeScript>().UpgradeData.IsTemporary && UpgradeLevel > i)
             g.GetComponent<UpgradeScript>().UpgradeData.OnUpgrade.Invoke();
       }
       UpdateStack();

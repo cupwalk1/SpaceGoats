@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Forces")]
     [SerializeField] private float initialJumpForce;
-    [SerializeField] private float continualJumpForce;
+    private float continualJumpForce => goatStats.jumpForce;
     [SerializeField] private float initalXJumpForce;
     [SerializeField] private float continualXJumpForce;
         

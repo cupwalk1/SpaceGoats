@@ -116,12 +116,12 @@ TextureImporter:
       name: Mine door_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 76
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 41
+        y: 6
+        width: 55
+        height: 72
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -139,11 +139,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 7
-        y: 0
-        width: 40
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 6
+        width: 34
+        height: 72
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

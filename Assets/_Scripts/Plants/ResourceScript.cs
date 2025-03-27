@@ -15,23 +15,10 @@ public abstract class ResourceScript : MonoBehaviour
    public Vector3Int position;
    public Image minimapSprite;
    protected Animator _animator;
+
+   public Color readyColor = Color.blue;
+   public Color notReadyColor = Color.gray;
    
-   Color readyColor = Color.blue;
-   Color notReadyColor = Color.gray;
-   
-   Coroutine _regenCoroutine;
-   private Coroutine RegenCoroutine
-   {
-      get => _regenCoroutine;
-      set
-      {
-         if (_regenCoroutine == null)
-         {
-            _regenCoroutine = value;
-         }
-      }
-      
-   }
    public abstract int MaxTimeToRegen { get; }
 
    protected ResourceManager _RM
@@ -45,28 +32,25 @@ public abstract class ResourceScript : MonoBehaviour
 
    private void Start()
    {
+
       _thisResourceData = _RM.GetResource(transform.position, Type);
+      _thisResourceData.ResourceGameObject = gameObject;
       _animator = GetComponent<Animator>();
       minimapSprite = gameObject.GetComponentInChildren<Image>();
       Debug.Log(_thisResourceData.IsRipe);
       if(!IsRipe)
       {
          minimapSprite.color = notReadyColor;
-         RegenCoroutine = StartCoroutine("Regen");
       }
       else minimapSprite.color = readyColor;
-      _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
+      _animator.SetFloat("TimeToRipe", TimeToRipe);
       
    }
 
-   IEnumerator Regen()
+   IEnumerator Animate()
    {
-      while (TimeToRipe > 0)
-      {
-         TimeToRipe--;
-         _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
+         _animator.SetInteger("TimeToRipe", (int) TimeToRipe);
          yield return new WaitForSeconds(1);
-      }
    }
 
 
@@ -75,7 +59,7 @@ public abstract class ResourceScript : MonoBehaviour
       get => TimeToRipe == 0;
    }
 
-   public double TimeToRipe
+   public float TimeToRipe
    {
       get => _thisResourceData.TimeToRipe;
       set
@@ -92,8 +76,6 @@ public abstract class ResourceScript : MonoBehaviour
    private void OnDestroy()
    {
       _RM.SaveResources();
-      if (RegenCoroutine == null) return;
-      StopCoroutine(RegenCoroutine);
    }
 
    public abstract bool Harvest();
@@ -108,7 +90,7 @@ public abstract class ResourceScript : MonoBehaviour
             SoundManager.Instance.PlaySFX(SoundManager.Instance.AquiredResource);
             minimapSprite.color = notReadyColor;
             TimeToRipe = MaxTimeToRegen;
-            RegenCoroutine = StartCoroutine("Regen");
+            _animator.SetInteger("TimeToRipe", (int)TimeToRipe);
          }
       }
       

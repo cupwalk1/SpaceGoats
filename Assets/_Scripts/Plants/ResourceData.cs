@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 public class ResourceData
 {
    
-   public ResourceData(ResourceType type, string sceneName, Vector3 position, double timeToRipe)
+   public ResourceData(ResourceType type, string sceneName, Vector3 position, float timeToRipe)
    {
       Type = type;
       SceneName = sceneName;
       Position = position;
       TimeToRipe = timeToRipe;
    }
+   
+   [NonSerialized]
+   public GameObject ResourceGameObject;
    
    public enum ResourceType
    {
@@ -28,5 +31,5 @@ public class ResourceData
    {
       get => TimeToRipe == 0;
    }
-   public double TimeToRipe;
+   public float TimeToRipe;
 }

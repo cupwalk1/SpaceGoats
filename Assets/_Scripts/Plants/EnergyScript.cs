@@ -11,7 +11,6 @@ public class EnergyScript : ResourceScript
    
    public override bool Harvest()
    {
-      Debug.Log("Harvesting energy");
       return true;
    }
 }
