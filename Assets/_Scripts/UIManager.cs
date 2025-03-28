@@ -71,6 +71,7 @@ public class UIManager : MonoBehaviour
          if (Enum.TryParse(panel.name, out PanelType panelType))
          {
             panels[panelType] = panel;
+            if  (panel.name == "GameOver" && GameManager.Instance.IsGameOver) continue;
             panel.Hide(true);
          }
       }
@@ -86,9 +87,7 @@ public class UIManager : MonoBehaviour
       volumeSlider.onValueChanged.AddListener((float value) => PlayerPrefs.SetFloat("volume", value));
       volumeSlider.value = PlayerPrefs.GetFloat("volume");
       _rm.OnResourcesChanged.AddListener(CheckGameOver);
-        
       GameManager.Instance.OnGameWin.AddListener(ShowVictory);
-      CheckGameOver();
       GameManager.Instance.OnGameOver.AddListener(ShowGameOver);
       PlayerPrefs.SetFloat("volume", PlayerPrefs.GetFloat("volume", 1f));
       PlayerPrefs.SetInt("vibration", PlayerPrefs.GetInt("vibration", 1));

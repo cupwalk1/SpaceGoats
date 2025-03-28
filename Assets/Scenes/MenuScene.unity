@@ -11804,13 +11804,13 @@ MonoBehaviour:
   _rm: {fileID: 163772042}
   volumeSlider: {fileID: 2098226011}
   VelocityPanel:
-    Panel: {fileID: 0}
-    Slider: {fileID: 0}
-    Text: {fileID: 0}
+    Panel: {fileID: 2017912503}
+    Slider: {fileID: 282536653}
+    Text: {fileID: 590066838}
   JumpPanel:
-    Panel: {fileID: 0}
-    Slider: {fileID: 0}
-    Text: {fileID: 0}
+    Panel: {fileID: 1163045769}
+    Slider: {fileID: 1416897696}
+    Text: {fileID: 29706545}
 --- !u!4 &1652936177
 Transform:
   m_ObjectHideFlags: 0
