@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: cfccfb0ff57c041b0b31eb679e9dd779
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4680762317307742420
+    second: logoAgenda2030_0
+  - first:
+      213: 3106618509634855457
+    second: logoAgenda2030_1
+  - first:
+      213: -7887735239023824366
+    second: logoAgenda2030_2
+  - first:
+      213: 3012515036539994512
+    second: logoAgenda2030_3
+  - first:
+      213: 7282379426753770673
+    second: logoAgenda2030_4
+  - first:
+      213: -2486422341437351959
+    second: logoAgenda2030_5
+  - first:
+      213: 1998666064983543945
+    second: logoAgenda2030_6
+  - first:
+      213: 9114262015275321333
+    second: logoAgenda2030_7
+  - first:
+      213: -4390506933012509955
+    second: logoAgenda2030_8
+  - first:
+      213: -6821417083100601531
+    second: logoAgenda2030_9
+  - first:
+      213: -3802841566782834276
+    second: logoAgenda2030_10
+  - first:
+      213: -322778555373324956
+    second: logoAgenda2030_11
+  - first:
+      213: -4951774833385606168
+    second: logoAgenda2030_12
+  - first:
+      213: -4627273805073700360
+    second: logoAgenda2030_13
+  - first:
+      213: -4078980904993758341
+    second: logoAgenda2030_14
+  - first:
+      213: -2522422942820437678
+    second: logoAgenda2030_15
+  - first:
+      213: 5959440874978347914
+    second: logoAgenda2030_16
+  - first:
+      213: 7967747414635501158
+    second: logoAgenda2030_17
+  - first:
+      213: -6575227635297960324
+    second: logoAgenda2030_18
+  - first:
+      213: -3834370902229459761
+    second: logoAgenda2030_19
+  - first:
+      213: -2558002519388361884
+    second: logoAgenda2030_20
+  - first:
+      213: 8219355740699425934
+    second: logoAgenda2030_21
+  - first:
+      213: 8032626702853449127
+    second: logoAgenda2030_22
+  - first:
+      213: 3710923950739922785
+    second: logoAgenda2030_23
+  - first:
+      213: 7913825026360340891
+    second: logoAgenda2030_24
+  - first:
+      213: 3523085836532277621
+    second: logoAgenda2030_25
+  - first:
+      213: 7978840841185106864
+    second: logoAgenda2030_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: logoAgenda2030_0
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 566
+        width: 105
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2776ded8779a0fb0800000000000000
+      internalID: -4680762317307742420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_1
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 601
+        width: 95
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122607f231dec1b20800000000000000
+      internalID: 3106618509634855457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 625
+        width: 74
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21277a35792298290800000000000000
+      internalID: -7887735239023824366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_3
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 631
+        width: 66
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0914d79f67a9ec920800000000000000
+      internalID: 3012515036539994512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_4
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 614
+        width: 85
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b475434185301560800000000000000
+      internalID: 7282379426753770673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 584
+        width: 101
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e71809dd047e7dd0800000000000000
+      internalID: -2486422341437351959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_6
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 523
+        width: 100
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 980d8fb5230bcbb10800000000000000
+      internalID: 1998666064983543945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_7
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 545
+        width: 104
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f74252730d5c7e70800000000000000
+      internalID: 9114262015275321333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_8
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 485
+        width: 95
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa46e1d439c113c0800000000000000
+      internalID: -4390506933012509955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_9
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 446
+        width: 100
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 543e109ed457551a0800000000000000
+      internalID: -6821417083100601531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_10
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 379
+        width: 104
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99b1da4eb7993bc0800000000000000
+      internalID: -3802841566782834276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_11
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 355
+        width: 101
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 465fbd13d92458bf0800000000000000
+      internalID: -322778555373324956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_12
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 414
+        width: 103
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e3f4505603c74bb0800000000000000
+      internalID: -4951774833385606168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_13
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 331
+        width: 95
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f9ac1a9dfe98cfb0800000000000000
+      internalID: -4627273805073700360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_14
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 308
+        width: 73
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b73ee307a7c8467c0800000000000000
+      internalID: -4078980904993758341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_15
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 307
+        width: 67
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25174e7a2bd8efcd0800000000000000
+      internalID: -2522422942820437678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_16
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 317
+        width: 85
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b070db6ef24b250800000000000000
+      internalID: 5959440874978347914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 168
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 666d2650f00239e60800000000000000
+      internalID: 7967747414635501158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_18
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 167
+        width: 77
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ebbb08d4910c4a0800000000000000
+      internalID: -6575227635297960324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_19
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 168
+        width: 60
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fccd483daf399cac0800000000000000
+      internalID: -3834370902229459761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_20
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 168
+        width: 75
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b6d41f246208cd0800000000000000
+      internalID: -2558002519388361884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_21
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 168
+        width: 74
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8cf4f68f74011270800000000000000
+      internalID: 8219355740699425934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_22
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 168
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a5a5e47d6f997f60800000000000000
+      internalID: 8032626702853449127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_23
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 121
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16f97500ca9df7330800000000000000
+      internalID: 3710923950739922785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_24
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 0
+        width: 127
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91fdc6aeed83dd60800000000000000
+      internalID: 7913825026360340891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_25
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 0
+        width: 119
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57167b7f6e384e030800000000000000
+      internalID: 3523085836532277621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logoAgenda2030_26
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 0
+        width: 127
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb973aa8798abe60800000000000000
+      internalID: 7978840841185106864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      logoAgenda2030_0: -4680762317307742420
+      logoAgenda2030_1: 3106618509634855457
+      logoAgenda2030_10: -3802841566782834276
+      logoAgenda2030_11: -322778555373324956
+      logoAgenda2030_12: -4951774833385606168
+      logoAgenda2030_13: -4627273805073700360
+      logoAgenda2030_14: -4078980904993758341
+      logoAgenda2030_15: -2522422942820437678
+      logoAgenda2030_16: 5959440874978347914
+      logoAgenda2030_17: 7967747414635501158
+      logoAgenda2030_18: -6575227635297960324
+      logoAgenda2030_19: -3834370902229459761
+      logoAgenda2030_2: -7887735239023824366
+      logoAgenda2030_20: -2558002519388361884
+      logoAgenda2030_21: 8219355740699425934
+      logoAgenda2030_22: 8032626702853449127
+      logoAgenda2030_23: 3710923950739922785
+      logoAgenda2030_24: 7913825026360340891
+      logoAgenda2030_25: 3523085836532277621
+      logoAgenda2030_26: 7978840841185106864
+      logoAgenda2030_3: 3012515036539994512
+      logoAgenda2030_4: 7282379426753770673
+      logoAgenda2030_5: -2486422341437351959
+      logoAgenda2030_6: 1998666064983543945
+      logoAgenda2030_7: 9114262015275321333
+      logoAgenda2030_8: -4390506933012509955
+      logoAgenda2030_9: -6821417083100601531
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

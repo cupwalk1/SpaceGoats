@@ -31,8 +31,12 @@ public abstract class UIPanel : MonoBehaviour
       Debug.Log($"Showing panel {this.name}");
    }
 
-   public void HideImmediate() => gameObject.SetActive(false);
-   
+   public void HideImmediate()
+   {
+      gameObject.transform.position = menuSpawn.position;
+      gameObject.SetActive(false);
+   }
+
    public virtual void Hide(bool ommitNoise = false)
    {
       if (menu)
@@ -140,6 +144,7 @@ public class UIManager : MonoBehaviour
       var volume = PlayerPrefs.GetFloat("volume", 1f);
       PlayerPrefs.DeleteAll();
       PlayerPrefs.SetFloat("volume", volume);
+      PlayerPrefs.SetInt("IsInitialGame", 0);
       PlayerPrefs.Save();
       
       ResourceInfo.CopyFrom(DefaultResourceInfo);
