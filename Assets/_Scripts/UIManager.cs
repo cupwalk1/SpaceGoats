@@ -33,7 +33,7 @@ public abstract class UIPanel : MonoBehaviour
 
    public void HideImmediate()
    {
-      gameObject.transform.position = menuSpawn.position;
+      menu.transform.position = menuSpawn.position;
       gameObject.SetActive(false);
    }
 
