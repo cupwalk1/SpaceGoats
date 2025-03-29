@@ -2700,6 +2700,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 528950126}
   m_CullTransparentMesh: 1
 --- !u!1 &558316797
@@ -2837,6 +2838,9 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558316797}
+=======
+  m_GameObject: {fileID: 562964488}
+>>>>>>> Stashed changes
 =======
   m_GameObject: {fileID: 562964488}
 >>>>>>> Stashed changes
@@ -4542,6 +4546,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &918117812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4678,6 +4683,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918117812}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -7710,6 +7717,7 @@ MonoBehaviour:
   m_ReverseArrangement: 0
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1395663604
 GameObject:
   m_ObjectHideFlags: 0
@@ -7846,6 +7854,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395663604}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
