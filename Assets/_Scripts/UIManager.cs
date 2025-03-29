@@ -31,6 +31,8 @@ public abstract class UIPanel : MonoBehaviour
       Debug.Log($"Showing panel {this.name}");
    }
 
+   public void HideImmediate() => gameObject.SetActive(false);
+   
    public virtual void Hide(bool ommitNoise = false)
    {
       if (menu)
@@ -71,8 +73,7 @@ public class UIManager : MonoBehaviour
          if (Enum.TryParse(panel.name, out PanelType panelType))
          {
             panels[panelType] = panel;
-            if  (panel.name == "GameOver" && GameManager.Instance.IsGameOver) continue;
-            panel.Hide(true);
+            panel.HideImmediate();
          }
       }
    }

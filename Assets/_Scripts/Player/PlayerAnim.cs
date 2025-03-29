@@ -4,16 +4,18 @@ using UnityEngine.UI;
 
 public class PlayerAnim : MonoBehaviour
 {
+   private static readonly int Left = Animator.StringToHash("IsLeft");
    public float time;
    public float cooldownTime;
    public float lightxoffset;
-   public bool IsRight = true;
+   public bool IsRight;
+   
    public PlayerMovement playerMovement;
    public SpriteRenderer spriteRenderer;
    public float flipTime = 0.25f;
    public Rigidbody2D rb;
    Animator _animator;
-      
+   
 
    public bool lastIsRight;
       
@@ -25,11 +27,11 @@ public class PlayerAnim : MonoBehaviour
       _animator = GetComponent<Animator>();
       GameManager.Instance.GameStart.AddListener(OnGameStart);
       playerManager.OnPlayerDie.AddListener(OnPlayerDie);
-
    }
-
+   
    private void OnPlayerDie()
    {
+      
    }
 
    void OnGameStart()
@@ -47,7 +49,8 @@ public class PlayerAnim : MonoBehaviour
          {
             lastIsRight = IsRight;
             time = 0;
-            Flip();
+            _animator.SetTrigger("Flip");
+            FlipSprite();
             return;
          }
             
@@ -59,13 +62,20 @@ public class PlayerAnim : MonoBehaviour
       else IsRight = rb.linearVelocityX > 0;
    }
 
-   void Flip()
-   {
-      _animator.SetTrigger("Flip");
-   }
+
    
    public void FlipSprite()
    {
       spriteRenderer.flipX = !IsRight;
    }
+   
+   public void FlipSpriteToLeft()
+   {
+      spriteRenderer.flipX = true;
+   }
+   public void FlipSpriteToRight()
+   {
+      spriteRenderer.flipX = false;
+   }
+   
 }

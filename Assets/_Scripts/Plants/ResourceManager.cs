@@ -26,6 +26,33 @@ public class ResourceManager : MonoBehaviour
 
    public int RandomMaxEnergyTime => Random.Range(ResourceInfo.averageGeneratorBreakingTime - ResourceInfo.semiRangeGeneratorBreakingTime,
       ResourceInfo.averageGeneratorBreakingTime + ResourceInfo.semiRangeGeneratorBreakingTime);
+
+
+
+private Coroutine miningCoroutine;
+   public Coroutine MineOreCoroutine
+   {
+      set
+      {
+         if (miningCoroutine != null) return;
+         miningCoroutine = value;
+      }
+      get
+      {
+         return miningCoroutine;
+      }
+   }
+   
+   
+   public void StartMiner()
+   {
+      MineOreCoroutine = StartCoroutine(MineOre());
+   }
+   
+   
+   
+   
+   
    
    
    public List<ResourceData> Resources = new();
@@ -208,6 +235,15 @@ public class ResourceManager : MonoBehaviour
             TotalFood--;
          }
       }
+
+   IEnumerator MineOre()
+   {
+      while (gameObject)
+      {
+         yield return new WaitForSeconds(ResourceInfo.oreMiningRate);
+         TotalMaterials++;
+      }
+   }
 
       public (ResourceData.ResourceType type, string levelName) GetResourceType(Vector3 position)
       {

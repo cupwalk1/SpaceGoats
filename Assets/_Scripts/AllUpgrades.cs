@@ -82,4 +82,9 @@ public class AllUpgrades : ScriptableObject
    {
       resourceInfo.materialsPerOre += i;
    }
+
+   public void ContructTrivella()
+   {
+      ResourceManager.Instance.StartMiner();
+   }
 }

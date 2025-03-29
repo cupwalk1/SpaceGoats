@@ -20,7 +20,8 @@ public class ResourceInfo : ScriptableObject
    public int energyPerGenerator;
    public int averageGeneratorBreakingTime;
    public int semiRangeGeneratorBreakingTime;
-   
+   public float oreMiningRate;
+
    public void CopyFrom(ResourceInfo other)
    {
       fruitsPerPlant = other.fruitsPerPlant;
@@ -30,6 +31,7 @@ public class ResourceInfo : ScriptableObject
       
       materialsPerOre = other.materialsPerOre;
       oreRegenTime = other.oreRegenTime;
+      oreMiningRate = other.oreMiningRate;
       
       energyAvailable = other.energyAvailable;
       energyPerGenerator = other.energyPerGenerator;
