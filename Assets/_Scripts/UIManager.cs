@@ -31,8 +31,12 @@ public abstract class UIPanel : MonoBehaviour
       Debug.Log($"Showing panel {this.name}");
    }
 
-   public void HideImmediate() => gameObject.SetActive(false);
-   
+   public void HideImmediate()
+   {
+      gameObject.transform.position = menuSpawn.position;
+      gameObject.SetActive(false);
+   }
+
    public virtual void Hide(bool ommitNoise = false)
    {
       if (menu)
@@ -49,6 +53,10 @@ public abstract class UIPanel : MonoBehaviour
 
 public class UIManager : MonoBehaviour
 {
+   
+   public AudioSource audioSource;
+   public AudioSource backgroundMusic;
+   
    public GameObject serra;
    public GameObject secCav;
    
@@ -85,14 +93,23 @@ public class UIManager : MonoBehaviour
       serra.SetActive(false);
       secCav.SetActive(false);
       _rm = ResourceManager.Instance;
-      volumeSlider.onValueChanged.AddListener((float value) => PlayerPrefs.SetFloat("volume", value));
+      volumeSlider.onValueChanged.AddListener((float value) =>
+      {
+         SetVolume(value);
+         PlayerPrefs.SetFloat("volume", value);
+      });
       volumeSlider.value = PlayerPrefs.GetFloat("volume");
       _rm.OnResourcesChanged.AddListener(CheckGameOver);
       GameManager.Instance.OnGameWin.AddListener(ShowVictory);
       GameManager.Instance.OnGameOver.AddListener(ShowGameOver);
       PlayerPrefs.SetFloat("volume", PlayerPrefs.GetFloat("volume", 1f));
-      PlayerPrefs.SetInt("vibration", PlayerPrefs.GetInt("vibration", 1));
       PlayerPrefs.Save();
+   }
+
+   private void SetVolume(float value)
+   {
+      audioSource.volume = value;
+      backgroundMusic.volume = value;
    }
 
 
@@ -141,6 +158,8 @@ public class UIManager : MonoBehaviour
       PlayerPrefs.DeleteAll();
       PlayerPrefs.SetFloat("volume", volume);
       PlayerPrefs.Save();
+      
+      ResourceManager.Instance.StopMiner();
       
       ResourceInfo.CopyFrom(DefaultResourceInfo);
       GoatStats.CopyFrom(DefaultGoatStats);

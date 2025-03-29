@@ -49,6 +49,15 @@ private Coroutine miningCoroutine;
       MineOreCoroutine = StartCoroutine(MineOre());
    }
    
+   public void StopMiner()
+   {
+      if (MineOreCoroutine != null)
+      {
+         StopCoroutine(MineOreCoroutine);
+         MineOreCoroutine = null;
+      }
+   }
+   
    
    
    

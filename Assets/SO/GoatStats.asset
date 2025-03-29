@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxGoatHealth: 3
   maxTimeOxygen: 60
-  speed: 7
+  speed: 9
   maxSpeed: 9
-  jumpForce: 0
-  maxJumpForce: 0
+  jumpForce: 15
+  maxJumpForce: 18
