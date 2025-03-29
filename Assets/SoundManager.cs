@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
 
    public void PlaySFX(AudioClip clip)
    {
-      sfxSource.PlayOneShot(clip, volumeCoeff*PlayerPrefs.GetFloat("volume", 1));
+      sfxSource.PlayOneShot(clip, volumeCoeff);
    }
    
    public void PlayWin() => PlaySFX(win);

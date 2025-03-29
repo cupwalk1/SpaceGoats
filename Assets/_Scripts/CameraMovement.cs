@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour
     {
         transform.position = player.transform.position + offset;
         player.GetComponent<PlayerManager>().OnTakeDamage.AddListener(Shake);
+        GetComponent<AudioSource>().volume = FindFirstObjectByType<SoundManager>().GetComponent<AudioSource>().volume;
     }
     
     void FixedUpdate()
