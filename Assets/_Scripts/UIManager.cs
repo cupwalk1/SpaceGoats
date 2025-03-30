@@ -15,7 +15,8 @@ public enum PanelType
    Potenziamenti,
    GameOver,
    Potenziamenti2,
-   Victory
+   Victory,
+   Benvenuto
 }
 
 public abstract class UIPanel : MonoBehaviour
@@ -90,6 +91,14 @@ public class UIManager : MonoBehaviour
    {
       GameManager.Instance.ResetGame.AddListener(RestartGame);
       
+      if(PlayerPrefs.GetString("hasPlayed", "false") == "false")
+      {
+         PlayerPrefs.SetString("hasPlayed", "true");
+         ShowBenvenuto();
+         PlayerPrefs.Save();
+      }
+      
+      backgroundMusic = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
       serra.SetActive(false);
       secCav.SetActive(false);
       _rm = ResourceManager.Instance;
@@ -212,7 +221,16 @@ public class UIManager : MonoBehaviour
       HidePanel(PanelType.Victory, ommit);
       GameManager.Instance.IsFreePlay = true;
    }
-    
+   
+   public void HideBenvenuto(bool ommit = false)
+   {
+      HidePanel(PanelType.Benvenuto, ommit);
+   }
+   public void ShowBenvenuto()
+   {
+      ShowPanel(PanelType.Benvenuto);
+   }
+   
    public void OnSerraClick() => serra.SetActive(true);
    public void OnExitClick() => Application.Quit();
    public void OnDonateClick() => Application.OpenURL("https://buymeacoffee.com/cupwalk1");
