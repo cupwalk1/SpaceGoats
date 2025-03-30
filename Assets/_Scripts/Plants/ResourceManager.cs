@@ -77,7 +77,7 @@ private Coroutine miningCoroutine;
       set
       {
          OnResourcesChanged.Invoke();
-         _totalFood = Mathf.Clamp(value, 0, ResourceInfo.maxFruitsInWarehouse);
+         _totalFood = value;
       }
    }
 
@@ -148,7 +148,7 @@ private Coroutine miningCoroutine;
    {
       GameManager.Instance.OnPlayerWin.AddListener(GainResources);
       TotalMaterials = PlayerPrefs.GetInt("TotalMaterials", 0);
-      TotalFood = PlayerPrefs.GetInt("TotalFood", ResourceInfo.maxFruitsInWarehouse / 2);
+      TotalFood = PlayerPrefs.GetInt("TotalFood", ResourceInfo.startingFruits);
       GameManager.Instance.GameLoaded.AddListener(ResetGatheredResources);
       StartCoroutine(Eating());
       StartCoroutine(DeductTime());
