@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoatSpeed
   m_EditorClassIdentifier: 
   Name: Energy Drink
-  Description: Increases the goat's max speed by 1
+  Description: "Aumenta di 1 la velocit\xE0 massima del giocatore"
   IsTemporary: 1
   Cost:
     materials: 0

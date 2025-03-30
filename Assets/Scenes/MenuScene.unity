@@ -3570,10 +3570,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buongiorno! Aiutaci a raccogliere frutti e materiali dalla caverna e a
-    riparare tubi perdenti nel centrale geotermica dove produciamo enegia. Stai attento
-    pero' che se finisce il cibo o l'energia moriremmo. Entra nella caverna e cerca
-    di uscire di nuovo prima che finisce l'ossigeno!
+  m_text: 'Benvenuto! Se senti questo testo sei sopravvisuto al cataclisma climatico
+    e ti trovi nella nostra colonia. Il tuo compito e'': "Raccoglitore". Sei incaricato
+    di accumulare risorse e sistemare problemi nelle tue miniere di competenza.Buona
+    fortuna!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
@@ -10153,7 +10153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1, y: -0}
+  m_AnchoredPosition: {x: 1, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1543538273
