@@ -1,25 +1,16 @@
 fileFormatVersion: 2
-guid: 78867a3c02baa084ba5185e4aa46d877
+guid: 391ce87e9f1505044a486494c830c05c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7502956719244603704
-    second: generics_0
-  - first:
-      213: -2926734319306087665
-    second: generics_1
-  - first:
-      213: 1255734390657972553
-    second: generics_2
-  - first:
-      213: -1680389706802269239
-    second: generics_3
+      213: 522659062649296728
+    second: Problem_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,9 +72,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 20
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -96,7 +87,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 12
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -122,57 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: generics_0
+      name: Problem_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 14
-        width: 17
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ce8b40cd9420e790800000000000000
-      internalID: -7502956719244603704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generics_1
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 19
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f03e0d1a4a62267d0800000000000000
-      internalID: -2926734319306087665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generics_2
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 7
         y: 0
-        width: 16
-        height: 15
+        width: 18
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 949f86f66c34d6110800000000000000
-      internalID: 1255734390657972553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generics_3
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 0
-        width: 9
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9c3f3d9f67e0ea8e0800000000000000
-      internalID: -1680389706802269239
+      spriteID: 85799d7f5abd04700800000000000000
+      internalID: 522659062649296728
       vertices: []
       indices: 
       edges: []
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      generics_0: -7502956719244603704
-      generics_1: -2926734319306087665
-      generics_2: 1255734390657972553
-      generics_3: -1680389706802269239
+      Problem_0: 522659062649296728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
