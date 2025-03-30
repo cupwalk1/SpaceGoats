@@ -11,7 +11,6 @@ public class ResourceCounter : MonoBehaviour
    public TextMeshProUGUI energyText;
    public TextMeshProUGUI plantText;
    public Slider energySlider;
-   public Slider plantSlider;
    private ResourceManager _resourceManager;
 
    private void Start()
@@ -19,7 +18,7 @@ public class ResourceCounter : MonoBehaviour
       _resourceManager = ResourceManager.Instance;
       _resourceManager.OnResourcesChanged.AddListener(UpdateUI);
       materialText.text = _resourceManager.TotalMaterials.ToString();
-      InvokeRepeating("UpdateResources", 0, 1);
+      InvokeRepeating("UpdateResources", 0, 0.25f);
    }
 
    void UpdateResources() => _resourceManager.OnResourcesChanged.Invoke();
@@ -33,7 +32,7 @@ public class ResourceCounter : MonoBehaviour
       energySlider.value = (float)_resourceManager.TotalEnergy / _resourceManager.ResourceInfo.energyAvailable;
 
       plantText.text =
-         $"{_resourceManager.TotalFood.ToString()}/{_resourceManager.ResourceInfo.maxFruitsInWarehouse}";
-      plantSlider.value = (float)_resourceManager.TotalFood / _resourceManager.ResourceInfo.maxFruitsInWarehouse;
+         $"{_resourceManager.TotalFood.ToString()}";
+
    }
 }

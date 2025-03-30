@@ -6,8 +6,9 @@ public class ResourceInfo : ScriptableObject
    [Header("Plant Stats")] 
    public int fruitsPerPlant;
    public int plantRegenTime;
-   public int maxFruitsInWarehouse;
    public int fruitEatingRate;
+   public int startingFruits;
+   
    
    //material stats
    [Header("Material Stats")]
@@ -26,7 +27,6 @@ public class ResourceInfo : ScriptableObject
    {
       fruitsPerPlant = other.fruitsPerPlant;
       plantRegenTime = other.plantRegenTime;
-      maxFruitsInWarehouse = other.maxFruitsInWarehouse;
       fruitEatingRate = other.fruitEatingRate;
       
       materialsPerOre = other.materialsPerOre;

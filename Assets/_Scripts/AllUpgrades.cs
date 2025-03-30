@@ -53,11 +53,6 @@ public class AllUpgrades : ScriptableObject
       if (um.JumpSlider.Slider.maxValue == 2) um.JumpSlider.Slider.minValue = 1;
    }
 
-   public void IncreaseWarehouseCapacity(int i)
-   {
-      resourceInfo.maxFruitsInWarehouse += i;
-   }
-
    public void IncreaseGoatHealth(int i)
    {
       goatStats.maxGoatHealth += i;
