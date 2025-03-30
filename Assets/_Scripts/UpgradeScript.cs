@@ -57,10 +57,15 @@ public class UpgradeScript : MonoBehaviour
          UpgradeData.OnUpgrade.Invoke();
          UpgradeStack.UpgradeLevel++;
          
-         bool victory = true;
-         UpgradeManager.Instance.UpgradeStacks.Where(s => s.IsRequiredForVictory).ToList().ForEach(s => { if (s.UpgradeLevel < s.Upgrades.Length) victory = false; });
-         if (victory && !GameManager.Instance.IsFreePlay) GameManager.Instance.Victory();
-         
+         if(UpgradeStack.IsRequiredForVictory)
+         {
+            bool victory = true;
+            UpgradeManager.Instance.UpgradeStacks.Where(s => s.IsRequiredForVictory).ToList().ForEach(s =>
+            {
+               if (s.UpgradeLevel < s.Upgrades.Length) victory = false;
+            });
+            if (victory && !GameManager.Instance.IsFreePlay) GameManager.Instance.Victory();
+         }
          SoundManager.Instance.PlaySFX(SoundManager.Instance.upgrade);
       }
    }

@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
    private void SetVolume(float value)
    {
       audioSource.volume = value;
-      backgroundMusic.volume = value;
+      backgroundMusic.volume = value/2;
    }
 
 
