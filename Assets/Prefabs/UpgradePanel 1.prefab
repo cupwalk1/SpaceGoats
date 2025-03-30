@@ -473,7 +473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.9999695, y: -0.000022888184}
+  m_AnchoredPosition: {x: -4.9999695, y: -0.000030517578}
   m_SizeDelta: {x: 82.401, y: -49.331}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8934756358127910633
@@ -686,7 +686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.9999695, y: -0.000022888184}
+  m_AnchoredPosition: {x: -4.9999695, y: -0.000030517578}
   m_SizeDelta: {x: 82.401, y: -49.331}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &974004415941059703
@@ -862,8 +862,18 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+=======
+    rgba: 4284903183
+  m_fontColor: {r: 0.058134574, g: 0.4339623, b: 0.39916345, a: 1}
+>>>>>>> Stashed changes
+=======
+    rgba: 4284903183
+  m_fontColor: {r: 0.058134574, g: 0.4339623, b: 0.39916345, a: 1}
+>>>>>>> Stashed changes
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1077,7 +1087,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Color: {r: 0.24046445, g: 0.6415094, b: 0.23905303, a: 0.46666667}
+=======
+  m_Color: {r: 0.72156864, g: 1, b: 0.9571296, a: 1}
+>>>>>>> Stashed changes
+=======
+  m_Color: {r: 0.72156864, g: 1, b: 0.9571296, a: 1}
+>>>>>>> Stashed changes
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1190,8 +1208,18 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+=======
+    rgba: 4284903183
+  m_fontColor: {r: 0.058134574, g: 0.4339623, b: 0.39916345, a: 1}
+>>>>>>> Stashed changes
+=======
+    rgba: 4284903183
+  m_fontColor: {r: 0.058134574, g: 0.4339623, b: 0.39916345, a: 1}
+>>>>>>> Stashed changes
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
