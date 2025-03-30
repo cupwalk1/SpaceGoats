@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560dfc7a7525409e9c0128018d411cb7, type: 3}
   m_Name: GoatStats
   m_EditorClassIdentifier: 
-  maxGoatHealth: 3
+  maxGoatHealth: 5
   maxTimeOxygen: 60
   speed: 7.5
   maxSpeed: 9.5
-  jumpForce: 13
+  jumpForce: 14.4
   maxJumpForce: 18

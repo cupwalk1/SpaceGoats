@@ -21,5 +21,5 @@ MonoBehaviour:
   energyAvailable: 5000
   energyPerGenerator: 0
   averageGeneratorBreakingTime: 120
-  semiRangeGeneratorBreakingTime: 60
+  semiRangeGeneratorBreakingTime: 30
   oreMiningRate: 0.5

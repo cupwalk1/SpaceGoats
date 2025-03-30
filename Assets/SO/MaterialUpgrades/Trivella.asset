@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Trivella
   m_EditorClassIdentifier: 
   Name: Costruisci Trivella
-  Description: Costruisci una trivella per minare automaticamente materiale.
+  Description: Costruisci una trivella per scavare automaticamente materiale.
   IsTemporary: 1
   Cost:
-    materials: 1
+    materials: 40
     fruits: 0
-    power: 5000
+    power: 7000
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:

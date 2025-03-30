@@ -16,9 +16,9 @@ MonoBehaviour:
   Description: "Rende piu forti i tubi,riducendo la possibilit\xE0 che si rompano."
   IsTemporary: 0
   Cost:
-    materials: 25
+    materials: 30
     fruits: 0
-    power: 5000
+    power: 4500
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:

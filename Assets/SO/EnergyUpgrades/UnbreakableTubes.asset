@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: UnbreakableTubes
   m_EditorClassIdentifier: 
   Name: Tubi Indistruttibili
-  Description: Tubi sistemati non si romperano mai piu'
+  Description: "I tubi assumeranno la stessa propriet\xE0 rigenerativa del metallo
+    e non si romperanno pi\xF9"
   IsTemporary: 0
   Cost:
-    materials: 120
-    fruits: 50
+    materials: 100
+    fruits: 70
     power: 8000
   OnUpgrade:
     m_PersistentCalls:

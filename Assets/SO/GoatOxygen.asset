@@ -16,8 +16,8 @@ MonoBehaviour:
   Description: Aumenta la durata dell'ossigeno di +20s
   IsTemporary: 0
   Cost:
-    materials: 15
-    fruits: 75
+    materials: 20
+    fruits: 60
     power: 4500
   OnUpgrade:
     m_PersistentCalls:

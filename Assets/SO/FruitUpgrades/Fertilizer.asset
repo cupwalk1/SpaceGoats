@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Fertilizer
   m_EditorClassIdentifier: 
   Name: Fertilizzante
-  Description: Riduce il tempo di ricrescita delle piante di 15%.
+  Description: Riduce il tempo di ricrescita delle piante di 15% usando solo risorse
+    naturali
+  IsTemporary: 0
   Cost:
     materials: 0
-    fruits: 0
-    power: 7000
+    fruits: 40
+    power: 6500
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:

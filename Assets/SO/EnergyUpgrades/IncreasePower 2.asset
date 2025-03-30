@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
   m_Name: IncreasePower 2
   m_EditorClassIdentifier: 
-  Name: Energy Boost
+  Name: Cavi isolati
   Description: Aumenta la potenza generata dal impianto di 1000 kW.
   IsTemporary: 0
   Cost:
-    materials: 10
+    materials: 30
     fruits: 0
-    power: 2000
+    power: 4500
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:

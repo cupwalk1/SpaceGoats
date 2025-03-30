@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: UnlockGreenhouse
   m_EditorClassIdentifier: 
   Name: Costruisci una serra
-  Description: Sbloccare un nuovo edificio che contiene piante facilmente racoglibili.
+  Description: Sblocca un nuovo edificio che contiene piante facilmente raccoglibili.
+    La forza dell'agricoltura!
   IsTemporary: 1
   Cost:
-    materials: 10
-    fruits: 10
+    materials: 40
+    fruits: 50
     power: 8000
   OnUpgrade:
     m_PersistentCalls:
