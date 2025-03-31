@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitsPerPlant: 5
   plantRegenTime: 15
-  fruitEatingRate: 20
+  fruitEatingRate: 15
   startingFruits: 50
   materialsPerOre: 1
   oreRegenTime: 30

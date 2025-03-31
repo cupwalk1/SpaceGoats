@@ -93,6 +93,7 @@ public class UIManager : MonoBehaviour
       
       if(PlayerPrefs.GetString("hasPlayed", "false") == "false")
       {
+         RestartGame();
          PlayerPrefs.SetString("hasPlayed", "true");
          ShowBenvenuto();
          PlayerPrefs.Save();
@@ -107,7 +108,7 @@ public class UIManager : MonoBehaviour
          SetVolume(value);
          PlayerPrefs.SetFloat("volume", value);
       });
-      volumeSlider.value = PlayerPrefs.GetFloat("volume");
+      volumeSlider.value = PlayerPrefs.GetFloat("volume", 1);
       _rm.OnResourcesChanged.AddListener(CheckGameOver);
       GameManager.Instance.OnGameWin.AddListener(ShowVictory);
       GameManager.Instance.OnGameOver.AddListener(ShowGameOver);
