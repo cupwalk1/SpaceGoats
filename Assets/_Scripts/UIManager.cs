@@ -174,6 +174,7 @@ public class UIManager : MonoBehaviour
       ResourceInfo.CopyFrom(DefaultResourceInfo);
       GoatStats.CopyFrom(DefaultGoatStats);
       _rm.TotalMaterials = 0;
+      _rm.TotalFood = ResourceInfo.startingFruits;
       GameManager.Instance.IsGameOver = false;
    }
 
