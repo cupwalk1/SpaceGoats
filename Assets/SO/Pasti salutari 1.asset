@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
+  m_Name: Pasti salutari 1
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  IsTemporary: 0
+  Cost:
+    materials: 0
+    fruits: 0
+    power: 0
+  OnUpgrade:
+    m_PersistentCalls:
+      m_Calls: []

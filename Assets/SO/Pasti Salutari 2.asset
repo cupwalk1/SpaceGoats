@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
-  m_Name: Pasti Salutari
+  m_Name: Pasti Salutari 2
   m_EditorClassIdentifier: 
   Name: Pasti Salutari
   Description: Aggiunge +1 cuore alla barra della vita
