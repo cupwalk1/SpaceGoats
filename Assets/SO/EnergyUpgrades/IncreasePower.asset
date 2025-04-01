@@ -18,7 +18,7 @@ MonoBehaviour:
   Cost:
     materials: 25
     fruits: 0
-    power: 4000
+    power: 3500
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:

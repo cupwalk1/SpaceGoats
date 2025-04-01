@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Pasti Salutari
   m_EditorClassIdentifier: 
   Name: Pasti Salutari
-  Description: 
+  Description: Aggiunge +1 cuore alla barra della vita
   IsTemporary: 0
   Cost:
     materials: 20
-    fruits: 100
+    fruits: 500
     power: 5000
   OnUpgrade:
     m_PersistentCalls:
