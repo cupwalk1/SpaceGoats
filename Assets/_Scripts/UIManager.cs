@@ -89,6 +89,7 @@ public class UIManager : MonoBehaviour
 
    private void Start()
    {
+      volumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
       GameManager.Instance.ResetGame.AddListener(RestartGame);
       
       if(PlayerPrefs.GetString("hasPlayed", "false") == "false")
