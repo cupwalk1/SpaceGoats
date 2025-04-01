@@ -7865,8 +7865,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Il cibo \xE8 terminato, niente cena stasera! O mai pi\xF9... Riprova,
-    e assicurati che i tuoi abitanti siano ben nutriti."
+  m_text: "Il cibo \xE8 terminato, niente cena stasera! O mai piu'... Riprova, e
+    assicurati che i tuoi abitanti siano ben nutriti."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
@@ -13191,10 +13191,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 455a53faa7fa844d7b8ddf703f5e4494, type: 2}
     - {fileID: 11400000, guid: 0ab4134ea65864056a85a1b4714c0d0a, type: 2}
     - {fileID: 11400000, guid: 455a53faa7fa844d7b8ddf703f5e4494, type: 2}
-    - {fileID: 11400000, guid: 0ab4134ea65864056a85a1b4714c0d0a, type: 2}
-    - {fileID: 11400000, guid: 455a53faa7fa844d7b8ddf703f5e4494, type: 2}
-    - {fileID: 11400000, guid: 0ab4134ea65864056a85a1b4714c0d0a, type: 2}
-    - {fileID: 11400000, guid: 455a53faa7fa844d7b8ddf703f5e4494, type: 2}
+    - {fileID: 11400000, guid: bbd69eef21e13eb49afc32e0ac37ac27, type: 2}
+    - {fileID: 11400000, guid: dbffd099d869644198a4efd3a682aaa4, type: 2}
+    - {fileID: 11400000, guid: bbd69eef21e13eb49afc32e0ac37ac27, type: 2}
+    - {fileID: 11400000, guid: dbffd099d869644198a4efd3a682aaa4, type: 2}
     - {fileID: 11400000, guid: 0f155930583204bd785e03cabfb788e9, type: 2}
     IsRequiredForVictory: 1
     Stack: {fileID: 2841704318810073661}
@@ -13204,7 +13204,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5cf210e96f4dd4830888f95f96453ebe, type: 2}
     - {fileID: 11400000, guid: 0e84cc72951f041eda40df3cf0e54e3a, type: 2}
     - {fileID: 11400000, guid: 5cf210e96f4dd4830888f95f96453ebe, type: 2}
-    - {fileID: 11400000, guid: 0e84cc72951f041eda40df3cf0e54e3a, type: 2}
+    - {fileID: 11400000, guid: e32240dec48a54857b742bb8ac1b5bf2, type: 2}
     IsRequiredForVictory: 1
     Stack: {fileID: 7044772902423412754}
   - Upgrades:
@@ -13212,9 +13212,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0255f703be85743be903eb1a44a9b12e, type: 2}
     - {fileID: 11400000, guid: 0255f703be85743be903eb1a44a9b12e, type: 2}
     - {fileID: 11400000, guid: 51cc2aaf132064a0a8e0889f45d67bbb, type: 2}
-    - {fileID: 11400000, guid: 0255f703be85743be903eb1a44a9b12e, type: 2}
-    - {fileID: 11400000, guid: 0255f703be85743be903eb1a44a9b12e, type: 2}
-    - {fileID: 11400000, guid: 0255f703be85743be903eb1a44a9b12e, type: 2}
+    - {fileID: 11400000, guid: 39acd85a2b84f7b4fbc0c1c9f84d7087, type: 2}
+    - {fileID: 11400000, guid: 39acd85a2b84f7b4fbc0c1c9f84d7087, type: 2}
+    - {fileID: 11400000, guid: 39acd85a2b84f7b4fbc0c1c9f84d7087, type: 2}
     - {fileID: 11400000, guid: f5fe5a1f274804e4bb05f50ad609282b, type: 2}
     IsRequiredForVictory: 1
     Stack: {fileID: 3173207756238621203}
@@ -13563,7 +13563,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Grazie per l'aiuto nel rendere la nostra colonia autosostenibile!
+  m_text: Grazie per l'aiuto nel rendere la nostra colonia sostenibile! Goditi il
+    tuo nuovo tempo libero.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
@@ -16867,7 +16868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Close
+  m_text: Chiudi
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
   m_sharedMaterial: {fileID: 2863668724684315999, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}

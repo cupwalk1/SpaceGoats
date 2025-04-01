@@ -17,7 +17,7 @@ MonoBehaviour:
   IsTemporary: 1
   Cost:
     materials: 0
-    fruits: 75
+    fruits: 300
     power: 5000
   OnUpgrade:
     m_PersistentCalls:

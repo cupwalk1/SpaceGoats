@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Costruisci una trivella per scavare automaticamente materiale.
   IsTemporary: 1
   Cost:
-    materials: 40
+    materials: 1000
     fruits: 0
     power: 7000
   OnUpgrade:

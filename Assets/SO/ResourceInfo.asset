@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c33406f27d4a2688ed83628c5fd6e2, type: 3}
   m_Name: ResourceInfo
   m_EditorClassIdentifier: 
-  fruitsPerPlant: 11
-  plantRegenTime: 3
-  fruitEatingRate: 30
+  fruitsPerPlant: 5
+  plantRegenTime: 15
+  fruitEatingRate: 20
   startingFruits: 50
-  materialsPerOre: 4
+  materialsPerOre: 1
   oreRegenTime: 30
-  energyAvailable: 13000
+  energyAvailable: 7000
   energyPerGenerator: 0
-  averageGeneratorBreakingTime: 44
-  semiRangeGeneratorBreakingTime: 0
+  averageGeneratorBreakingTime: 390
+  semiRangeGeneratorBreakingTime: 60
   oreMiningRate: 0.5
