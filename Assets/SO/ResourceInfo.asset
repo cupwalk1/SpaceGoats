@@ -18,8 +18,8 @@ MonoBehaviour:
   startingFruits: 50
   materialsPerOre: 1
   oreRegenTime: 30
-  energyAvailable: 7000
+  energyAvailable: 5000
   energyPerGenerator: 0
-  averageGeneratorBreakingTime: 390
-  semiRangeGeneratorBreakingTime: 60
+  averageGeneratorBreakingTime: 120
+  semiRangeGeneratorBreakingTime: 30
   oreMiningRate: 0.5

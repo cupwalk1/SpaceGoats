@@ -13219,8 +13219,8 @@ MonoBehaviour:
     IsRequiredForVictory: 1
     Stack: {fileID: 3173207756238621203}
   - Upgrades:
-    - {fileID: 11400000, guid: fe9f3a5e95eb943fca6c42cc0790e70e, type: 2}
-    - {fileID: 11400000, guid: fe9f3a5e95eb943fca6c42cc0790e70e, type: 2}
+    - {fileID: 11400000, guid: b4c220df7b7048c4383f97cf40158968, type: 2}
+    - {fileID: 11400000, guid: b4c220df7b7048c4383f97cf40158968, type: 2}
     - {fileID: 11400000, guid: fe9f3a5e95eb943fca6c42cc0790e70e, type: 2}
     - {fileID: 11400000, guid: fe9f3a5e95eb943fca6c42cc0790e70e, type: 2}
     - {fileID: 11400000, guid: fe9f3a5e95eb943fca6c42cc0790e70e, type: 2}

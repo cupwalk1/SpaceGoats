@@ -16,5 +16,5 @@ MonoBehaviour:
   maxTimeOxygen: 60
   speed: 7.5
   maxSpeed: 9.5
-  jumpForce: 14.4
+  jumpForce: 13
   maxJumpForce: 18

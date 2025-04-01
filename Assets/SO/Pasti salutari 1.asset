@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b6f35162a849a5a2bc2bcc0f2c2022, type: 3}
   m_Name: Pasti salutari 1
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
+  Name: Pasti Salutari
+  Description: Aggiunge +1 cuore alla barra della vita
   IsTemporary: 0
   Cost:
-    materials: 0
-    fruits: 0
-    power: 0
+    materials: 20
+    fruits: 200
+    power: 4000
   OnUpgrade:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: a06291275845342a3be4be6c11a6ccef, type: 2}
+        m_TargetAssemblyTypeName: AllUpgrades, Assembly-CSharp
+        m_MethodName: IncreaseGoatHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
