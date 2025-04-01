@@ -3572,7 +3572,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Benvenuto! Se senti questo testo sei sopravvisuto al cataclisma climatico
     e ti trovi nella nostra colonia. Il tuo compito e'': "Raccoglitore". Sei incaricato
-    di accumulare risorse e sistemare problemi nelle tue miniere di competenza.Buona
+    di accumulare risorse e sistemare problemi nelle tue miniere di competenza. Buona
     fortuna!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08948597b4b234cdea0ad703b685b5d3, type: 2}
