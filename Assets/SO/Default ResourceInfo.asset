@@ -20,6 +20,6 @@ MonoBehaviour:
   oreRegenTime: 30
   energyAvailable: 5000
   energyPerGenerator: 0
-  averageGeneratorBreakingTime: 120
+  averageGeneratorBreakingTime: 360
   semiRangeGeneratorBreakingTime: 30
   oreMiningRate: 0.5

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitsPerPlant: 5
   plantRegenTime: 15
-  fruitEatingRate: 20
+  fruitEatingRate: 15
   startingFruits: 50
   materialsPerOre: 1
   oreRegenTime: 30
   energyAvailable: 7000
   energyPerGenerator: 0
-  averageGeneratorBreakingTime: 390
-  semiRangeGeneratorBreakingTime: 60
+  averageGeneratorBreakingTime: 360
+  semiRangeGeneratorBreakingTime: 30
   oreMiningRate: 0.5
