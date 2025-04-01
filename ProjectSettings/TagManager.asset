@@ -7,6 +7,7 @@ TagManager:
   - tilemap
   - UpgradePanel
   - Spike
+  - Volume
   layers:
   - Default
   - TransparentFX

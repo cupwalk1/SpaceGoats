@@ -89,9 +89,8 @@ public class UIManager : MonoBehaviour
 
    private void Start()
    {
-      volumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
       GameManager.Instance.ResetGame.AddListener(RestartGame);
-      
+      audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
       if(PlayerPrefs.GetString("hasPlayed", "false") == "false")
       {
          RestartGame();
